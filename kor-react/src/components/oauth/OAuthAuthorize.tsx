@@ -102,7 +102,9 @@ const OAuthAuthorize: React.FC = () => {
       // Production custom scheme fallback
       const schemeBase = 'kor://';
       const normalized = normalizeBase(schemeBase);
-      link = `${normalized}/${path}?${query}`;
+      // Avoid double slash by checking if normalized already ends with ://
+      const separator = normalized.endsWith('://') ? '' : '/';
+      link = `${normalized}${separator}${path}?${query}`;
     }
 
     console.log('[OAuthAuthorize] Redirecting to app:', link);
