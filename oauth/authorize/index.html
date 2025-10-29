@@ -162,7 +162,9 @@
                 // Production custom scheme fallback
                 const schemeBase = 'kor://';
                 const normalized = normalizeBase(schemeBase);
-                appLink = `${normalized}/${path}?${query}`;
+                // Avoid double slash by checking if normalized already ends with ://
+                const separator = normalized.endsWith('://') ? '' : '/';
+                appLink = `${normalized}${separator}${path}?${query}`;
             }
 
             console.log('Redirecting to app:', appLink);

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
 import GoogleAnalytics, { initGA } from './components/common/GoogleAnalytics';
+import { initPostHog } from './lib/posthog';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import Home from './components/pages/Home';
@@ -36,6 +37,7 @@ function App() {
     });
     
     initGA();
+    initPostHog();
     
     console.log('✨ [App] App initialization complete');
   }, [domain, clientId, audience]);

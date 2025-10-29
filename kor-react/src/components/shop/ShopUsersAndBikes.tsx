@@ -18,6 +18,8 @@ interface BikeRecord {
 
 interface ShopUsersAndBikesProps {
   accentColor?: string;
+  readOnlyMode?: boolean; // For inactive users - disable bike loading and interactions
+  showBikes?: boolean; // Whether to show bike functionality at all
 }
 
 const formatTimeAgo = (iso?: string | null): string => {
@@ -51,7 +53,11 @@ const statusHue = (status?: string | null): string => {
 
 const badgeBg = (hex: string) => `${hex}20`;
 
-const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({ accentColor = '#667eea' }) => {
+const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({ 
+  accentColor = '#667eea',
+  readOnlyMode = false,
+  showBikes = true
+}) => {
   const baseUrl = process.env.REACT_APP_API_BASE_URL || 'https://jmrcycling.com:3001';
   const authToken = process.env.REACT_APP_API_AUTH_TOKEN || '1893784827439273928203838';
 
@@ -150,6 +156,9 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({ accentColor = '#6
   }, [baseUrl]);
 
   const toggleExpand = useCallback((userId: string | number) => {
+    // Disable bike loading in readOnlyMode
+    if (readOnlyMode || !showBikes) return;
+    
     const key = String(userId);
     setBikesByUser((prev) => {
       const current = prev[key] || { bikes: [], error: null, loading: false, expanded: false };
@@ -162,9 +171,12 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({ accentColor = '#6
       }
       return next;
     });
-  }, [fetchBikesForUser]);
+  }, [fetchBikesForUser, readOnlyMode, showBikes]);
 
   const loadAllBikes = useCallback(async () => {
+    // Disable bike loading in readOnlyMode
+    if (readOnlyMode || !showBikes) return;
+    
     // simple concurrency limit
     const ids = users.map(u => String(u.strava_user_id));
     const limit = 4;
@@ -189,7 +201,7 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({ accentColor = '#6
 
     const workers = Array.from({ length: Math.min(limit, ids.length) }, () => runNext());
     await Promise.all(workers);
-  }, [users, fetchBikesForUser]);
+  }, [users, fetchBikesForUser, readOnlyMode, showBikes]);
 
   const filteredSorted = useMemo(() => {
     const term = search.trim().toLowerCase();
@@ -223,7 +235,10 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({ accentColor = '#6
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem 1.25rem', borderBottom: '1px solid #eee', background: badgeBg(accentColor) }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <Users size={20} color={accentColor} />
-          <h2 style={{ margin: 0, color: '#333' }}>Customers & Bikes</h2>
+          <h2 style={{ margin: 0, color: '#333' }}>
+            {showBikes ? 'Customers & Bikes' : 'Customers'}
+            {readOnlyMode && <span style={{ fontSize: '0.8rem', color: '#856404', marginLeft: '0.5rem' }}>(Read Only)</span>}
+          </h2>
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           <div style={{ position: 'relative' }}>
@@ -260,13 +275,15 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({ accentColor = '#6
           >
             <RefreshCcw size={16} /> Refresh
           </button>
-          <button
-            onClick={() => loadAllBikes()}
-            title="Load bikes for all users"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#333', color: 'white', border: 'none', padding: '8px 12px', borderRadius: 8, cursor: 'pointer' }}
-          >
-            <Bike size={16} /> Load All Bikes
-          </button>
+          {showBikes && !readOnlyMode && (
+            <button
+              onClick={() => loadAllBikes()}
+              title="Load bikes for all users"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#333', color: 'white', border: 'none', padding: '8px 12px', borderRadius: 8, cursor: 'pointer' }}
+            >
+              <Bike size={16} /> Load All Bikes
+            </button>
+          )}
         </div>
       </div>
 
@@ -308,16 +325,30 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({ accentColor = '#6
                       <span style={{ fontSize: 12, color: '#666' }}>{(u.shop_activity || 'unknown').toUpperCase()}</span>
                     </div>
                     <div style={{ fontSize: 12, color: '#999' }}>Last: {lastLogin}</div>
-                    <button
-                      onClick={() => toggleExpand(u.strava_user_id)}
-                      style={{ border: `1px solid ${accentColor}`, background: 'transparent', color: accentColor, display: 'inline-flex', alignItems: 'center', gap: 6, padding: '6px 10px', borderRadius: 8, cursor: 'pointer' }}
-                    >
-                      {bikesState.expanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />} Bikes
-                    </button>
+                    {showBikes && (
+                      <button
+                        onClick={() => toggleExpand(u.strava_user_id)}
+                        disabled={readOnlyMode}
+                        style={{ 
+                          border: `1px solid ${readOnlyMode ? '#ccc' : accentColor}`, 
+                          background: 'transparent', 
+                          color: readOnlyMode ? '#999' : accentColor, 
+                          display: 'inline-flex', 
+                          alignItems: 'center', 
+                          gap: 6, 
+                          padding: '6px 10px', 
+                          borderRadius: 8, 
+                          cursor: readOnlyMode ? 'not-allowed' : 'pointer',
+                          opacity: readOnlyMode ? 0.6 : 1
+                        }}
+                      >
+                        {bikesState.expanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />} Bikes
+                      </button>
+                    )}
                   </div>
                 </div>
 
-                {bikesState.expanded && (
+                {showBikes && bikesState.expanded && (
                   <div style={{ padding: '0.8rem 1rem' }}>
                     {bikesState.loading && (
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#666' }}>

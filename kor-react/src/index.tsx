@@ -3,13 +3,23 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ShopAccessProvider, SubscriptionGate } from './contexts/ShopAccess';
+function AppWrapper() {
+  return (
+    <ShopAccessProvider>
+      <SubscriptionGate>
+        <App />
+      </SubscriptionGate>
+    </ShopAccessProvider>
+  );
+}
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <AppWrapper />
   </React.StrictMode>
 );
 

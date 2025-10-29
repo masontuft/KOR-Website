@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { pauseSubscription as cbPauseSubscription, resumeSubscription as cbResumeSubscription } from '../../services/chargebeeClient';
 
 // Declare Chargebee as a global variable for TypeScript
 declare global {
@@ -55,17 +56,27 @@ interface SubscriptionDetailsProps {
   subscriptionId?: string;
   onError?: (error: string) => void;
   onLoading?: (loading: boolean) => void;
+  onSubscriptionData?: (data: SubscriptionData | null) => void;
 }
 
 const SubscriptionDetails: React.FC<SubscriptionDetailsProps> = ({
   subscriptionId,
   onError,
-  onLoading
+  onLoading,
+  onSubscriptionData
 }) => {
   const { user, isAuthenticated } = useAuth0();
   const [subscriptionData, setSubscriptionData] = useState<SubscriptionData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Local UI state for pause/resume actions
+  const [showPauseModal, setShowPauseModal] = useState(false);
+  const [pauseDateStr, setPauseDateStr] = useState('');
+  const [resumeDateStr, setResumeDateStr] = useState('');
+  const [pauseOption, setPauseOption] = useState<'SPECIFIC_DATE' | 'IMMEDIATELY'>('SPECIFIC_DATE');
+  const [actionLoading, setActionLoading] = useState(false);
+  const [actionError, setActionError] = useState<string | null>(null);
+  const [actionSuccess, setActionSuccess] = useState<string | null>(null);
 
   const getFallbackSubscriptionId = useCallback((): string | null => {
     try {
@@ -122,9 +133,18 @@ const SubscriptionDetails: React.FC<SubscriptionDetailsProps> = ({
 
       const data = await response.json();
 
-      if (data.message === 'success' && data.subscription) {
-        setSubscriptionData(data.subscription);
-        console.log('Successfully fetched subscription data:', data.subscription);
+      if (data.message === 'success') {
+        if (data.subscription) {
+          setSubscriptionData(data.subscription);
+          console.log('Successfully fetched subscription data:', data.subscription);
+          // Notify parent component of subscription data
+          onSubscriptionData?.(data.subscription);
+        } else {
+          // Backend may return 200 with shop_status when the shop exists but is not active
+          console.log('No active subscription found. Backend status:', data.shop_status || 'unknown');
+          setSubscriptionData(null);
+          onSubscriptionData?.(null);
+        }
       } else {
         throw new Error(data.error || 'Failed to fetch subscription data');
       }
@@ -138,10 +158,129 @@ const SubscriptionDetails: React.FC<SubscriptionDetailsProps> = ({
       setLoading(false);
       onLoading?.(false);
     }
-  }, [isAuthenticated, user?.sub, subscriptionId, onError, onLoading, getFallbackSubscriptionId]);
+  }, [isAuthenticated, user?.sub, subscriptionId, onError, onLoading, getFallbackSubscriptionId, onSubscriptionData]);
 
   const refreshData = () => {
     fetchSubscriptionData();
+  };
+
+  // Helpers for pause/resume
+  const dateStringToEpochSeconds = (dateStr: string): number => {
+    // Parse as local midnight of the selected date
+    const dt = new Date(`${dateStr}T00:00:00`);
+    if (isNaN(dt.getTime())) throw new Error('Invalid date');
+    return Math.floor(dt.getTime() / 1000);
+  };
+
+  const openPauseModal = () => {
+    setActionError(null);
+    setActionSuccess(null);
+    setPauseDateStr('');
+    setResumeDateStr('');
+    setPauseOption('SPECIFIC_DATE');
+    setShowPauseModal(true);
+  };
+
+  const closePauseModal = () => {
+    if (!actionLoading) setShowPauseModal(false);
+  };
+
+  const handlePauseConfirm = async () => {
+    if (!subscriptionData) return;
+
+    if (pauseOption === 'SPECIFIC_DATE') {
+      if (!pauseDateStr || !resumeDateStr) {
+        setActionError('Please select both pause and resume dates.');
+        return;
+      }
+
+      let pauseSec: number;
+      let resumeSec: number;
+      try {
+        pauseSec = dateStringToEpochSeconds(pauseDateStr);
+        resumeSec = dateStringToEpochSeconds(resumeDateStr);
+      } catch (e) {
+        setActionError('Invalid date(s). Please check your selections.');
+        return;
+      }
+
+      if (resumeSec <= pauseSec) {
+        setActionError('Resume date must be after the pause date.');
+        return;
+      }
+
+      const nowSec = Math.floor(Date.now() / 1000);
+      if (pauseSec <= nowSec) {
+        setActionError('Pause date must be in the future.');
+        return;
+      }
+    } else {
+      // IMMEDIATELY - no date validation needed
+      if (!resumeDateStr) {
+        setActionError('Please select a resume date for immediate pause.');
+        return;
+      }
+    }
+
+    try {
+      setActionLoading(true);
+      setActionError(null);
+      
+      let pauseParams;
+      let successMessage;
+      
+      if (pauseOption === 'IMMEDIATELY') {
+        const resumeSec = dateStringToEpochSeconds(resumeDateStr);
+        pauseParams = {
+          subscriptionId: subscriptionData.subscriptionId,
+          pauseOption: 'IMMEDIATELY' as const,
+          resumeDate: resumeSec
+        };
+        successMessage = `Subscription paused immediately, will resume on ${resumeDateStr}`;
+      } else {
+        const pauseSec = dateStringToEpochSeconds(pauseDateStr);
+        const resumeSec = dateStringToEpochSeconds(resumeDateStr);
+        pauseParams = {
+          subscriptionId: subscriptionData.subscriptionId,
+          pauseOption: 'SPECIFIC_DATE' as const,
+          pauseDate: pauseSec,
+          resumeDate: resumeSec
+        };
+        successMessage = `Subscription paused from ${pauseDateStr} to ${resumeDateStr}`;
+      }
+      
+      await cbPauseSubscription(pauseParams);
+      setShowPauseModal(false);
+      setActionSuccess(successMessage);
+      refreshData();
+      // Clear success message after 5 seconds
+      setTimeout(() => setActionSuccess(null), 5000);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Failed to pause subscription.';
+      setActionError(msg);
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const handleResumeNow = async () => {
+    if (!subscriptionData) return;
+    if (!window.confirm('Resume your subscription now?')) return;
+
+    try {
+      setActionLoading(true);
+      setActionError(null);
+      await cbResumeSubscription({ subscriptionId: subscriptionData.subscriptionId });
+      setActionSuccess('Subscription resumed successfully!');
+      refreshData();
+      // Clear success message after 5 seconds
+      setTimeout(() => setActionSuccess(null), 5000);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Failed to resume subscription.';
+      alert(msg);
+    } finally {
+      setActionLoading(false);
+    }
   };
 
   const openCustomerPortal = () => {
@@ -355,6 +494,107 @@ const SubscriptionDetails: React.FC<SubscriptionDetailsProps> = ({
       border: `3px solid ${getStatusColor(subscriptionData.status)}`,
       borderLeft: `6px solid ${getStatusColor(subscriptionData.status)}`
     }}>
+      {/* Pause Modal */}
+      {showPauseModal && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}>
+          <div style={{ background: 'white', padding: '1.5rem', width: '100%', maxWidth: '520px', borderRadius: '8px', boxShadow: '0 10px 20px rgba(0,0,0,0.2)' }}>
+            <h3 style={{ marginTop: 0 }}>Pause Subscription</h3>
+            <p style={{ color: '#666', marginTop: '0.25rem' }}>Choose when to pause your subscription. A resume date is always required.</p>
+
+            <div style={{ marginBottom: '1rem' }}>
+              <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem' }}>Pause timing</label>
+              <div style={{ display: 'flex', gap: '1rem' }}>
+                <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                  <input
+                    type="radio"
+                    name="pauseOption"
+                    value="IMMEDIATELY"
+                    checked={pauseOption === 'IMMEDIATELY'}
+                    onChange={(e) => setPauseOption(e.target.value as 'IMMEDIATELY')}
+                    style={{ marginRight: '0.5rem' }}
+                  />
+                  Pause now
+                </label>
+                <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                  <input
+                    type="radio"
+                    name="pauseOption"
+                    value="SPECIFIC_DATE"
+                    checked={pauseOption === 'SPECIFIC_DATE'}
+                    onChange={(e) => setPauseOption(e.target.value as 'SPECIFIC_DATE')}
+                    style={{ marginRight: '0.5rem' }}
+                  />
+                  Pause on specific date
+                </label>
+              </div>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: pauseOption === 'IMMEDIATELY' ? '1fr' : '1fr 1fr', gap: '1rem', margin: '1rem 0' }}>
+              {pauseOption === 'SPECIFIC_DATE' && (
+                <div>
+                  <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem' }}>Pause date</label>
+                  <input
+                    type="date"
+                    value={pauseDateStr}
+                    onChange={(e) => setPauseDateStr(e.target.value)}
+                    style={{ width: '100%', padding: '0.5rem', border: '1px solid #ddd', borderRadius: '6px' }}
+                  />
+                </div>
+              )}
+              <div>
+                <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem' }}>Resume date</label>
+                <input
+                  type="date"
+                  value={resumeDateStr}
+                  onChange={(e) => setResumeDateStr(e.target.value)}
+                  style={{ width: '100%', padding: '0.5rem', border: '1px solid #ddd', borderRadius: '6px' }}
+                />
+              </div>
+            </div>
+
+            {actionError && (
+              <div style={{ backgroundColor: '#ffe6e6', color: '#d63031', padding: '0.75rem', borderRadius: '6px', border: '1px solid #d63031', marginBottom: '0.75rem' }}>
+                {actionError}
+              </div>
+            )}
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' }}>
+              <button
+                onClick={closePauseModal}
+                disabled={actionLoading}
+                style={{ backgroundColor: '#f8f9fa', color: '#495057', border: '1px solid #dee2e6', padding: '0.5rem 0.75rem', borderRadius: '4px', cursor: 'pointer' }}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handlePauseConfirm}
+                disabled={actionLoading}
+                style={{ backgroundColor: '#ffc107', color: '#333', border: 'none', padding: '0.5rem 0.75rem', borderRadius: '4px', cursor: 'pointer' }}
+              >
+                {actionLoading ? 'Pausing…' : 'Confirm Pause'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Success message */}
+      {actionSuccess && (
+        <div style={{
+          backgroundColor: '#e6f7e6',
+          color: '#00b894',
+          padding: '0.75rem',
+          borderRadius: '6px',
+          border: '1px solid #00b894',
+          marginBottom: '1rem',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem'
+        }}>
+          ✅ {actionSuccess}
+        </div>
+      )}
+
       {/* Header with status and refresh button */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
         <h3 style={{ 
@@ -547,6 +787,30 @@ const SubscriptionDetails: React.FC<SubscriptionDetailsProps> = ({
         >
           🚀 Manage Subscription
         </button>
+
+        {/* Pause/Resume controls */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginTop: '1rem' }}>
+          {(['active', 'in_trial'].includes((subscriptionData.status || '').toLowerCase())) && (
+            <button
+              onClick={openPauseModal}
+              disabled={actionLoading}
+              style={{ backgroundColor: '#ffc107', color: '#333', border: 'none', padding: '0.5rem 1rem', borderRadius: '6px', cursor: 'pointer' }}
+              title="Pause subscription on a specific date"
+            >
+              ⏸️ Pause Subscription
+            </button>
+          )}
+          {(subscriptionData.status || '').toLowerCase() === 'paused' && (
+            <button
+              onClick={handleResumeNow}
+              disabled={actionLoading}
+              style={{ backgroundColor: '#28a745', color: 'white', border: 'none', padding: '0.5rem 1rem', borderRadius: '6px', cursor: 'pointer' }}
+              title="Resume subscription now"
+            >
+              ▶️ Resume Now
+            </button>
+          )}
+        </div>
         
         <div style={{
           marginTop: '1rem',

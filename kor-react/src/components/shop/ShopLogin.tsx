@@ -51,7 +51,7 @@ const ShopLogin: React.FC = () => {
       
       console.log('✅ [ShopLogin] API response received:', result);
       console.log('📊 [ShopLogin] Shop data:', {
-        plan_type: result.plan_type[0].plan_type,
+        plan_type: 'result.plan_type[0].plan_type',
         shop_name: result.plan_type[0].shop_name,
         shop_code: result.plan_type[0].shop_code,
         shop_token: result.plan_type[0].shop_token

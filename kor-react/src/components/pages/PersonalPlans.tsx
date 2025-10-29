@@ -102,7 +102,12 @@ const PersonalPlans: React.FC = () => {
               </div>
 
               {/* Premium Plan (Coming Soon) */}
-              <div className={`payment-card2 ${selectedPlan === 'premium' ? 'selected' : ''}`} style={{ opacity: 0.8 }}>
+              {/* Premium Plan (Coming Soon) */}
+              <a 
+                href="/premium-plan" 
+                className={`payment-card2 ${selectedPlan === 'premium' ? 'selected' : ''}`} 
+                style={{ opacity: 0.8 }}
+              >
                 <h1>Premium</h1>
                 <h2 className="title">$9.99/month</h2>
                 <h2 className="title">Features</h2>
@@ -119,7 +124,8 @@ const PersonalPlans: React.FC = () => {
                 <div className="coming-soon-badge">
                   <span>Coming Soon!</span>
                 </div>
-              </div>
+              </a>
+
               
               <div className="payment2" style={{ opacity: 0.8 }}>
                 <div className="payment-row">
@@ -137,24 +143,25 @@ const PersonalPlans: React.FC = () => {
                 </div>
               </div>
 
-              {/* Pro Plan (Future) */}
-              <div className="payment-card3" style={{ opacity: 0.5 }}>
-                <h1>Pro</h1>
+              {/* Family Plan (Future) */}
+              <a href="/family-plan" className="payment-card3" style={{ opacity: 0.5 }}>
+                <h1>Family</h1>
                 <h2 className="title">$19.99/month</h2>
                 <h2 className="title">Features</h2>
                 <ul className="list">
                   <li>All Premium features</li>
                   <li>Unlimited bikes</li>
-                  <li>Team/family sharing</li>
+                  <li>Team/family sharing up to 6 total users</li>
                   <li>Advanced part recommendations</li>
                   <li>Integration with bike shop networks</li>
                   <li>Priority customer support</li>
                   <li>Custom component databases</li>
                 </ul>
-                <h1 style={{ position: 'absolute', bottom: '30%', opacity: 1 }}>
+                <h1 style={{ bottom: '30%', opacity: 1 }}>
                   Planned for 2024
                 </h1>
-              </div>
+              </a>
+
               
               <div className="payment3" style={{ opacity: 0.5 }}>
                 <div className="payment-row"></div>

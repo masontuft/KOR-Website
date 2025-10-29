@@ -2,72 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
 import { useLegacyParams, logLegacyParams } from '../../hooks/useLegacyParams';
-import QrCodeGenerator from '../common/QrCodeGenerator';
 import SubscriptionDetails from '../subscription/SubscriptionDetails';
 import ShopUsersAndBikes from './ShopUsersAndBikes';
 import SendNotificationsPanel from './SendNotificationsPanel';
-interface ShopUser {
-  email: string;
-  name: string;
-  shopName?: string;
-  shopCode?: string;
-  subscription?: {
-    plan: string;
-    status: string;
-    nextBilling?: string;
-    subId?: string;
-    invoiceId?: string;
-  };
-}
 
-// Plan-specific features and limits
-interface PlanFeatures {
-  name: string;
-  maxCustomers: number;
-  maxNotifications: number;
-  features: string[];
-  color: string;
-  description: string;
-}
+// Modular Components
+import PlanSpecificModules from './modules/PlanSpecificModules';
 
-// Plan configurations based on legacy system
+// Types and Hooks
+import { ShopUser, PlanFeatures } from './types';
+import { usePlanFeatures } from './hooks/usePlanFeatures';
 
-//TODO create family plan 
-const getPlanFeatures = (planType: string): PlanFeatures => {
-  const plans: { [key: string]: PlanFeatures } = {
-    'basic': {
-      name: 'Basic Plan',
-      maxCustomers: 50,
-      maxNotifications: 100,
-      features: ['Customer Management', 'Basic Notifications', 'Email Support'],
-      color: '#17a2b8',
-      description: 'Perfect for small bike shops getting started with KOR'
-    },
-    'premium': {
-      name: 'Premium Plan',
-      maxCustomers: -1, // Unlimited customers
-      maxNotifications: -1, // Unlimited notifications
-      features: ['Advanced Customer Management', 'Unlimited Notifications', 'Priority Support', 'Analytics Dashboard', 'Custom Campaigns'],
-      color: '#28a745',
-      description: 'Full-featured plan for growing bike shops'
-    },
-    'pro': {
-      name: 'Pro Plan',
-      maxCustomers: -1, // Unlimited customers
-      maxNotifications: -1, // Unlimited notifications
-      features: ['Pro Customer Management', 'Unlimited Everything', '24/7 Support', 'Advanced Analytics', 'Custom Integrations'], // Removed 'API Access'
-      color: '#6f42c1',
-      description: 'Complete solution for large bike shop networks'
-    }
-  };
-  
-  return plans[planType] || plans['basic'];
-};
+// Plan configurations moved to usePlanFeatures hook
 
 const ShopDashboard: React.FC = () => {
   const { user, isAuthenticated, isLoading, error } = useAuth0();
   const navigate = useNavigate();
   const params = useLegacyParams();
+  const { getPlanFeatures } = usePlanFeatures();
   const [shopUser, setShopUser] = useState<ShopUser | null>(null);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [planFeatures, setPlanFeatures] = useState<PlanFeatures | null>(null);
@@ -554,317 +506,16 @@ const ShopDashboard: React.FC = () => {
         </div>
       )}
       
-      {/* Header with personalized greeting */}
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        alignItems: 'center', 
-        marginBottom: '2rem',
-        padding: '1.5rem',
-        backgroundColor: planFeatures?.color || '#007bff',
-        color: 'white',
-        borderRadius: '12px',
-        backgroundImage: 'linear-gradient(135deg, ' + (planFeatures?.color || '#007bff') + ', ' + (planFeatures?.color || '#007bff') + '90)'
-      }}>
-        <div>
-          <h1 style={{ color: 'white', margin: 0, marginBottom: '0.5rem' }}>Welcome, {shopUser?.shopName}!</h1>
-          <p style={{ color: 'rgba(255,255,255,0.9)', margin: 0, fontSize: '1.1rem' }}>
-            {planFeatures?.description || 'Managing your bike shop with KOR'}
-          </p>
-          {shopUser?.shopCode && (
-            <p style={{ color: 'rgba(255,255,255,0.8)', margin: '0.5rem 0 0 0', fontSize: '0.9rem' }}>
-              Shop Code: <strong>{shopUser.shopCode}</strong>
-            </p>
-          )}
-        </div>
-      </div>
-
-      {/* Plan-specific information banner */}
-      {planFeatures && (
-        <div style={{
-          backgroundColor: 'white',
-          padding: '1.5rem',
-          borderRadius: '8px',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-          marginBottom: '2rem',
-          border: `3px solid ${planFeatures.color}`,
-          borderLeft: `6px solid ${planFeatures.color}`
-        }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-            <div>
-              <h3 style={{ color: planFeatures.color, margin: '0 0 0.5rem 0' }}>{planFeatures.name} Features</h3>
-              <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-                <div>
-                  <strong>Customer Limit:</strong> {planFeatures.maxCustomers === -1 ? 'Unlimited' : planFeatures.maxCustomers.toLocaleString()}
-                </div>
-              </div>
-            </div>
-            {planFeatures.maxCustomers !== 50 && (
-              <div style={{
-                backgroundColor: planFeatures.color,
-                color: 'white',
-                padding: '0.5rem 1rem',
-                borderRadius: '20px',
-                fontSize: '0.8rem',
-                fontWeight: 'bold'
-              }}>
-                {planFeatures.name === 'Premium Plan' ? '⭐ POPULAR' : '🚀 Pro'}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* Getting Started Section (moved just below Plan Features banner) */}
-      <div style={{
-        backgroundColor: 'white',
-        padding: '2rem',
-        borderRadius: '8px',
-        boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-        marginTop: '1rem',
-        textAlign: 'center'
-      }}>
-        <h2 style={{ color: '#333', marginBottom: '1rem' }}>Getting Started with JMR Cycling</h2>
-        <p style={{ color: '#666', marginBottom: '1.5rem' }}>
-          Your dashboard is being prepared with all the features of your {planFeatures?.name || 'plan'}.
-        </p>
-        
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginTop: '1.5rem' }}>
-          <div style={{ padding: '1rem' }}>
-            <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>📱</div>
-            <h4 style={{ color: planFeatures?.color || '#007bff' }}>Download KOR App</h4>
-            <p style={{ fontSize: '0.9rem', color: '#666' }}>Your customers will use your shop code: <strong>{shopUser?.shopCode}</strong></p>
-          </div>
-          <div style={{ padding: '1rem' }}>
-            <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>⚙️</div>
-            <h4 style={{ color: planFeatures?.color || '#007bff' }}>Configure Settings</h4>
-            <p style={{ fontSize: '0.9rem', color: '#666' }}>Customize notifications and shop preferences</p>
-          </div>
-          <div style={{ padding: '1rem' }}>
-            <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🚀</div>
-            <h4 style={{ color: planFeatures?.color || '#007bff' }}>Start Managing</h4>
-            <p style={{ fontSize: '0.9rem', color: '#666' }}>Begin tracking customer bike maintenance</p>
-          </div>
-        </div>
-      </div>
-
-      {/* QR Code Section - Matching Legacy Dashboard */}
-      {shopUser?.shopCode && (
-        <div style={{
-          backgroundColor: 'white',
-          padding: '2rem',
-          borderRadius: '8px',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-          marginTop: '2rem',
-          textAlign: 'center'
-        }}>
-          <h2 style={{ color: '#333', marginBottom: '1rem' }}>📱 Customer QR Code</h2>
-          <p style={{ color: '#666', marginBottom: '0.5rem', fontSize: '1.1rem' }}>
-            <strong>Seamless customer onboarding for your bike shop!</strong>
-          </p>
-          <p style={{ color: '#666', marginBottom: '1.5rem', lineHeight: 1.5 }}>
-            Customers scan → Auto-redirect to app store → App pre-filled with shop code → Instant login!
-          </p>
-          
-          {/* Legacy-style benefits display */}
-          <div style={{
-            backgroundColor: '#e8f5e8',
-            border: '1px solid #28a745',
-            borderRadius: '8px',
-            padding: '1rem',
-            marginBottom: '2rem',
-            display: 'inline-block',
-            maxWidth: '500px'
-          }}>
-            <h3 style={{ color: '#28a745', marginTop: 0, marginBottom: '0.5rem' }}>✨ What's Improved</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: '0.9rem' }}>
-              <div>
-                <strong style={{ color: '#e67e22' }}>😕 Before (7 steps)</strong>
-                <ol style={{ textAlign: 'left', fontSize: '0.8rem', paddingLeft: '1rem' }}>
-                  <li>Get shop code from staff</li>
-                  <li>Download app manually</li>
-                  <li>Open app</li>
-                  <li>Navigate to login</li>
-                  <li>Type shop code</li>
-                  <li>Tap continue</li>
-                  <li>Complete Strava auth</li>
-                </ol>
-              </div>
-              <div>
-                <strong style={{ color: '#28a745' }}>😊 After (3 steps)</strong>
-                <ol style={{ textAlign: 'left', fontSize: '0.8rem', paddingLeft: '1rem' }}>
-                  <li><strong>Scan QR code</strong></li>
-                  <li><strong>App opens automatically</strong></li>
-                  <li><strong>Complete Strava auth</strong></li>
-                </ol>
-                <p style={{ color: '#28a745', fontWeight: 'bold', fontSize: '0.8rem', margin: '0.5rem 0 0 0' }}>
-                  ✨ Shop code auto-filled!
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* QR Code Generator */}
-          <QrCodeGenerator 
-            shopCode={shopUser.shopCode}
-            shopName={shopUser.shopName}
-            size={200}
-            onError={(error) => console.error('QR Code Error:', error)}
-          />
-          
-          {/* Instructions for shop owners */}
-          <div style={{
-            backgroundColor: '#f8f9fa',
-            border: '1px solid #dee2e6',
-            borderRadius: '8px',
-            padding: '1.5rem',
-            marginTop: '2rem',
-            maxWidth: '600px',
-            margin: '2rem auto 0'
-          }}>
-            <h4 style={{ color: '#333', marginTop: 0 }}>💡 How to Use Your QR Code</h4>
-            <div style={{ textAlign: 'left', lineHeight: 1.6 }}>
-              <p><strong>For your customers:</strong></p>
-              <blockquote style={{
-                backgroundColor: '#667eea',
-                color: 'white',
-                padding: '1rem',
-                borderRadius: '8px',
-                fontStyle: 'italic',
-                margin: '1rem 0'
-              }}>
-                "Scan this QR code with your phone to get our bike maintenance app - it'll set everything up automatically!"
-              </blockquote>
-              
-              <p><strong>Ways to share:</strong></p>
-              <ul style={{ paddingLeft: '1.5rem' }}>
-                <li>📄 <strong>Print it</strong> and display prominently in your shop</li>
-                <li>💳 <strong>Add to business cards</strong> or promotional materials</li>
-                <li>📧 <strong>Share digitally</strong> via email or social media</li>
-                <li>📱 <strong>Show on tablet/phone</strong> for customers to scan</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Users & Bikes Section */}
-      <div style={{ marginTop: '2rem' }}>
-        <ShopUsersAndBikes accentColor={planFeatures?.color || '#667eea'} />
-      </div>
-
-      {/* Premium/Pro: Send Notifications */}
-      {(() => {
-        const planTypeParam = (params.plan_type || sessionStorage.getItem('plan_type') || '').toString().toLowerCase();
-        const canSendNotifications = planTypeParam === 'premium' || planTypeParam === 'pro';
-        return canSendNotifications ? (
-          <div style={{ marginTop: '2rem' }}>
-            <SendNotificationsPanel />
-          </div>
-        ) : null;
-      })()}
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
-        {/* Shop Info Card - Enhanced with parameters */}
-        <div style={{
-          backgroundColor: 'white',
-          padding: '1.5rem',
-          borderRadius: '8px',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
-        }}>
-          <h3 style={{ marginTop: 0, color: '#333', display: 'flex', alignItems: 'center' }}>
-            🏪 Shop Information
-          </h3>
-          <div style={{ lineHeight: 1.6 }}>
-            <p><strong>Shop Name:</strong> {shopUser?.shopName}</p>
-            <p><strong>Email:</strong> {shopUser?.email}</p>
-            {shopUser?.shopCode && <p><strong>Shop Code:</strong> <code style={{ backgroundColor: '#f8f9fa', padding: '2px 6px', borderRadius: '4px' }}>{shopUser.shopCode}</code></p>}
-          </div>
-        </div>
-
-        {/* Plan Limits Card - Dynamic based on plan */}
-        <div style={{
-          backgroundColor: 'white',
-          padding: '1.5rem',
-          borderRadius: '8px',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
-        }}>
-          <h3 style={{ marginTop: 0, color: '#333', display: 'flex', alignItems: 'center' }}>
-            📊 Plan Usage
-          </h3>
-          <div style={{ lineHeight: 1.6 }}>
-            <div style={{ marginBottom: '1rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                <strong>Customers:</strong>
-                <span>{customerCountLoading ? 'Loading…' : (customerCount ?? 0)} / {planFeatures?.maxCustomers === -1 ? '∞' : planFeatures?.maxCustomers}</span>
-              </div>
-              {planFeatures?.maxCustomers !== -1 && (
-                <div style={{ backgroundColor: '#e9ecef', height: '8px', borderRadius: '4px', overflow: 'hidden' }}>
-                  <div style={{ 
-                    backgroundColor: planFeatures?.color || '#007bff', 
-                    height: '100%', 
-                    width: `${(planFeatures?.maxCustomers && planFeatures.maxCustomers > 0 && (customerCount ?? 0) >= 0) ? Math.min(100, Math.round(((customerCount ?? 0) / planFeatures.maxCustomers) * 100)) : 0}%` 
-                  }}></div>
-                </div>
-              )}
-              {customerCountError && (
-                <p style={{ color: '#e74c3c', fontSize: '0.85rem', marginTop: '0.5rem' }}>Error loading customers: {customerCountError}</p>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Live Subscription Details from Chargebee API */}
-      <div style={{ marginTop: '2rem' }}>
-        <SubscriptionDetails
-          subscriptionId={shopUser?.subscription?.subId}
-          onError={(error) => console.error('Subscription Details Error:', error)}
-          onLoading={(loading) => console.log('Subscription Details Loading:', loading)}
-        />
-      </div>
-
-      {/* Plan Features Section - Dynamic based on parameters */}
-      {planFeatures && (
-        <div style={{
-          backgroundColor: 'white',
-          padding: '2rem',
-          borderRadius: '8px',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-          marginTop: '2rem'
-        }}>
-          <h2 style={{ color: '#333', marginBottom: '1rem', textAlign: 'center' }}>Your {planFeatures.name} Features</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
-            {planFeatures.features.map((feature, index) => (
-              <div key={index} style={{ 
-                padding: '1rem',
-                textAlign: 'center',
-                border: `2px solid ${planFeatures.color}20`,
-                borderRadius: '8px',
-                backgroundColor: `${planFeatures.color}10`
-              }}>
-                <h4 style={{ color: planFeatures.color, marginTop: 0 }}>✓ {feature}</h4>
-                <p style={{ fontSize: '0.9rem', color: '#666', margin: 0 }}>
-                  {feature === 'Customer Management' && 'Track and manage all your bike service customers'}
-                  {feature === 'Basic Notifications' && 'Send service reminders to your customers'}
-                  {feature === 'Email Support' && 'Get help via email from our support team'}
-                  {feature === 'Advanced Customer Management' && 'Detailed customer profiles and service history'}
-                  {feature === 'Unlimited Notifications' && 'Send unlimited maintenance alerts and promotions'}
-                  {feature === 'Priority Support' && 'Get faster response times from our team'}
-                  {feature === 'Analytics Dashboard' && 'Detailed insights into your shop performance'}
-                  {feature === 'Custom Campaigns' && 'Create targeted marketing campaigns'}
-                  {feature === 'Pro Customer Management' && 'Multi-location customer management'}
-                  {feature === 'Unlimited Everything' && 'No limits on any features'}
-                  {feature === '24/7 Support' && 'Round-the-clock support via phone and chat'}
-                  {feature === 'Advanced Analytics' && 'Deep business intelligence and reporting'}
-                  {feature === 'Custom Integrations' && 'Connect with your existing business tools'}
-                  {!feature.includes('Customer') && !feature.includes('Notification') && !feature.includes('Support') && !feature.includes('Analytics') && !feature.includes('Campaign') && !feature.includes('Integration') && 'Available in your current plan'}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      {/* All modules are now controlled by plan type in PlanSpecificModules */}
+      <PlanSpecificModules 
+        shopUser={shopUser} 
+        planFeatures={planFeatures}
+        planType={shopUser?.subscription?.plan || params.plan_type || sessionStorage.getItem('plan_type') || 'basic'}
+        customerCount={customerCount}
+        customerCountLoading={customerCountLoading}
+        customerCountError={customerCountError}
+        params={params}
+      />
 
 
       

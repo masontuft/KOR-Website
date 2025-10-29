@@ -8,8 +8,8 @@ The React app now connects to the KOR backend API (`https://jmrcycling.com:3001`
 
 ## API Service Architecture
 
-### Core API Service
-**Location:** `src/services/korAPI.ts`
+## Core API Service
+**Location:** `src/services/korAPI.ts`#
 
 The `KORAPIService` class provides a clean interface to all backend endpoints:
 
