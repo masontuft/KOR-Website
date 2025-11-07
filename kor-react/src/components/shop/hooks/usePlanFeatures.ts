@@ -32,7 +32,7 @@ export const usePlanFeatures = () => {
         maxCustomers: 5, // Unlimited customers
         maxNotifications: -1, // Unlimited notifications
         features: ['Advanced Customer Management', 'Unlimited Notifications', 'Priority Support', 'Analytics Dashboard', 'Custom Campaigns'],
-        color: '#ffc107',
+        color: '#BF4A00',
         description: 'The ideal solution for a family of up to 6 bikers'
       },
     };

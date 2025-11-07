@@ -11,6 +11,8 @@ import SendNotificationsPanel from '../SendNotificationsPanel';
 import SubscriptionDetails from '../../subscription/SubscriptionDetails';
 import { DashboardSectionProps, CustomerUsageProps } from '../types';
 
+import ShopUsersAndBikesMock from '../ShopUsersandBikesMock'; //MOCK REMOVE!!!!!!
+
 interface PlanSpecificModulesProps extends DashboardSectionProps, CustomerUsageProps {
   planType: string;
   params: any; // For accessing URL params
@@ -106,10 +108,11 @@ const PlanSpecificModules: React.FC<PlanSpecificModulesProps> = ({
               instructionText="For your family members:"
             />
             
-            {/* Users & Bikes */}
+            {/* Users & Bikes CHANGE TO PRODUCTION FILE*/}
             <div style={{ marginTop: '2rem' }}>
-              <ShopUsersAndBikes accentColor={planFeatures?.color || '#667eea'} />
-            </div>
+              <ShopUsersAndBikesMock accentColor={planFeatures?.color || '#667eea'} /> 
+            </div> 
+          
             
             {/* Shop info cards */}
             <ShopInfoCards 

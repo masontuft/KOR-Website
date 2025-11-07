@@ -15,7 +15,7 @@ const WelcomeHeader: React.FC<DashboardSectionProps> = ({ shopUser, planFeatures
       backgroundImage: 'linear-gradient(135deg, ' + (planFeatures?.color || '#007bff') + ', ' + (planFeatures?.color || '#007bff') + '90)'
     }}>
       <div>
-        <h1 style={{ color: 'white', margin: 0, marginBottom: '0.5rem' }}>Welcome, {shopUser?.shopName}!</h1>
+        <h1 style={{ color: 'white', margin: 0, marginBottom: '0.5rem', textAlign: 'left' }}>Welcome, {shopUser?.shopName}!</h1>
         <p style={{ color: 'rgba(255,255,255,0.9)', margin: 0, fontSize: '1.1rem' }}>
           {planFeatures?.description || 'Managing your bike shop with KOR'}
         </p>

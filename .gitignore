@@ -32,3 +32,4 @@ Thumbs.db
 # Deployment logs
 deploy-*.log
 nginx.conf.sample
+login.txt
