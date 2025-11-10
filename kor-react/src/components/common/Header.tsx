@@ -70,12 +70,20 @@ const Header: React.FC = () => {
           {showLoading ? (
             <span className="link loading-auth">Loading...</span>
           ) : isOnShopPage && softAuthenticated ? (
-            <button 
-              className="link"
-              onClick={handleLogout}
-            >
-              Log Out
-            </button>
+            <>
+              <Link 
+                className="link" 
+                to="/shop/settings"
+              >
+                ⚙️ Settings
+              </Link>
+              <button 
+                className="link"
+                onClick={handleLogout}
+              >
+                Log Out
+              </button>
+            </>
           ) : (
             <Link 
               className="link" 
@@ -110,15 +118,20 @@ const Header: React.FC = () => {
         {showLoading ? (
           <span className="mobile-link loading-auth">Loading...</span>
         ) : isOnShopPage && softAuthenticated ? (
-          <button 
-            className="mobile-link" 
-            onClick={() => {
-              setIsMobileMenuOpen(false);
-              handleLogout();
-            }}
-          >
-            Log Out
-          </button>
+          <>
+            <Link className="mobile-link" to="/shop/settings" onClick={() => setIsMobileMenuOpen(false)}>
+              ⚙️ Settings
+            </Link>
+            <button 
+              className="mobile-link" 
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                handleLogout();
+              }}
+            >
+              Log Out
+            </button>
+          </>
         ) : (
           <Link className="mobile-link" to="/shop/login" onClick={() => setIsMobileMenuOpen(false)}>
             Log In

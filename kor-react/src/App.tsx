@@ -15,6 +15,7 @@ import FAQ from './components/pages/FAQ';
 import QrGuide from './components/pages/QrGuide';
 import ShopLogin from './components/shop/ShopLogin';
 import ShopDashboard from './components/shop/ShopDashboard';
+import ShopSettings from './components/shop/ShopSettings';
 import ShopSignIn from './components/shop/ShopSignIn';
 import LegacyParamsDemo from './components/demo/LegacyParamsDemo';
 import ParameterTestPage from './components/demo/ParameterTestPage';
@@ -81,6 +82,7 @@ function App() {
               <Route path="/oauth/authorize/*" element={<OAuthAuthorize />} />
               <Route path="/shop/login" element={<ShopLogin />} />
               <Route path="/shop/dashboard" element={<ShopDashboard />} />
+              <Route path="/shop/settings" element={<ShopSettings />} />
               {/* Legacy-compatible routes */}
               <Route path="/shop/signin" element={<ShopSignIn />} />
               <Route path="/shop_tools/signin" element={<ShopSignIn />} />
