@@ -9,7 +9,9 @@ import {
   Loader2
 } from 'lucide-react';
 import BikeWearBars from './WearBar/BikeWearBars';
+import AllPartsWear from './WearBar/AllPartsWear';
 import fakeData from './fakeShopUsers.json'; // Your mock JSON for development
+import { convertApiResponse, convertShopUsers } from './modules/dataConverter';
 
 // Full JSON types
 interface PartData {
@@ -56,11 +58,14 @@ interface PartData {
   new_tires_date: string;
   dropper_service_date: string;
   sealant_refresh_date: string;
-  sealant_show: string;
-  rear_suspension_show: string;
-  dropper_show: string;
-  front_fork_show: string;
-  AXS_show: string;
+  sealant_show: boolean;
+  rear_suspension_show: boolean;
+  dropper_show: boolean;
+  front_fork_show: boolean;
+  AXS_show: boolean;
+  brake_pads_show: boolean;
+  brake_bleed_show: boolean;
+  brake_rotors_show: boolean;
   dropper_mile_marker: number;
 }
 
@@ -105,7 +110,6 @@ interface ShopUsersAndBikesProps {
   readOnlyMode?: boolean;
   showBikes?: boolean;
 }
-
 const formatTimeAgo = (iso?: string | null): string => {
   if (!iso) return 'Never';
   const dt = new Date(iso);
@@ -175,8 +179,8 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({
 
   const fetchUsers = useCallback(async () => {
     if (process.env.NODE_ENV === 'development') {
-      // Use fake data in dev
-      const mapped = fakeData.users as ShopUser[];
+      // Use fake data in dev and convert boolean fields from 0/1 to true/false
+      const mapped = convertShopUsers(fakeData.users as any) as ShopUser[];
       setUsers(mapped);
 
       const init: Record<
@@ -223,7 +227,9 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({
       if (data?.message !== 'success' || !Array.isArray(data?.users))
         throw new Error(data?.error || 'Unexpected response');
 
-      const mapped: ShopUser[] = data.users.map((u: any) => ({
+      // Convert API response and map to ShopUser format
+      const convertedData = convertApiResponse(data);
+      const mapped: ShopUser[] = convertedData.users.map((u: any) => ({
         strava_user_id: u.strava_user_id,
         first_name: u.first_name,
         last_name: u.last_name,
@@ -295,7 +301,8 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
-        const bikes: Bike[] = Array.isArray(data?.bikes) ? data.bikes : [];
+        const convertedData = convertApiResponse(data);
+        const bikes: Bike[] = Array.isArray(convertedData?.bikes) ? convertedData.bikes : [];
 
         setBikesByUser(prev => ({
           ...prev,
@@ -434,98 +441,6 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({
     }
     return list;
   }, [users, search, statusFilter, sort]);
-
-  // --- Derived data for All Parts View ---
-  const allParts = React.useMemo(() => {
-    if (!showAllParts) return [];
-
-    const parts: {
-      label: string;
-      value: number;
-      bikeName: string;
-      ownerName: string;
-    }[] = [];
-
-    filteredSorted.forEach(u => {
-      const bikes = bikesByUser[String(u.strava_user_id)]?.bikes || [];
-      bikes.forEach(bike => {
-        const { part_data, service_periods } = bike;
-
-        const partDefs = [
-          {
-            label: 'Chain',
-            used: part_data.chain_used_miles,
-            total: service_periods.chain_miles
-          },
-          {
-            label: 'Cassette',
-            used: part_data.cassette_used_miles,
-            total: service_periods.cassette_miles
-          },
-          {
-            label: 'Chain Ring',
-            used: part_data.chain_ring_used_miles,
-            total: service_periods.chain_ring_miles
-          },
-          {
-            label: 'Bottom Bracket',
-            used: part_data.bottom_bracket_used_miles,
-            total: service_periods.bottom_bracket_miles
-          },
-          {
-            label: 'Front Fork',
-            used: part_data.front_fork_used_miles,
-            total: service_periods.front_fork_miles
-          },
-          {
-            label: 'Rear Shock',
-            used: part_data.rear_shock_used_miles,
-            total: service_periods.rear_shock_miles
-          },
-          {
-            label: 'Brake Pads',
-            used: part_data.brake_pads_used_miles,
-            total: service_periods.brake_pads_miles
-          },
-          {
-            label: 'Brake Rotors',
-            used: part_data.brake_rotors_used_miles,
-            total: service_periods.brake_rotors_miles
-          },
-          {
-            label: 'Dropper',
-            used: part_data.dropper_used_miles,
-            total: service_periods.dropper_miles
-          },
-          {
-            label: 'Tires',
-            used: part_data.tires_used_miles,
-            total: service_periods.tires_miles
-          },
-          {
-            label: 'Sealant',
-            used: part_data.sealant_used_hours,
-            total: service_periods.sealant_refresh_hours
-          }
-        ];
-
-        partDefs.forEach(p => {
-          const pct =
-            p.total > 0
-              ? Math.min(Math.round((p.used / p.total) * 100), 100)
-              : 0;
-          parts.push({
-            label: p.label,
-            value: pct,
-            bikeName: part_data.strava_bike_name,
-            ownerName: `${u.first_name} ${u.last_name}`
-          });
-        });
-      });
-    });
-
-    return parts.sort((a, b) => b.value - a.value);
-  }, [showAllParts, filteredSorted, bikesByUser]);
 
   return (
     <div
@@ -700,73 +615,19 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({
         )}
 
         <div
-          style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1rem' }}
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr',
+            gap: '1rem'
+          }}
         >
-          {showAllParts && (
-            <div style={{ marginTop: '1rem' }}>
-              <h3 style={{ color: '#333', marginBottom: '1rem' }}>
-                All Part Wear
-              </h3>
-
-              {(() => {
-                // Flatten all bikes across all users
-                const allBikes = filteredSorted.flatMap(u =>
-                  (bikesByUser[String(u.strava_user_id)]?.bikes || []).map(
-                    bike => ({
-                      bike,
-                      userName: `${u.first_name} ${u.last_name}`
-                    })
-                  )
-                );
-
-                // Sort bikes by their most-worn part
-                const sorted = allBikes.sort((a, b) => {
-                  const aWear =
-                    Math.max(
-                      a.bike.part_data.chain_used_miles ?? 0,
-                      a.bike.part_data.brake_pads_used_miles ?? 0,
-                      a.bike.part_data.tires_used_miles ?? 0
-                    ) || 0;
-                  const bWear =
-                    Math.max(
-                      b.bike.part_data.chain_used_miles ?? 0,
-                      b.bike.part_data.brake_pads_used_miles ?? 0,
-                      b.bike.part_data.tires_used_miles ?? 0
-                    ) || 0;
-                  return bWear - aWear;
-                });
-
-                return (
-                  <div
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: '1fr', // one column only
-                      gap: '1rem'
-                    }}
-                  >
-                    {sorted.map(({ bike, userName }) => (
-                      <div
-                        key={`${bike.part_data.strava_user_id}-${bike.part_data.id}`}
-                        style={{
-                          border: '1px solid #eee',
-                          borderRadius: 10,
-                          padding: '1rem',
-                          background: '#fafafa'
-                        }}
-                      >
-                        <BikeWearBars
-                          bike={bike}
-                          bikeName={bike.part_data.strava_bike_name}
-                          ownerName={userName}
-                          showContext={true}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                );
-              })()}
-            </div>
-          )}
+          <div style={{ width: '90%', maxWidth: 1000, margin: '0 auto' }}>
+            <AllPartsWear
+              filteredUsers={filteredSorted}
+              bikesByUser={bikesByUser}
+              showAllParts={showAllParts}
+            />
+          </div>
 
           {!showAllParts &&
             filteredSorted.map(u => {

@@ -31,3 +31,14 @@ export interface CustomerUsageProps {
   customerCountLoading: boolean;
   customerCountError: string | null;
 }
+export interface PartWear {
+  partName: string;
+  miles: number;
+  limit: number;
+}
+
+export interface Bike {
+  id: number;
+  name: string;
+  parts: PartWear[];
+}
