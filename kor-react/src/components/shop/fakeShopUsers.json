@@ -69,7 +69,7 @@
             "sealant_show": 1,
             "rear_suspension_show": 1,
             "dropper_show": 0,
-            "front_fork_show": 1,
+            "front_fork_show": 0,
             "AXS_show": 0,
             "brake_pad_show": 1,
             "brake_bleed_show": 1,

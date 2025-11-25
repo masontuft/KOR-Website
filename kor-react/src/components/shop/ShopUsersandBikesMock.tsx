@@ -3,6 +3,7 @@ import {
   Search,
   ChevronDown,
   ChevronRight,
+  ChevronUp,
   RefreshCcw,
   Users,
   Bike,
@@ -168,14 +169,11 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({
     >
   >({});
   const [showAllParts, setShowAllParts] = useState(false);
+  const [allBikesExpanded, setAllBikesExpanded] = useState(false);
 
   const [search, setSearch] = useState('');
-  const [statusFilter, setStatusFilter] = useState<
-    'all' | 'active' | 'inactive' | 'pending'
-  >('all');
-  const [sort, setSort] = useState<
-    'last_login_desc' | 'last_login_asc' | 'name_asc' | 'name_desc'
-  >('last_login_desc');
+  // Sort mode controls how parts are ordered in the bike view and all-parts view
+  const [sort, setSort] = useState<'wear_desc' | 'wear_asc'>('wear_desc');
 
   const fetchUsers = useCallback(async () => {
     if (process.env.NODE_ENV === 'development') {
@@ -302,7 +300,9 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
         const convertedData = convertApiResponse(data);
-        const bikes: Bike[] = Array.isArray(convertedData?.bikes) ? convertedData.bikes : [];
+        const bikes: Bike[] = Array.isArray(convertedData?.bikes)
+          ? convertedData.bikes
+          : [];
 
         setBikesByUser(prev => ({
           ...prev,
@@ -395,52 +395,46 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({
       runNext()
     );
     await Promise.all(workers);
+    setAllBikesExpanded(true);
   }, [users, fetchBikesForUser, readOnlyMode, showBikes]);
+
+  const hideAllBikes = useCallback(() => {
+    if (readOnlyMode || !showBikes) return;
+    const ids = users.map(u => String(u.strava_user_id));
+
+    setBikesByUser(prev => {
+      const copy = { ...prev };
+      ids.forEach(id => {
+        const cur = copy[id];
+        if (cur) {
+          copy[id] = { ...cur, expanded: false };
+        }
+      });
+      return copy;
+    });
+    setAllBikesExpanded(false);
+  }, [users, readOnlyMode, showBikes]);
+
+  const toggleAllBikes = useCallback(() => {
+    if (allBikesExpanded) {
+      hideAllBikes();
+    } else {
+      // Close the All Part Wear view when showing all bikes
+      if (showAllParts) {
+        setShowAllParts(false);
+      }
+      loadAllBikes();
+    }
+  }, [allBikesExpanded, hideAllBikes, loadAllBikes, showAllParts]);
 
   const filteredSorted = useMemo(() => {
     const term = search.trim().toLowerCase();
-    let list = users.filter(u => {
-      const statusOk =
-        statusFilter === 'all' ||
-        (u.shop_activity || '').toLowerCase() === statusFilter;
+    return users.filter(u => {
       const text = `${u.first_name} ${u.last_name}`.toLowerCase();
       const textOk = !term || text.includes(term);
-      return statusOk && textOk;
+      return textOk;
     });
-
-    switch (sort) {
-      case 'name_asc':
-        list.sort((a, b) =>
-          `${a.first_name} ${a.last_name}`.localeCompare(
-            `${b.first_name} ${b.last_name}`
-          )
-        );
-        break;
-      case 'name_desc':
-        list.sort((a, b) =>
-          `${b.first_name} ${b.last_name}`.localeCompare(
-            `${a.first_name} ${a.last_name}`
-          )
-        );
-        break;
-      case 'last_login_asc':
-        list.sort(
-          (a, b) =>
-            new Date(a.last_login || 0).getTime() -
-            new Date(b.last_login || 0).getTime()
-        );
-        break;
-      case 'last_login_desc':
-      default:
-        list.sort(
-          (a, b) =>
-            new Date(b.last_login || 0).getTime() -
-            new Date(a.last_login || 0).getTime()
-        );
-        break;
-    }
-    return list;
-  }, [users, search, statusFilter, sort]);
+  }, [users, search]);
 
   return (
     <div
@@ -453,6 +447,7 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({
       }}
     >
       <div
+        className='shop-header'
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -465,7 +460,7 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <Users size={20} color={accentColor} />
           <h2 style={{ margin: 0, color: '#333' }}>
-            {showBikes ? 'Customers & Bikes' : 'Customers'}
+            {showBikes ? 'Family Members & Bikes' : 'Customers'}
             {readOnlyMode && (
               <span
                 style={{
@@ -479,16 +474,36 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({
             )}
           </h2>
         </div>
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          <div style={{ position: 'relative' }}>
+        <div
+          className='shop-controls'
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
+            flexWrap: 'wrap'
+          }}
+        >
+          <div
+            style={{
+              position: 'relative',
+              display: 'flex',
+              alignItems: 'center'
+            }}
+          >
             <Search
               size={16}
-              style={{ position: 'absolute', left: 10, top: 10, color: '#888' }}
+              style={{
+                position: 'absolute',
+                left: 10,
+                top: '50%',
+                transform: 'translateY(-50%)',
+                color: '#888'
+              }}
             />
             <input
               value={search}
               onChange={e => setSearch(e.target.value)}
-              placeholder='Search name'
+              placeholder='Search'
               style={{
                 padding: '8px 10px 8px 30px',
                 border: '1px solid #ddd',
@@ -499,45 +514,29 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({
             />
           </div>
           <div>
-            <label style={{ fontSize: 12, color: '#666', marginRight: 6 }}>
-              Status
-            </label>
-            <select
-              value={statusFilter}
-              onChange={e => setStatusFilter(e.target.value as any)}
-              style={{
-                padding: '8px',
-                border: '1px solid #ddd',
-                borderRadius: 8
-              }}
-            >
-              <option value='all'>All</option>
-              <option value='active'>Active</option>
-              <option value='inactive'>Inactive</option>
-              <option value='pending'>Pending</option>
-            </select>
-          </div>
-          <div>
-            <label style={{ fontSize: 12, color: '#666', marginRight: 6 }}>
-              Sort
-            </label>
             <select
               value={sort}
-              onChange={e => setSort(e.target.value as any)}
+              onChange={e =>
+                setSort(e.target.value as 'wear_desc' | 'wear_asc')
+              }
               style={{
                 padding: '8px',
                 border: '1px solid #ddd',
                 borderRadius: 8
               }}
             >
-              <option value='last_login_desc'>Last login (newest)</option>
-              <option value='last_login_asc'>Last login (oldest)</option>
-              <option value='name_asc'>Name (A→Z)</option>
-              <option value='name_desc'>Name (Z→A)</option>
+              <option value='wear_desc'>Most Worn</option>
+              <option value='wear_asc'>Least Worn</option>
             </select>
           </div>
           <button
-            onClick={() => setShowAllParts(!showAllParts)}
+            onClick={() => {
+              setShowAllParts(!showAllParts);
+              // Reset the Show All Bikes button when opening All Part Wear view
+              if (!showAllParts) {
+                setAllBikesExpanded(false);
+              }
+            }}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -545,13 +544,40 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({
               background: '#BF4A00',
               color: 'white',
               border: 'none',
-              padding: '8px 12px',
+              padding: '12px 16px',
               borderRadius: 8,
-              cursor: 'pointer'
+              cursor: 'pointer',
+              fontSize: '15px'
             }}
           >
+            {showAllParts ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
             {showAllParts ? 'Hide All Part Wear' : 'Show All Part Wear'}
           </button>
+          {showBikes && !readOnlyMode && (
+            <button
+              onClick={toggleAllBikes}
+              title={allBikesExpanded ? 'Hide all bikes' : 'Show all bikes'}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+                background: '#BF4A00',
+                color: 'white',
+                border: 'none',
+                padding: '12px 16px',
+                borderRadius: 8,
+                cursor: 'pointer',
+                fontSize: '15px'
+              }}
+            >
+              {allBikesExpanded ? (
+                <ChevronUp size={16} />
+              ) : (
+                <ChevronDown size={16} />
+              )}
+              {allBikesExpanded ? 'Hide All Bikes' : 'Show All Bikes'}
+            </button>
+          )}
           <button
             onClick={() => fetchUsers()}
             title='Refresh users'
@@ -562,32 +588,14 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({
               background: accentColor,
               color: 'white',
               border: 'none',
-              padding: '8px 12px',
+              padding: '12px 16px',
               borderRadius: 8,
-              cursor: 'pointer'
+              cursor: 'pointer',
+              fontSize: '15px'
             }}
           >
             <RefreshCcw size={16} /> Refresh
           </button>
-          {showBikes && !readOnlyMode && (
-            <button
-              onClick={() => loadAllBikes()}
-              title='Load bikes for all users'
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 6,
-                background: '#333',
-                color: 'white',
-                border: 'none',
-                padding: '8px 12px',
-                borderRadius: 8,
-                cursor: 'pointer'
-              }}
-            >
-              <Bike size={16} /> Load All Bikes
-            </button>
-          )}
         </div>
       </div>
 
@@ -626,6 +634,7 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({
               filteredUsers={filteredSorted}
               bikesByUser={bikesByUser}
               showAllParts={showAllParts}
+              sortMode={sort}
             />
           </div>
 
@@ -797,6 +806,7 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({
                         !bikesState.error &&
                         bikesState.bikes.length > 0 && (
                           <div
+                            className='bikes-grid'
                             style={{
                               display: 'grid',
                               gridTemplateColumns: 'repeat(2, 1fr)',
@@ -849,7 +859,7 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({
                                 </div>
 
                                 {/* Wear bars */}
-                                <BikeWearBars bike={b} />
+                                <BikeWearBars bike={b} sortMode={sort} />
                               </div>
                             ))}
                           </div>
@@ -866,6 +876,49 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({
         {`
           .spin { animation: spin 1s linear infinite; }
           @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+          
+          /* Mobile responsive styles */
+          @media (max-width: 768px) {
+            .shop-header {
+              flex-direction: column;
+              align-items: flex-start !important;
+              gap: 1rem;
+            }
+            
+            .shop-controls {
+              width: 100%;
+              flex-direction: column;
+              align-items: stretch !important;
+            }
+            
+            .shop-controls > * {
+              width: 100%;
+            }
+            
+            .shop-controls input {
+              width: 100% !important;
+              min-width: unset !important;
+              box-sizing: border-box;
+            }
+            
+            .shop-controls button {
+              width: 100%;
+              justify-content: center;
+              font-size: 16px;
+            }
+            
+            .shop-controls > div {
+              width: 100%;
+            }
+            
+            .shop-controls select {
+              width: 100%;
+            }
+            
+            .bikes-grid {
+              grid-template-columns: 1fr !important;
+            }
+          }
           `}
       </style>
     </div>

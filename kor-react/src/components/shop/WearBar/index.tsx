@@ -16,7 +16,7 @@ const WearBar: React.FC<WearBarProps> = ({
 }) => {
   // Determine bar color based on wear percentage
   let barColor = '#00FF75';
-  if (value == 100) {
+  if (value === 100) {
     barColor = '#FF1744';
   } else if (value >= 75) {
     barColor = '#FFD700';
