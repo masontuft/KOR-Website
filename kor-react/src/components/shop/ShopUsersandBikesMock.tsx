@@ -429,12 +429,32 @@ const ShopUsersAndBikes: React.FC<ShopUsersAndBikesProps> = ({
 
   const filteredSorted = useMemo(() => {
     const term = search.trim().toLowerCase();
+    if (!term) return users;
+    
     return users.filter(u => {
-      const text = `${u.first_name} ${u.last_name}`.toLowerCase();
-      const textOk = !term || text.includes(term);
-      return textOk;
+      // Search by user name
+      const userName = `${u.first_name} ${u.last_name}`.toLowerCase();
+      if (userName.includes(term)) return true;
+      
+      // Search by bike names
+      const key = String(u.strava_user_id);
+      const userBikes = bikesByUser[key]?.bikes || [];
+      const hasBikeNameMatch = userBikes.some(bike => 
+        bike.part_data.strava_bike_name?.toLowerCase().includes(term)
+      );
+      if (hasBikeNameMatch) return true;
+      
+      // Search by part names (chain, cassette, brakes, etc.)
+      const partNames = [
+        'chain', 'cassette', 'chainring', 'chain ring',
+        'bottom bracket', 'brake', 'brake pad', 'brake rotor',
+        'tire', 'fork', 'shock', 'sealant', 'dropper'
+      ];
+      const hasPartMatch = partNames.some(part => part.includes(term) || term.includes(part));
+      
+      return hasPartMatch;
     });
-  }, [users, search]);
+  }, [users, search, bikesByUser]);
 
   return (
     <div
