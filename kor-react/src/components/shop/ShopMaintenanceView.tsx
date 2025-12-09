@@ -1,21 +1,3 @@
-/**
- * ShopMaintenanceView - REFACTORED Main Component
- *
- * BEFORE: 900+ lines of mixed logic, styles, and rendering
- * AFTER: ~150 lines focused ONLY on composition and rendering
- *
- * KEY IMPROVEMENTS:
- * 1. All logic moved to useShopMaintenance hook
- * 2. All styles moved to styles file
- * 3. UI broken into sub-components (Header, UserCard)
- * 4. Clear separation of concerns
- *
- * PATTERN: Container Component
- * - Manages state via custom hook
- * - Composes UI from sub-components
- * - Passes data down via props
- */
-
 import React, { useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { useShopMaintenance } from './hooks/useShopMaintenance';
