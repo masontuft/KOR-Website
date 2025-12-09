@@ -12,7 +12,7 @@ import SendNotificationsPanel from '../SendNotificationsPanel';
 import SubscriptionDetails from '../../subscription/SubscriptionDetails';
 import { DashboardSectionProps, CustomerUsageProps } from '../types';
 
-import ShopUsersAndBikesMock from '../ShopUsersandBikesMock'; //MOCK REMOVE!!!!!!
+import ShopMaintenanceView from '../ShopMaintenanceView';
 import FamilyPlanQRCodeSection from '../sections/FamilyPlanQRCode';
 
 interface PlanSpecificModulesProps
@@ -113,10 +113,8 @@ const PlanSpecificModules: React.FC<PlanSpecificModulesProps> = ({
               shopUser={shopUser}
               planFeatures={planFeatures}
             />
-
-            {/* Users & Bikes CHANGE TO PRODUCTION FILE*/}
             <div style={{ marginTop: '2rem' }}>
-              <ShopUsersAndBikesMock
+              <ShopMaintenanceView
                 accentColor={planFeatures?.color || '#667eea'}
               />
             </div>
