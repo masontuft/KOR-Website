@@ -11,7 +11,7 @@
  */
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { MaintenanceUser, MaintenanceBike, BikeState } from '../types/shopUsersAndBikes.types';
+import { MaintenanceUser, BikeState } from '../types/shopUsersAndBikes.types';
 import { fetchShopMaintenanceReports, getApiConfig } from '../services/shopMaintenanceApi';
 
 /**
@@ -36,23 +36,6 @@ export const useShopMaintenance = () => {
   const [search, setSearch] = useState('');
   const [showAllParts, setShowAllParts] = useState(false);
   const [allBikesExpanded, setAllBikesExpanded] = useState(false);
-
-  /**
-   * USEEFFECT: Runs on component mount
-   * WHY: We want to load data when component first renders
-   */
-  useEffect(() => {
-    fetchUsers();
-  }, []); // Empty array = run once on mount
-
-  /**
-   * Reset UI states - helper function
-   * WHY: When switching between views, we need to reset conflicting states
-   */
-  const resetUIStates = useCallback(() => {
-    setShowAllParts(false);
-    setAllBikesExpanded(false);
-  }, []);
 
   /**
    * USECALLBACK: Memoizes function to prevent unnecessary re-renders
@@ -108,6 +91,15 @@ export const useShopMaintenance = () => {
       setLoading(false);
     }
   }, []); // No dependencies = function created once
+
+  /**
+   * USEEFFECT: Runs on component mount
+   * WHY: We want to load data when component first renders
+   */
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]); // Include fetchUsers in dependency array
+
 
   /**
    * Toggle bike expansion for a single user

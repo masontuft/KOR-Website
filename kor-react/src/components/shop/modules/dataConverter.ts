@@ -130,7 +130,7 @@ export const convertApiResponse = <T extends { users?: any[]; bikes?: any[]; par
   return converted;
 };
 
-export default {
+const dataConverter = {
   toBool,
   convertBooleanFields,
   convertPartData,
@@ -139,3 +139,5 @@ export default {
   convertShopUsers,
   convertApiResponse
 };
+
+export default dataConverter;
