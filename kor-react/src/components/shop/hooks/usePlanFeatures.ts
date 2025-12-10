@@ -1,7 +1,8 @@
+import { useCallback } from 'react';
 import { PlanFeatures } from '../types';
 
 export const usePlanFeatures = () => {
-  const getPlanFeatures = (planType: string): PlanFeatures => {
+  const getPlanFeatures = useCallback((planType: string): PlanFeatures => {
     const plans: { [key: string]: PlanFeatures } = {
       'basic': {
         name: 'Basic Plan',
@@ -38,7 +39,7 @@ export const usePlanFeatures = () => {
     };
     
     return plans[planType] || plans['basic'];
-  };
+  }, []);
 
   return { getPlanFeatures };
 };

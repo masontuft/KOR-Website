@@ -157,7 +157,7 @@ const QrCodeGenerator: React.FC<QrCodeGeneratorProps> = ({
     } finally {
       setIsLoading(false);
     }
-  }, [shopCode, size, shopName, onError, genericMode, genericUrl]);
+  }, [shopCode, size, shopName, genericMode, genericUrl, onError]);
 
   if (isLoading) {
     return (

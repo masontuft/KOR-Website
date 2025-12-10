@@ -373,7 +373,8 @@ const SubscriptionDetails: React.FC<SubscriptionDetailsProps> = ({
     if (haveSubId || (isAuthenticated && user)) {
       fetchSubscriptionData();
     }
-  }, [isAuthenticated, user, subscriptionId, fetchSubscriptionData, getFallbackSubscriptionId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated, user?.sub, subscriptionId]);
 
   const getStatusColor = (status: string): string => {
     switch (status.toLowerCase()) {
