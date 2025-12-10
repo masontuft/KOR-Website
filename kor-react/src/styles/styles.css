@@ -1213,7 +1213,20 @@ h1 {
   border-radius: 15px;
   grid-row: 1/2;
   position: relative;
+  
 }
+a.payment-card2, a.payment-card3 {
+  display: block;           /* makes the link behave like a div */
+  margin: 3%;
+  background-color: var(--secondary-color);
+  padding: 5px;
+  border-radius: 15px;
+  grid-row: 1/2;
+  position: relative;
+  text-decoration: none;    /* removes underline */
+  color: inherit;           /* inherits text color */
+}
+
 .payment-row {
   display: flex;
   flex-direction: column;
@@ -1829,4 +1842,7 @@ h1 {
     font-size: 1.1em;
     margin: 0 5%;
   }
+}
+.coming-soon-badge{
+  text-align: center;
 }
