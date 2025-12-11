@@ -112,3 +112,12 @@ export interface ShopUsersAndBikesProps {
 }
 
 export type SortMode = 'wear_desc' | 'wear_asc';
+
+// Interface for family plan member in user management
+export interface FamilyMember {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  strava_user_id?: number;
+}

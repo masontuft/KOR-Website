@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DashboardSectionProps, CustomerUsageProps } from '../types';
+import ManageUsersModal from '../components/ManageUsersModal';
 
 interface FamilyPlanUsageProps
   extends DashboardSectionProps,
-    CustomerUsageProps {}
+    CustomerUsageProps {
+  onUserDeleted?: () => void;
+}
 
 const FamilyPlanUsage: React.FC<FamilyPlanUsageProps> = ({
   planFeatures,
   customerCount,
   customerCountLoading,
-  customerCountError
+  customerCountError,
+  onUserDeleted
 }) => {
+  const [showManageUsersModal, setShowManageUsersModal] = useState(false);
+
+  const handleUserDeleted = () => {
+    // Notify parent to refresh data
+    onUserDeleted?.();
+  };
   return (
     <div
       style={{
@@ -105,7 +115,35 @@ const FamilyPlanUsage: React.FC<FamilyPlanUsageProps> = ({
                 </div>
               </div>
             )}
-
+            {/* Manage Users Button */}
+            <div
+              style={{
+                maxWidth: '700px',
+                width: '100%',
+                margin: '1rem auto 0.5rem',
+                display: 'flex',
+                justifyContent: 'center'
+              }}
+            >
+              <button
+                onClick={() => setShowManageUsersModal(true)}
+                style={{
+                  backgroundColor: planFeatures?.color || '#007bff',
+                  color: 'white',
+                  border: 'none',
+                  padding: '0.6rem 1.2rem',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  fontSize: '0.95rem',
+                  fontWeight: 500,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem'
+                }}
+              >
+                👥 Manage Users
+              </button>
+            </div>
             {customerCountError && (
               <p
                 style={{
@@ -120,6 +158,13 @@ const FamilyPlanUsage: React.FC<FamilyPlanUsageProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Manage Users Modal */}
+      <ManageUsersModal
+        isOpen={showManageUsersModal}
+        onClose={() => setShowManageUsersModal(false)}
+        onUserDeleted={handleUserDeleted}
+      />
     </div>
   );
 };
