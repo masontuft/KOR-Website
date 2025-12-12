@@ -27,6 +27,7 @@ const Home: React.FC = () => {
               <h1 id="hero-title" className="title_box">KOR (Keep On Rolling)</h1>
               <div className="cta-section">
                 <h3 className="cta-heading">Get Started Today - Free Download!</h3>
+                <h4  className="paragraph">Show up for every ride with a bike that’s ready to roll.</h4>
                 <div className="app-store-buttons">
                   <a
                     href="https://play.google.com/store/apps/details?id=com.robtuft.newKOR"
@@ -58,7 +59,9 @@ const Home: React.FC = () => {
                 <div className="secondary-cta">
                   <p className="cta-subtext">Don't have a bike shop? No problem!</p>
                   <Link className="personal-cta-button" to="/personal-plans">
-                    View Personal Account Plans →
+                    KOR’s personal plans keep your maintenance dialed in wherever you 
+                    ride, so you get pro-level tracking without needing a dedicated 
+                    mechanic. → 
                   </Link>
                 </div>
                 <p className="cta-trust-signal">
@@ -67,14 +70,17 @@ const Home: React.FC = () => {
               </div>
 
               <div className="mobile_textbox">
-                <h2 className="hero-subtitle">Never Miss Bike Maintenance Again</h2>
+                <h2 className="hero-subtitle">
+                    Spend less time worrying about maintenance and more time enjoying the 
+                    ride.
+                </h2>
                 <h4 className="paragraph">
-                  Track your bike's component wear automatically with our
-                  intelligent maintenance app. Connected to Strava, KOR monitors
-                  your rides and alerts you before parts fail, keeping you
-                  rolling when it matters most.
+                  Keep On Rolling is a bike maintenance app that tracks your component 
+                  wear from your Strava rides and alerts you before parts fail, so you 
+                  never miss a ride to a broken bike again.
                 </h4>
                 <div className="key-benefits">
+                  
                   <div className="benefit-point">
                     🔧 <strong>Smart Tracking:</strong> Automatically monitors
                     component wear
@@ -85,6 +91,7 @@ const Home: React.FC = () => {
                   <div className="benefit-point">
                     ⚡ <strong>Proactive Alerts:</strong> Know before parts fail
                   </div>
+                  
                 </div>
               </div>
             </div>
@@ -112,17 +119,17 @@ const Home: React.FC = () => {
                 <article className="point-card" role="listitem">
                   <h3 className="title">Simple & Intuitive</h3>
                   <p className="paragraph-on-dark">
-                    No complicated setup or confusing interfaces. KOR is
-                    designed for riders, by riders. Connect to Strava and you're
-                    ready to track your bike's health automatically.
+                    Simple, intuitive design built by riders means no complicated 
+                    setup—just ride and KOR handles the tracking.
                   </p>
                 </article>
                 <article className="point-card" role="listitem">
                   <h3 className="title">Stay Ride-Ready</h3>
                   <p className="paragraph-on-dark">
-                    Advanced algorithms predict when components need attention,
-                    so you're never caught off-guard with a broken chain or worn
-                    brake pads during peak riding season.
+                    Peak riding season shouldn’t be ruined by preventable mechanical 
+                    problems. Advanced algorithms predict when components need attention,
+                    so you can ride with confidence knowing KOR is watching your 
+                    components for you.
                   </p>
                 </article>
               </div>
