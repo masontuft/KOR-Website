@@ -204,7 +204,7 @@ const SignUp: React.FC = () => {
                 Turn your customers' Strava rides into automated maintenance revenue and stronger relationships.
               </p>
               <p className="paragraph" style={{ fontSize: '1.2em', fontWeight: 700, color: '#4CAF50', marginTop: '1em' }}>
-                KOR can have an increase of 30% in service revenue.
+                KOR can have an increase of up to 30% in service revenue.
               </p>
             </div>
             {/* How It Works Section */}
