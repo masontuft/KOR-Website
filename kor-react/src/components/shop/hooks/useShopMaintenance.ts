@@ -12,7 +12,11 @@
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { MaintenanceUser, BikeState } from '../types/shopUsersAndBikes.types';
-import { fetchShopMaintenanceReports, getApiConfig } from '../services/shopMaintenanceApi';
+import {
+  fetchShopMaintenanceReports,
+  getApiConfig,
+  removeUserShop,
+} from '../services/shopMaintenanceApi';
 
 /**
  * Custom hook to manage shop maintenance data
@@ -33,9 +37,13 @@ export const useShopMaintenance = () => {
   // STATE: UI state
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [actionError, setActionError] = useState<string | null>(null);
   const [search, setSearch] = useState('');
   const [showAllParts, setShowAllParts] = useState(false);
   const [allBikesExpanded, setAllBikesExpanded] = useState(false);
+  const [removingUserIds, setRemovingUserIds] = useState<Set<number>>(
+    () => new Set<number>()
+  );
 
   /**
    * USECALLBACK: Memoizes function to prevent unnecessary re-renders
@@ -44,6 +52,7 @@ export const useShopMaintenance = () => {
   const fetchUsers = useCallback(async () => {
     setLoading(true);
     setError(null);
+    setActionError(null);
     
     // Reset UI states when refreshing
     setShowAllParts(false);
@@ -118,6 +127,45 @@ export const useShopMaintenance = () => {
         [key]: { ...current, expanded: !current.expanded }
       };
     });
+  }, []);
+
+  /**
+   * Remove a user's association with this shop.
+   *
+   * This calls the backend /removeUserShop endpoint and, on success,
+   * removes the user from local state so the UI reflects the change.
+   */
+  const removeUserFromShop = useCallback(async (userId: number) => {
+    setActionError(null);
+    setRemovingUserIds(prev => {
+      const next = new Set(prev);
+      next.add(userId);
+      return next;
+    });
+
+    try {
+      const config = getApiConfig();
+
+      await removeUserShop(config, userId);
+
+      // Remove user and their bikes from local state
+      setUsers(prev => prev.filter(u => u.strava_user_id !== userId));
+      setBikesByUser(prev => {
+        const copy = { ...prev };
+        delete copy[String(userId)];
+        return copy;
+      });
+    } catch (e) {
+      setActionError(
+        e instanceof Error ? e.message : 'Failed to remove user from shop'
+      );
+    } finally {
+      setRemovingUserIds(prev => {
+        const next = new Set(prev);
+        next.delete(userId);
+        return next;
+      });
+    }
   }, []);
 
   /**
@@ -252,6 +300,10 @@ export const useShopMaintenance = () => {
     search,
     showAllParts,
     allBikesExpanded,
+
+    // Action state
+    actionError,
+    removingUserIds,
     
     // Actions (functions)
     setSearch,
@@ -260,5 +312,6 @@ export const useShopMaintenance = () => {
     fetchUsers,
     toggleExpand,
     toggleAllBikes,
+    removeUserFromShop,
   };
 };

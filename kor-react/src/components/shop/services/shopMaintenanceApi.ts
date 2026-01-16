@@ -11,13 +11,13 @@
 
 import { convertApiResponse } from '../modules/dataConverter';
 
-interface FetchConfig {
+export interface FetchConfig {
   baseUrl: string;
   authToken: string;
   shopToken: string;
 }
 
-interface ShopMaintenanceResponse {
+export interface ShopMaintenanceResponse {
   message: string;
   shop_info: {
     shop_name: string;
@@ -31,6 +31,13 @@ interface ShopMaintenanceResponse {
     has_more: boolean;
   };
   users: any[];
+}
+
+export interface RemoveUserShopResponse {
+  message: string;
+  strava_user_id: number | string;
+  previous_shop_token?: string | null;
+  updated: number;
 }
 
 /**
@@ -67,6 +74,82 @@ export const fetchShopMaintenanceReports = async (
 
   // Convert API response to proper format (handles 0/1 to boolean conversion)
   return convertApiResponse(data);
+};
+
+/**
+ * Fetches basic shop users list (without maintenance details).
+ * Used by the family plan Manage Users modal.
+ */
+export const fetchShopUsers = async (
+  config: FetchConfig
+): Promise<any[]> => {
+  const { baseUrl, authToken, shopToken } = config;
+
+  if (!shopToken) {
+    throw new Error('Missing shop_token. Please log in again.');
+  }
+
+  const response = await fetch(`${baseUrl}/getShopUsers`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      auth: authToken,
+      shop_token: shopToken,
+    }) as unknown as BodyInit,
+    redirect: 'follow' as RequestRedirect,
+  });
+
+  if (!response.ok) {
+    const errText = await response.text().catch(() => '');
+    throw new Error(`Failed to load users (HTTP ${response.status} ${errText})`);
+  }
+
+  const data = await response.json();
+
+  if (data?.message !== 'success' || !Array.isArray(data?.users)) {
+    throw new Error(data?.error || 'Unexpected response when loading users');
+  }
+
+  return data.users;
+};
+
+/**
+ * Removes a user's association with the current shop.
+ *
+ * NOTE: This endpoint does not require auth or shop_token; it only
+ * needs the Strava user id. We still use the shared baseUrl from config
+ * to keep API configuration centralized.
+ */
+export const removeUserShop = async (
+  config: FetchConfig,
+  stravaUserId: number | string
+): Promise<RemoveUserShopResponse> => {
+  const { baseUrl } = config;
+  const response = await fetch(`${baseUrl}/removeUserShop`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      strava_user_id: String(stravaUserId)
+    }) as unknown as BodyInit,
+    redirect: 'follow' as RequestRedirect
+  });
+
+  if (!response.ok) {
+    const errText = await response.text().catch(() => '');
+    throw new Error(
+      `Failed to remove user from shop (HTTP ${response.status} ${errText})`
+    );
+  }
+
+  const data = (await response.json()) as RemoveUserShopResponse & {
+    error?: string;
+  };
+
+  if (data?.message !== 'success') {
+    throw new Error(data?.error || data?.message || 'Failed to remove user');
+  }
+
+  return data;
 };
 
 /**

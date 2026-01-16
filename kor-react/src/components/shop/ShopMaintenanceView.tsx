@@ -40,11 +40,14 @@ const ShopMaintenanceView: React.FC<ShopUsersAndBikesProps> = ({
     search,
     showAllParts,
     allBikesExpanded,
+    actionError,
+    removingUserIds,
     setSearch,
     toggleShowAllParts,
     fetchUsers,
     toggleExpand,
-    toggleAllBikes
+    toggleAllBikes,
+    removeUserFromShop,
   } = useShopMaintenance();
 
   // Local UI state (doesn't need to be in hook)
@@ -84,6 +87,13 @@ const ShopMaintenanceView: React.FC<ShopUsersAndBikesProps> = ({
         {/* Error State */}
         {error && <div style={errorStyle}>Error loading users: {error}</div>}
 
+        {/* Action Error State (e.g., failed remove) */}
+        {actionError && (
+          <div style={{ ...errorStyle, marginTop: error ? '0.5rem' : 0 }}>
+            {actionError}
+          </div>
+        )}
+
         {/* Empty State */}
         {!loading && !error && users.length === 0 && (
           <div style={emptyStateStyle}>No users found.</div>
@@ -112,6 +122,8 @@ const ShopMaintenanceView: React.FC<ShopUsersAndBikesProps> = ({
                   error: null,
                   expanded: false
                 };
+
+                const isRemoving = removingUserIds.has(user.strava_user_id);
 
                 return (
                   <UserCard
