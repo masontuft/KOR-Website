@@ -23,7 +23,6 @@ import LegacyParamsDemo from './components/demo/LegacyParamsDemo';
 import ParameterTestPage from './components/demo/ParameterTestPage';
 import PersonalSignIn from './components/personal/PersonalSignIn';
 import OAuthAuthorize from './components/oauth/OAuthAuthorize';
-import FamilyPlanSignUp from './components/pages/FamilyPlanSignUp';
 import './styles/styles.css';
 
 function App() {
