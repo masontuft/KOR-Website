@@ -167,3 +167,80 @@ export const getApiConfig = (): FetchConfig => {
 
   return { baseUrl, authToken, shopToken };
 };
+
+/**
+ * Fetches shop users for family plan management
+ *
+ * @param config - API configuration (baseUrl, authToken, shopToken)
+ * @returns List of family members
+ * @throws Error if API call fails or returns invalid data
+ */
+export const fetchShopUsers = async (
+  config: FetchConfig
+): Promise<any[]> => {
+  const { baseUrl, authToken, shopToken } = config;
+
+  const response = await fetch(`${baseUrl}/getShopUsers`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      auth: authToken,
+      shop_token: shopToken
+    }) as unknown as BodyInit,
+    redirect: 'follow' as RequestRedirect
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}`);
+  }
+
+  const data = await response.json();
+
+  if (data?.message !== 'success') {
+    throw new Error(data?.error || 'Failed to load users');
+  }
+
+  return data.users || [];
+};
+
+/**
+ * Removes a user from the bike shop (stub for now)
+ *
+ * @param config - API configuration
+ * @param userId - ID of the user to remove
+ * @throws Error if API call fails
+ */
+export const removeUserFromShop = async (
+  config: FetchConfig,
+  userId: number
+): Promise<void> => {
+  // TODO: Replace with actual API endpoint when backend is ready
+  const stubUrl = '/api/remove-user-from-shop';
+  
+  console.log(`Stub API call to ${stubUrl} for user ID:`, userId);
+  
+  // Simulate API delay
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  
+  // When the real endpoint is ready, use this pattern:
+  // const { baseUrl, authToken, shopToken } = config;
+  // const response = await fetch(`${baseUrl}/removeShopUser`, {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  //   body: new URLSearchParams({
+  //     auth: authToken,
+  //     shop_token: shopToken,
+  //     user_id: userId.toString()
+  //   }) as unknown as BodyInit,
+  //   redirect: 'follow' as RequestRedirect
+  // });
+  //
+  // if (!response.ok) {
+  //   throw new Error(`HTTP ${response.status}`);
+  // }
+  //
+  // const data = await response.json();
+  // if (data?.message !== 'success') {
+  //   throw new Error(data?.error || 'Failed to remove user');
+  // }
+};

@@ -20,6 +20,7 @@ interface PlanSpecificModulesProps
     CustomerUsageProps {
   planType: string;
   params: any; // For accessing URL params
+  onRefreshCustomerCount?: () => void;
 }
 
 const PlanSpecificModules: React.FC<PlanSpecificModulesProps> = ({
@@ -29,6 +30,7 @@ const PlanSpecificModules: React.FC<PlanSpecificModulesProps> = ({
   customerCount,
   customerCountLoading,
   customerCountError,
+  onRefreshCustomerCount,
   params
 }) => {
   const normalizedPlanType = planType.toLowerCase();
@@ -131,6 +133,7 @@ const PlanSpecificModules: React.FC<PlanSpecificModulesProps> = ({
               customerCount={customerCount}
               customerCountLoading={customerCountLoading}
               customerCountError={customerCountError}
+              onUserDeleted={onRefreshCustomerCount}
             />
 
             {/* Subscription details */}

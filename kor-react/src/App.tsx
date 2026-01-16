@@ -10,6 +10,8 @@ import OurStory from './components/pages/OurStory';
 import OurApp from './components/pages/OurApp';
 import SignUp from './components/pages/SignUp';
 import PersonalPlans from './components/pages/PersonalPlans';
+import FamilyPlanPricing from './components/pages/FamilyPlanPricing';
+import FamilyPlanSignUp from './components/pages/FamilyPlanSignUp';
 import Contact from './components/pages/Contact';
 import FAQ from './components/pages/FAQ';
 import QrGuide from './components/pages/QrGuide';
@@ -78,7 +80,6 @@ function App() {
               <Route path='/sign-up' element={<SignUp />} />
               <Route path='/personal-plans' element={<PersonalPlans />} />
               <Route path='/personal/signin' element={<PersonalSignIn />} />
-              <Route path='/family-plan-signup' element={<FamilyPlanSignUp />} />
               <Route path='/contact' element={<Contact />} />
               <Route path='/faq' element={<FAQ />} />
               <Route path='/qr-guide' element={<QrGuide />} />
