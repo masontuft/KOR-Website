@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import WearBar from './index';
 import { getWearPartsForBike } from './partWear';
 
@@ -18,6 +18,8 @@ interface AllPartsWearProps {
   showAllParts: boolean;
   // Controls how parts are sorted; currently we only use wear_desc (most worn -> least worn)
   sortMode?: 'wear_desc' | 'wear_asc';
+  adminUserId?: number | null;
+  viewerIsAdmin?: boolean;
 }
 
 interface PartEntry {
@@ -25,6 +27,7 @@ interface PartEntry {
   wearPercent: number;
   bikeName: string;
   ownerName: string;
+  ownerId: number;
   icon: string;
 }
 
@@ -32,9 +35,15 @@ const AllPartsWear: React.FC<AllPartsWearProps> = ({
   filteredUsers,
   bikesByUser,
   showAllParts,
-  sortMode = 'wear_desc'
+  sortMode = 'wear_desc',
+  adminUserId = null,
+  viewerIsAdmin = false,
 }) => {
   const [showAll, setShowAll] = React.useState(false);
+
+  useEffect(() => {
+    if (!showAllParts) setShowAll(false);
+  }, [showAllParts]);
 
   const allParts = useMemo(() => {
     if (!showAllParts) return [];
@@ -55,6 +64,7 @@ const AllPartsWear: React.FC<AllPartsWearProps> = ({
             wearPercent: part.wearPercent,
             bikeName,
             ownerName,
+            ownerId: user.strava_user_id,
             icon: part.icon
           });
         });
@@ -86,33 +96,69 @@ const AllPartsWear: React.FC<AllPartsWearProps> = ({
           background: '#fafafa'
         }}
       >
+        {/* Legend */}
+        {viewerIsAdmin && adminUserId != null && (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              marginBottom: '1rem',
+              padding: '0.5rem 0.75rem',
+              background: '#f0f7ff',
+              borderRadius: 6,
+              fontSize: '0.875rem',
+              color: '#555'
+            }}
+          >
+            <div
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: '50%',
+                backgroundColor: '#3B82F6',
+                flexShrink: 0
+              }}
+            />
+            <span>Your parts</span>
+          </div>
+        )}
         <div
           style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}
         >
-          {visibleParts.map((part, index) => (
-            <div
-              key={`${part.ownerName}-${part.bikeName}-${part.label}-${index}`}
-            >
-              <WearBar
-                label={part.label}
-                value={part.wearPercent}
-                imageSRC={part.icon}
-              />
-              <div
-                style={{
-                  fontSize: '.9rem',
-                  color: '#555',
-                  marginLeft: '2rem',
-                  marginTop: '0.25rem'
-                }}
-              >
-                <span style={{ color: '#000', fontWeight: 600 }}>
-                  {part.bikeName}
-                </span>{' '}
-                (<span style={{ color: '#999' }}>{part.ownerName}</span>)
+          {visibleParts.map((part, index) => {
+            const isAdminOwner =
+              viewerIsAdmin &&
+              adminUserId != null &&
+              part.ownerId === adminUserId;
+
+            const label = part.label;
+            const ownerLabel = isAdminOwner ? 'You' : part.ownerName;
+
+            return (
+              <div key={`${part.ownerId}-${part.bikeName}-${part.label}-${index}`}>
+                <WearBar
+                  label={label}
+                  value={part.wearPercent}
+                  imageSRC={part.icon}
+                  showAdminIndicator={isAdminOwner}
+                />
+                <div
+                  style={{
+                    fontSize: '.9rem',
+                    color: '#555',
+                    marginLeft: '2rem',
+                    marginTop: '0.25rem'
+                  }}
+                >
+                  <span style={{ color: '#000', fontWeight: 600 }}>
+                    {part.bikeName}
+                  </span>{' '}
+                  (<span style={{ color: '#999' }}>{ownerLabel}</span>)
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         {allParts.length > 5 && (
           <div

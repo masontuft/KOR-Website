@@ -21,6 +21,7 @@ import {
   userInfoStyle,
   avatarStyle,
   userNameStyle,
+  youSuffixStyle,
   userActionsStyle,
   statusBadgeStyle,
   statusDotStyle,
@@ -46,6 +47,7 @@ interface UserCardProps {
   readOnlyMode: boolean;
   sortMode: 'wear_desc' | 'wear_asc';
   onToggleExpand: (userId: number) => void;
+  showYou?: boolean;
 }
 
 /**
@@ -68,6 +70,7 @@ export const UserCard: React.FC<UserCardProps> = ({
   readOnlyMode,
   sortMode,
   onToggleExpand,
+  showYou = false,
 }) => {
   const fullName = getFullName(user.first_name, user.last_name);
   const initial = getInitial(fullName);
@@ -82,7 +85,10 @@ export const UserCard: React.FC<UserCardProps> = ({
         <div style={userInfoStyle}>
           <div style={avatarStyle(accentColor)}>{initial}</div>
           <div style={{ minWidth: 0, maxWidth: '100%' }}>
-            <div style={userNameStyle}>{fullName}</div>
+            <div style={userNameStyle}>
+              {fullName}
+              {showYou && <span style={youSuffixStyle}> (You)</span>}
+            </div>
           </div>
         </div>
 

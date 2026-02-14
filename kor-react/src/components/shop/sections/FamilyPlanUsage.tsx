@@ -13,12 +13,14 @@ const FamilyPlanUsage: React.FC<FamilyPlanUsageProps> = ({
   customerCount,
   customerCountLoading,
   customerCountError,
-  onUserDeleted,
+  onUserDeleted
 }) => {
   const [showManageUsersModal, setShowManageUsersModal] = useState(false);
 
   // Local copy of count so the bar updates immediately when a user is removed.
-  const [effectiveCount, setEffectiveCount] = useState<number>(customerCount ?? 0);
+  const [effectiveCount, setEffectiveCount] = useState<number>(
+    customerCount ?? 0
+  );
 
   // Keep local count in sync with latest value from parent when it changes.
   useEffect(() => {
@@ -115,8 +117,7 @@ const FamilyPlanUsage: React.FC<FamilyPlanUsageProps> = ({
                           ? Math.min(
                               100,
                               Math.round(
-                                (effectiveCount /
-                                  planFeatures.maxCustomers) *
+                                (effectiveCount / planFeatures.maxCustomers) *
                                   100
                               )
                             )
@@ -153,7 +154,7 @@ const FamilyPlanUsage: React.FC<FamilyPlanUsageProps> = ({
                   gap: '0.5rem'
                 }}
               >
-                👥 Manage Users
+                Manage Users
               </button>
             </div>
             {customerCountError && (

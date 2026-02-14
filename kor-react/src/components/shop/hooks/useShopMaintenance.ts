@@ -14,8 +14,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { MaintenanceUser, BikeState } from '../types/shopUsersAndBikes.types';
 import {
   fetchShopMaintenanceReports,
-  getApiConfig,
-  removeUserShop,
+  getApiConfig
 } from '../services/shopMaintenanceApi';
 
 /**
@@ -31,7 +30,7 @@ import {
  */
 export const useShopMaintenance = () => {
   // STATE: Data storage
-  const [users, setUsers] = useState<MaintenanceUser[]>([]);
+  const [allUsers, setAllUsers] = useState<MaintenanceUser[]>([]);
   const [bikesByUser, setBikesByUser] = useState<Record<string, BikeState>>({});
   
   // STATE: UI state
@@ -41,9 +40,6 @@ export const useShopMaintenance = () => {
   const [search, setSearch] = useState('');
   const [showAllParts, setShowAllParts] = useState(false);
   const [allBikesExpanded, setAllBikesExpanded] = useState(false);
-  const [removingUserIds, setRemovingUserIds] = useState<Set<number>>(
-    () => new Set<number>()
-  );
 
   /**
    * USECALLBACK: Memoizes function to prevent unnecessary re-renders
@@ -70,17 +66,17 @@ export const useShopMaintenance = () => {
 
       // Map API response to our interface
       const mapped: MaintenanceUser[] = data.users.map((u: any) => ({
-        strava_user_id: u.strava_user_id,
+        strava_user_id: Number(u.strava_user_id),
         first_name: u.first_name,
         last_name: u.last_name,
         email: u.email,
         last_login: u.last_login,
         shop_activity: u.shop_activity,
-        bike_count: u.bike_count,
+        bike_count: Number(u.bike_count),
         bikes: u.bikes || []
       }));
 
-      setUsers(mapped);
+      setAllUsers(mapped);
 
       // Initialize bikes state - bikes already loaded from API
       const bikesState: Record<string, BikeState> = {};
@@ -129,44 +125,6 @@ export const useShopMaintenance = () => {
     });
   }, []);
 
-  /**
-   * Remove a user's association with this shop.
-   *
-   * This calls the backend /removeUserShop endpoint and, on success,
-   * removes the user from local state so the UI reflects the change.
-   */
-  const removeUserFromShop = useCallback(async (userId: number) => {
-    setActionError(null);
-    setRemovingUserIds(prev => {
-      const next = new Set(prev);
-      next.add(userId);
-      return next;
-    });
-
-    try {
-      const config = getApiConfig();
-
-      await removeUserShop(config, userId);
-
-      // Remove user and their bikes from local state
-      setUsers(prev => prev.filter(u => u.strava_user_id !== userId));
-      setBikesByUser(prev => {
-        const copy = { ...prev };
-        delete copy[String(userId)];
-        return copy;
-      });
-    } catch (e) {
-      setActionError(
-        e instanceof Error ? e.message : 'Failed to remove user from shop'
-      );
-    } finally {
-      setRemovingUserIds(prev => {
-        const next = new Set(prev);
-        next.delete(userId);
-        return next;
-      });
-    }
-  }, []);
 
   /**
    * Expand all bikes for all users
@@ -176,7 +134,7 @@ export const useShopMaintenance = () => {
     // Close All Parts view when expanding bikes
     setShowAllParts(false);
     
-    const ids = users.map(u => String(u.strava_user_id));
+    const ids = allUsers.map(u => String(u.strava_user_id));
     
     setBikesByUser(prev => {
       const copy = { ...prev };
@@ -192,13 +150,13 @@ export const useShopMaintenance = () => {
       return copy;
     });
     setAllBikesExpanded(true);
-  }, [users]);
+  }, [allUsers]);
 
   /**
    * Collapse all bikes for all users
    */
   const collapseAllBikes = useCallback(() => {
-    const ids = users.map(u => String(u.strava_user_id));
+    const ids = allUsers.map(u => String(u.strava_user_id));
     
     setBikesByUser(prev => {
       const copy = { ...prev };
@@ -211,7 +169,7 @@ export const useShopMaintenance = () => {
       return copy;
     });
     setAllBikesExpanded(false);
-  }, [users]);
+  }, [allUsers]);
 
   /**
    * Toggle between expand all / collapse all
@@ -232,9 +190,9 @@ export const useShopMaintenance = () => {
    */
   const filteredUsers = useMemo(() => {
     const term = search.trim().toLowerCase();
-    if (!term) return users;
+    if (!term) return allUsers;
 
-    return users.filter(u => {
+    return allUsers.filter(u => {
       // Search by user name
       const userName = `${u.first_name} ${u.last_name}`.toLowerCase();
       if (userName.includes(term)) return true;
@@ -253,9 +211,9 @@ export const useShopMaintenance = () => {
         'bottom bracket', 'brake', 'brake pad', 'brake rotor',
         'tire', 'fork', 'shock', 'sealant', 'dropper'
       ];
-      return partNames.some(part => part.includes(term) || term.includes(part));
+      return partNames.some(part => part.includes(term));
     });
-  }, [users, search, bikesByUser]);
+  }, [allUsers, search, bikesByUser]);
 
   /**
    * Toggle Show All Parts view
@@ -269,7 +227,7 @@ export const useShopMaintenance = () => {
     if (newShowAllParts && allBikesExpanded) {
       setAllBikesExpanded(false);
       // Collapse all individual bike expansions too
-      const ids = users.map(u => String(u.strava_user_id));
+      const ids = allUsers.map(u => String(u.strava_user_id));
       setBikesByUser(prev => {
         const copy = { ...prev };
         ids.forEach(id => {
@@ -280,7 +238,7 @@ export const useShopMaintenance = () => {
         return copy;
       });
     }
-  }, [showAllParts, allBikesExpanded, users]);
+  }, [showAllParts, allBikesExpanded, allUsers]);
 
   /**
    * RETURN: Expose state and actions to component
@@ -290,6 +248,7 @@ export const useShopMaintenance = () => {
   return {
     // Data
     users: filteredUsers,
+    allUsers,
     bikesByUser,
     
     // Loading states
@@ -303,7 +262,6 @@ export const useShopMaintenance = () => {
 
     // Action state
     actionError,
-    removingUserIds,
     
     // Actions (functions)
     setSearch,
@@ -311,7 +269,6 @@ export const useShopMaintenance = () => {
     toggleShowAllParts,
     fetchUsers,
     toggleExpand,
-    toggleAllBikes,
-    removeUserFromShop,
+    toggleAllBikes
   };
 };

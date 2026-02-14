@@ -171,7 +171,6 @@ const PersonalPlans: React.FC = () => {
                 className={`payment-card3 ${selectedPlan === 'family' ? 'selected' : ''}`}
                 onClick={e => {
                   e.preventDefault();
-                  setSelectedPlan('family');
                   window.location.href = '/family-plan-pricing';
                 }}
               >
@@ -203,7 +202,7 @@ const PersonalPlans: React.FC = () => {
                   <a
                     href='#'
                     data-cb-type='checkout'
-                    data-cb-item-0='Family-USD-Monthly'
+                    data-cb-item-0='family-USD-Monthly'
                     data-cb-item-0-quantity='1'
                     className='subscribe'
                     onClick={e => e.preventDefault()}
@@ -213,7 +212,7 @@ const PersonalPlans: React.FC = () => {
                   <a
                     href='#'
                     data-cb-type='checkout'
-                    data-cb-item-0='Family-USD-Yearly'
+                    data-cb-item-0='family-USD-Yearly'
                     data-cb-item-0-quantity='1'
                     className='subscribe'
                     onClick={e => e.preventDefault()}
