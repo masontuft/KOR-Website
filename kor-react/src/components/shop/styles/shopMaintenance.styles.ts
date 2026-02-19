@@ -194,6 +194,11 @@ export const userNameStyle: CSSProperties = {
   whiteSpace: 'nowrap',
 };
 
+export const youSuffixStyle: CSSProperties = {
+  fontWeight: 600,
+  color: tokens.colors.textSecondary,
+};
+
 export const userActionsStyle: CSSProperties = {
   display: 'flex',
   alignItems: 'center',

@@ -6,13 +6,15 @@ interface WearBarProps {
   value: number;
   threshold?: number;
   imageSRC: string;
+  showAdminIndicator?: boolean;
 }
 
 const WearBar: React.FC<WearBarProps> = ({
   label,
   value,
   threshold = 75,
-  imageSRC
+  imageSRC,
+  showAdminIndicator = false
 }) => {
   // Determine bar color based on wear percentage
   let barColor = '#00FF75';
@@ -31,6 +33,19 @@ const WearBar: React.FC<WearBarProps> = ({
         mt: 1.5
       }}
     >
+      {/* Admin indicator */}
+      {showAdminIndicator && (
+        <Box
+          sx={{
+            width: 8,
+            height: 8,
+            mr: 0.75,
+            flexShrink: 0,
+            borderRadius: '50%',
+            backgroundColor: '#3B82F6'
+          }}
+        />
+      )}
       {/* Icon */}
       <Box sx={{ width: 28, height: 28, mr: 1, flexShrink: 0 }}>
         <img

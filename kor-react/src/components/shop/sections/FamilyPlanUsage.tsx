@@ -1,16 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { DashboardSectionProps, CustomerUsageProps } from '../types';
+import ManageUsersModal from '../components/ManageUsersModal';
 
 interface FamilyPlanUsageProps
   extends DashboardSectionProps,
-    CustomerUsageProps {}
+    CustomerUsageProps {
+  onUserDeleted?: () => void;
+}
 
 const FamilyPlanUsage: React.FC<FamilyPlanUsageProps> = ({
   planFeatures,
   customerCount,
   customerCountLoading,
-  customerCountError
+  customerCountError,
+  onUserDeleted
 }) => {
+  const [showManageUsersModal, setShowManageUsersModal] = useState(false);
+
+  // Local copy of count so the bar updates immediately when a user is removed.
+  const [effectiveCount, setEffectiveCount] = useState<number>(
+    customerCount ?? 0
+  );
+
+  // Keep local count in sync with latest value from parent when it changes.
+  useEffect(() => {
+    if (typeof customerCount === 'number') {
+      setEffectiveCount(customerCount);
+    }
+  }, [customerCount]);
+
+  const handleUserDeleted = () => {
+    // Update local count immediately so the bar and label reflect the change.
+    setEffectiveCount(prev => Math.max(0, prev - 1));
+    // Notify parent to refresh data (e.g., re-fetch counts from backend)
+    onUserDeleted?.();
+  };
   return (
     <div
       style={{
@@ -59,7 +83,7 @@ const FamilyPlanUsage: React.FC<FamilyPlanUsageProps> = ({
               <strong>Family Members</strong>
 
               <span>
-                {customerCountLoading ? 'Loading…' : (customerCount ?? 0)} /{' '}
+                {customerCountLoading ? 'Loading…' : effectiveCount} /{' '}
                 {planFeatures?.maxCustomers === -1
                   ? '∞'
                   : planFeatures?.maxCustomers}
@@ -93,8 +117,7 @@ const FamilyPlanUsage: React.FC<FamilyPlanUsageProps> = ({
                           ? Math.min(
                               100,
                               Math.round(
-                                ((customerCount ?? 0) /
-                                  planFeatures.maxCustomers) *
+                                (effectiveCount / planFeatures.maxCustomers) *
                                   100
                               )
                             )
@@ -105,7 +128,35 @@ const FamilyPlanUsage: React.FC<FamilyPlanUsageProps> = ({
                 </div>
               </div>
             )}
-
+            {/* Manage Users Button */}
+            <div
+              style={{
+                maxWidth: '700px',
+                width: '100%',
+                margin: '1rem auto 0.5rem',
+                display: 'flex',
+                justifyContent: 'center'
+              }}
+            >
+              <button
+                onClick={() => setShowManageUsersModal(true)}
+                style={{
+                  backgroundColor: planFeatures?.color || '#007bff',
+                  color: 'white',
+                  border: 'none',
+                  padding: '0.6rem 1.2rem',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  fontSize: '0.95rem',
+                  fontWeight: 500,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem'
+                }}
+              >
+                Manage Users
+              </button>
+            </div>
             {customerCountError && (
               <p
                 style={{
@@ -120,6 +171,13 @@ const FamilyPlanUsage: React.FC<FamilyPlanUsageProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Manage Users Modal */}
+      <ManageUsersModal
+        isOpen={showManageUsersModal}
+        onClose={() => setShowManageUsersModal(false)}
+        onUserDeleted={handleUserDeleted}
+      />
     </div>
   );
 };

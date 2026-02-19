@@ -12,7 +12,10 @@
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { MaintenanceUser, BikeState } from '../types/shopUsersAndBikes.types';
-import { fetchShopMaintenanceReports, getApiConfig } from '../services/shopMaintenanceApi';
+import {
+  fetchShopMaintenanceReports,
+  getApiConfig
+} from '../services/shopMaintenanceApi';
 
 /**
  * Custom hook to manage shop maintenance data
@@ -27,12 +30,13 @@ import { fetchShopMaintenanceReports, getApiConfig } from '../services/shopMaint
  */
 export const useShopMaintenance = () => {
   // STATE: Data storage
-  const [users, setUsers] = useState<MaintenanceUser[]>([]);
+  const [allUsers, setAllUsers] = useState<MaintenanceUser[]>([]);
   const [bikesByUser, setBikesByUser] = useState<Record<string, BikeState>>({});
   
   // STATE: UI state
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [actionError, setActionError] = useState<string | null>(null);
   const [search, setSearch] = useState('');
   const [showAllParts, setShowAllParts] = useState(false);
   const [allBikesExpanded, setAllBikesExpanded] = useState(false);
@@ -44,6 +48,7 @@ export const useShopMaintenance = () => {
   const fetchUsers = useCallback(async () => {
     setLoading(true);
     setError(null);
+    setActionError(null);
     
     // Reset UI states when refreshing
     setShowAllParts(false);
@@ -61,17 +66,17 @@ export const useShopMaintenance = () => {
 
       // Map API response to our interface
       const mapped: MaintenanceUser[] = data.users.map((u: any) => ({
-        strava_user_id: u.strava_user_id,
+        strava_user_id: Number(u.strava_user_id),
         first_name: u.first_name,
         last_name: u.last_name,
         email: u.email,
         last_login: u.last_login,
         shop_activity: u.shop_activity,
-        bike_count: u.bike_count,
+        bike_count: Number(u.bike_count),
         bikes: u.bikes || []
       }));
 
-      setUsers(mapped);
+      setAllUsers(mapped);
 
       // Initialize bikes state - bikes already loaded from API
       const bikesState: Record<string, BikeState> = {};
@@ -120,6 +125,7 @@ export const useShopMaintenance = () => {
     });
   }, []);
 
+
   /**
    * Expand all bikes for all users
    * Also closes the All Parts view if it's open
@@ -128,7 +134,7 @@ export const useShopMaintenance = () => {
     // Close All Parts view when expanding bikes
     setShowAllParts(false);
     
-    const ids = users.map(u => String(u.strava_user_id));
+    const ids = allUsers.map(u => String(u.strava_user_id));
     
     setBikesByUser(prev => {
       const copy = { ...prev };
@@ -144,13 +150,13 @@ export const useShopMaintenance = () => {
       return copy;
     });
     setAllBikesExpanded(true);
-  }, [users]);
+  }, [allUsers]);
 
   /**
    * Collapse all bikes for all users
    */
   const collapseAllBikes = useCallback(() => {
-    const ids = users.map(u => String(u.strava_user_id));
+    const ids = allUsers.map(u => String(u.strava_user_id));
     
     setBikesByUser(prev => {
       const copy = { ...prev };
@@ -163,7 +169,7 @@ export const useShopMaintenance = () => {
       return copy;
     });
     setAllBikesExpanded(false);
-  }, [users]);
+  }, [allUsers]);
 
   /**
    * Toggle between expand all / collapse all
@@ -184,9 +190,9 @@ export const useShopMaintenance = () => {
    */
   const filteredUsers = useMemo(() => {
     const term = search.trim().toLowerCase();
-    if (!term) return users;
+    if (!term) return allUsers;
 
-    return users.filter(u => {
+    return allUsers.filter(u => {
       // Search by user name
       const userName = `${u.first_name} ${u.last_name}`.toLowerCase();
       if (userName.includes(term)) return true;
@@ -205,9 +211,9 @@ export const useShopMaintenance = () => {
         'bottom bracket', 'brake', 'brake pad', 'brake rotor',
         'tire', 'fork', 'shock', 'sealant', 'dropper'
       ];
-      return partNames.some(part => part.includes(term) || term.includes(part));
+      return partNames.some(part => part.includes(term));
     });
-  }, [users, search, bikesByUser]);
+  }, [allUsers, search, bikesByUser]);
 
   /**
    * Toggle Show All Parts view
@@ -221,7 +227,7 @@ export const useShopMaintenance = () => {
     if (newShowAllParts && allBikesExpanded) {
       setAllBikesExpanded(false);
       // Collapse all individual bike expansions too
-      const ids = users.map(u => String(u.strava_user_id));
+      const ids = allUsers.map(u => String(u.strava_user_id));
       setBikesByUser(prev => {
         const copy = { ...prev };
         ids.forEach(id => {
@@ -232,7 +238,7 @@ export const useShopMaintenance = () => {
         return copy;
       });
     }
-  }, [showAllParts, allBikesExpanded, users]);
+  }, [showAllParts, allBikesExpanded, allUsers]);
 
   /**
    * RETURN: Expose state and actions to component
@@ -242,6 +248,7 @@ export const useShopMaintenance = () => {
   return {
     // Data
     users: filteredUsers,
+    allUsers,
     bikesByUser,
     
     // Loading states
@@ -252,6 +259,9 @@ export const useShopMaintenance = () => {
     search,
     showAllParts,
     allBikesExpanded,
+
+    // Action state
+    actionError,
     
     // Actions (functions)
     setSearch,
@@ -259,6 +269,6 @@ export const useShopMaintenance = () => {
     toggleShowAllParts,
     fetchUsers,
     toggleExpand,
-    toggleAllBikes,
+    toggleAllBikes
   };
 };
