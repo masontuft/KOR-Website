@@ -6,8 +6,7 @@ import {
   fetchShopUsers,
   removeUserShop,
   setUserHead,
-  getApiConfig,
-  FetchConfig
+  getApiConfig
 } from '../services/shopMaintenanceApi';
 import {
   getAdminUserId,
@@ -89,14 +88,14 @@ const ManageUsersModal: React.FC<ManageUsersModalProps> = ({
     setLoading(true);
     setError(null);
     try {
-      const config: FetchConfig = getApiConfig();
+      const config = getApiConfig();
       const fetchedUsers = await fetchShopUsers(config);
 
       // Transform users to FamilyMember format
-      const familyMembers: FamilyMember[] = fetchedUsers.map((user: any) => ({
+      const familyMembers: FamilyMember[] = fetchedUsers.map(user => ({
         id: user.strava_user_id,
-        first_name: user.first_name || '',
-        last_name: user.last_name || '',
+        first_name: user.first_name,
+        last_name: user.last_name,
         email: user.email,
         strava_user_id: user.strava_user_id
       }));
@@ -122,7 +121,7 @@ const ManageUsersModal: React.FC<ManageUsersModalProps> = ({
     setIsDeleting(true);
     setError(null);
     try {
-      const config: FetchConfig = getApiConfig();
+      const config = getApiConfig();
       await removeUserShop(config, selectedUser.id);
 
       // Remove user from local state
@@ -168,7 +167,7 @@ const ManageUsersModal: React.FC<ManageUsersModalProps> = ({
     setError(null);
 
     try {
-      const config: FetchConfig = getApiConfig();
+      const config = getApiConfig();
       await setUserHead(config, selectedAdminId);
 
       // Mark this selection as saved
@@ -218,6 +217,10 @@ const ManageUsersModal: React.FC<ManageUsersModalProps> = ({
 
   // Check if there are unsaved changes
   const hasUnsavedChanges = selectedAdminId !== savedAdminId;
+
+  const unsavedChangesBadge = hasUnsavedChanges ? (
+    <span style={{ color: '#f39c12', marginLeft: '0.5rem' }}>(Unsaved changes)</span>
+  ) : null;
 
   return (
     <>
@@ -306,20 +309,12 @@ const ManageUsersModal: React.FC<ManageUsersModalProps> = ({
               {selectedAdminUser ? (
                 <div style={infoNoticeStyle}>
                   Current admin: <strong>{selectedAdminDisplayName}</strong>
-                  {hasUnsavedChanges && (
-                    <span style={{ color: '#f39c12', marginLeft: '0.5rem' }}>
-                      (Unsaved changes)
-                    </span>
-                  )}
+                  {unsavedChangesBadge}
                 </div>
               ) : (
                 <div style={infoNoticeStyle}>
                   No admin selected
-                  {hasUnsavedChanges && (
-                    <span style={{ color: '#f39c12', marginLeft: '0.5rem' }}>
-                      (Unsaved changes)
-                    </span>
-                  )}
+                  {unsavedChangesBadge}
                 </div>
               )}
 

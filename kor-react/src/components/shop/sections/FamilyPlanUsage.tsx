@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { DashboardSectionProps, CustomerUsageProps } from '../types';
 import ManageUsersModal from '../components/ManageUsersModal';
+import { getShopHead, getApiConfig } from '../services/shopMaintenanceApi';
+import { setAdminUserId } from '../utils/familyPlanAdmin';
 
 interface FamilyPlanUsageProps
   extends DashboardSectionProps,
@@ -16,6 +18,21 @@ const FamilyPlanUsage: React.FC<FamilyPlanUsageProps> = ({
   onUserDeleted
 }) => {
   const [showManageUsersModal, setShowManageUsersModal] = useState(false);
+
+  // Fetch the current admin from the backend on mount so sessionStorage is
+  // populated before the modal is ever opened.
+  useEffect(() => {
+    const config = getApiConfig();
+    getShopHead(config)
+      .then(adminId => {
+        if (adminId != null) {
+          setAdminUserId(adminId);
+        }
+      })
+      .catch(err => {
+        console.warn('Could not fetch shop head on load:', err);
+      });
+  }, []);
 
   // Local copy of count so the bar updates immediately when a user is removed.
   const [effectiveCount, setEffectiveCount] = useState<number>(

@@ -11,6 +11,8 @@
 
 import { convertApiResponse } from '../modules/dataConverter';
 
+const FORM_ENCODED = 'application/x-www-form-urlencoded';
+
 export interface FetchConfig {
   baseUrl: string;
   authToken: string;
@@ -33,16 +35,26 @@ export interface ShopMaintenanceResponse {
   users: any[];
 }
 
+/** Shape of a user returned by /getShopUsers */
+export interface ShopUser {
+  strava_user_id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+}
+
 export interface RemoveUserShopResponse {
   message: string;
   strava_user_id: number | string;
   previous_shop_token?: string | null;
   updated: number;
+  error?: string;
 }
 
 export interface SetUserHeadResponse {
   message: string;
   strava_user_id: number | string;
+  error?: string;
 }
 
 /**
@@ -59,7 +71,7 @@ export const fetchShopMaintenanceReports = async (
 
   const response = await fetch(`${baseUrl}/GetShopMaintenanceReports`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    headers: { 'Content-Type': FORM_ENCODED },
     body: new URLSearchParams({
       auth: authToken,
       shop_token: shopToken
@@ -87,7 +99,7 @@ export const fetchShopMaintenanceReports = async (
  */
 export const fetchShopUsers = async (
   config: FetchConfig
-): Promise<any[]> => {
+): Promise<ShopUser[]> => {
   const { baseUrl, authToken, shopToken } = config;
 
   if (!shopToken) {
@@ -96,7 +108,7 @@ export const fetchShopUsers = async (
 
   const response = await fetch(`${baseUrl}/getShopUsers`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    headers: { 'Content-Type': FORM_ENCODED },
     body: new URLSearchParams({
       auth: authToken,
       shop_token: shopToken,
@@ -115,7 +127,7 @@ export const fetchShopUsers = async (
     throw new Error(data?.error || 'Unexpected response when loading users');
   }
 
-  return data.users;
+  return data.users as ShopUser[];
 };
 
 /**
@@ -132,7 +144,7 @@ export const removeUserShop = async (
   const { baseUrl } = config;
   const response = await fetch(`${baseUrl}/removeUserShop`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    headers: { 'Content-Type': FORM_ENCODED },
     body: new URLSearchParams({
       strava_user_id: String(stravaUserId)
     }) as unknown as BodyInit,
@@ -146,9 +158,7 @@ export const removeUserShop = async (
     );
   }
 
-  const data = (await response.json()) as RemoveUserShopResponse & {
-    error?: string;
-  };
+  const data = (await response.json()) as RemoveUserShopResponse;
 
   if (data?.message !== 'success') {
     throw new Error(data?.error || data?.message || 'Failed to remove user');
@@ -173,7 +183,7 @@ export const setUserHead = async (
 
   const response = await fetch(`${baseUrl}/setUserHead`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    headers: { 'Content-Type': FORM_ENCODED },
     body: new URLSearchParams({
       strava_user_id: String(stravaUserId)
     }) as unknown as BodyInit,
@@ -187,15 +197,86 @@ export const setUserHead = async (
     );
   }
 
-  const data = (await response.json()) as SetUserHeadResponse & {
-    error?: string;
-  };
+  const data = (await response.json()) as SetUserHeadResponse;
 
   if (data?.message !== 'success') {
     throw new Error(data?.error || data?.message || 'Failed to set user as admin');
   }
 
   return data;
+};
+
+export interface GetShopHeadResponse {
+  message: string;
+  shop_name: string;
+  shop_code: string;
+  shop_token: string;
+  head: {
+    strava_user_id: number;
+    first_name: string;
+    last_name: string;
+    email: string;
+    last_login?: string;
+    shop_activity?: string;
+  } | null;
+  info?: string;
+  error?: string;
+}
+
+// ---------------------------------------------------------------------------
+// Mock flag for getShopHead
+//
+// /getShopHead is not yet deployed. Set REACT_APP_USE_MOCK_SHOP_HEAD=true in
+// .env.local (gitignored by CRA) to use the first shop user as the admin
+// while developing locally. .env.local is never included in production or CI
+// builds, so this flag cannot leak into a deployed environment.
+// ---------------------------------------------------------------------------
+const USE_MOCK_SHOP_HEAD = process.env.REACT_APP_USE_MOCK_SHOP_HEAD === 'true';
+
+if (USE_MOCK_SHOP_HEAD && process.env.NODE_ENV === 'development') {
+  // eslint-disable-next-line no-console
+  console.log(
+    '[DEV] getShopHead mock enabled: returning first shop user as admin. ' +
+      'Remove REACT_APP_USE_MOCK_SHOP_HEAD from .env.local to use the real endpoint.'
+  );
+}
+
+/**
+ * Gets the current head/admin of the family plan shop.
+ *
+ * Returns the strava_user_id of the head user, or null if no head is set.
+ */
+export const getShopHead = async (config: FetchConfig): Promise<number | null> => {
+  if (USE_MOCK_SHOP_HEAD) {
+    // Mock: pick the first user returned by the shop users list.
+    const users = await fetchShopUsers(config);
+    return users.length > 0 ? (users[0].strava_user_id as number) : null;
+  }
+
+  const { baseUrl, authToken, shopToken } = config;
+
+  const response = await fetch(`${baseUrl}/getShopHead`, {
+    method: 'POST',
+    headers: { 'Content-Type': FORM_ENCODED },
+    body: new URLSearchParams({
+      auth: authToken,
+      shop_token: shopToken
+    }) as unknown as BodyInit,
+    redirect: 'follow' as RequestRedirect
+  });
+
+  if (!response.ok) {
+    const errText = await response.text().catch(() => '');
+    throw new Error(`Failed to get shop head (HTTP ${response.status} ${errText})`);
+  }
+
+  const data = (await response.json()) as GetShopHeadResponse;
+
+  if (data?.message !== 'success') {
+    throw new Error(data?.error || 'Failed to get shop head');
+  }
+
+  return data.head?.strava_user_id ?? null;
 };
 
 /**
