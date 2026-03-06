@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Trash2, X, Shield } from 'lucide-react';
-import { FamilyMember } from '../types/shopUsersAndBikes.types';
 import {
+  ShopUser,
   fetchShopUsers,
+  getShopHead,
   removeUserShop,
   setUserHead,
   getApiConfig
@@ -37,9 +38,12 @@ import {
   adminRowRightStyle,
   infoNoticeStyle,
   modalFooterStyle,
+  adminFooterStyle,
   modalButtonStyle,
   errorMessageStyle,
-  emptyStateStyle
+  emptyStateStyle,
+  unsavedChangesBadgeStyle,
+  adminInnerStyle
 } from '../styles/userManagementModal.styles';
 
 interface ManageUsersModalProps {
@@ -58,10 +62,10 @@ const ManageUsersModal: React.FC<ManageUsersModalProps> = ({
   const { user: auth0User } = useAuth0();
 
   const [activeTab, setActiveTab] = useState<ManageUsersTab>('family');
-  const [users, setUsers] = useState<FamilyMember[]>([]);
+  const [users, setUsers] = useState<ShopUser[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [selectedUser, setSelectedUser] = useState<FamilyMember | null>(null);
+  const [selectedUser, setSelectedUser] = useState<ShopUser | null>(null);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isSavingAdmin, setIsSavingAdmin] = useState(false);
@@ -71,36 +75,25 @@ const ManageUsersModal: React.FC<ManageUsersModalProps> = ({
   // Tracks the last successfully saved admin ID to detect changes.
   const [savedAdminId, setSavedAdminId] = useState<number | null>(null);
 
-  useEffect(() => {
-    if (isOpen) {
-      setActiveTab('family');
-
-      // Restore current admin selection from sessionStorage.
-      const adminId = getAdminUserId();
-      setSelectedAdminId(adminId);
-      setSavedAdminId(adminId); // Track as saved to detect changes
-
-      loadUsers();
-    }
-  }, [isOpen]);
-
-  const loadUsers = async () => {
+  const loadUsers = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
       const config = getApiConfig();
-      const fetchedUsers = await fetchShopUsers(config);
+      const [fetchedUsers, serverAdminId] = await Promise.all([
+        fetchShopUsers(config),
+        getShopHead(config).then(head => (head != null ? head.strava_user_id : null)).catch(() => null)
+      ]);
+      setUsers(fetchedUsers);
 
-      // Transform users to FamilyMember format
-      const familyMembers: FamilyMember[] = fetchedUsers.map(user => ({
-        id: user.strava_user_id,
-        first_name: user.first_name,
-        last_name: user.last_name,
-        email: user.email,
-        strava_user_id: user.strava_user_id
-      }));
+      // Server admin takes priority; fall back to whatever is in sessionStorage.
+      const adminId = serverAdminId ?? getAdminUserId();
+      setSelectedAdminId(adminId);
+      setSavedAdminId(adminId);
 
-      setUsers(familyMembers);
+      if (serverAdminId != null) {
+        saveAdminUserId(serverAdminId);
+      }
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : 'Failed to load users';
@@ -108,9 +101,16 @@ const ManageUsersModal: React.FC<ManageUsersModalProps> = ({
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const handleDeleteClick = (user: FamilyMember) => {
+  useEffect(() => {
+    if (isOpen) {
+      setActiveTab('family');
+      loadUsers();
+    }
+  }, [isOpen, loadUsers]);
+
+  const handleDeleteClick = (user: ShopUser) => {
     setSelectedUser(user);
     setShowConfirmModal(true);
   };
@@ -122,13 +122,13 @@ const ManageUsersModal: React.FC<ManageUsersModalProps> = ({
     setError(null);
     try {
       const config = getApiConfig();
-      await removeUserShop(config, selectedUser.id);
+      await removeUserShop(config, selectedUser.strava_user_id);
 
       // Remove user from local state
-      setUsers(prev => prev.filter(u => u.id !== selectedUser.id));
+      setUsers(prev => prev.filter(u => u.strava_user_id !== selectedUser.strava_user_id));
 
       // If the deleted user was selected as admin, clear the selection.
-      setSelectedAdminId(prev => (prev === selectedUser.id ? null : prev));
+      setSelectedAdminId(prev => (prev === selectedUser.strava_user_id ? null : prev));
 
       // Close confirmation modal
       setShowConfirmModal(false);
@@ -187,21 +187,21 @@ const ManageUsersModal: React.FC<ManageUsersModalProps> = ({
 
   if (!isOpen) return null;
 
-  const getUserDisplayName = (user: FamilyMember): string => {
+  const getUserDisplayName = (user: ShopUser): string => {
     const fullName = `${user.first_name} ${user.last_name}`.trim();
     return fullName || user.email;
   };
 
   const auth0Email = typeof auth0User?.email === 'string' ? auth0User.email : null;
 
-  const isCurrentUser = (member: FamilyMember): boolean => {
+  const isCurrentUser = (member: ShopUser): boolean => {
     if (!auth0Email) return false;
     return member.email?.toLowerCase() === auth0Email.toLowerCase();
   };
 
-  const getUserDisplayNameWithYou = (member: FamilyMember): string => {
+  const getUserDisplayNameWithYou = (member: ShopUser): string => {
     const base = getUserDisplayName(member);
-    return selectedAdminId === member.id && isCurrentUser(member)
+    return selectedAdminId === member.strava_user_id && isCurrentUser(member)
       ? `${base} (You)`
       : base;
   };
@@ -209,7 +209,7 @@ const ManageUsersModal: React.FC<ManageUsersModalProps> = ({
   const selectedAdminUser =
     selectedAdminId == null
       ? null
-      : (users.find(u => u.id === selectedAdminId) ?? null);
+      : (users.find(u => u.strava_user_id === selectedAdminId) ?? null);
 
   const selectedAdminDisplayName = selectedAdminUser
     ? getUserDisplayNameWithYou(selectedAdminUser)
@@ -219,7 +219,7 @@ const ManageUsersModal: React.FC<ManageUsersModalProps> = ({
   const hasUnsavedChanges = selectedAdminId !== savedAdminId;
 
   const unsavedChangesBadge = hasUnsavedChanges ? (
-    <span style={{ color: '#f39c12', marginLeft: '0.5rem' }}>(Unsaved changes)</span>
+    <span style={unsavedChangesBadgeStyle}>(Unsaved changes)</span>
   ) : null;
 
   return (
@@ -271,13 +271,13 @@ const ManageUsersModal: React.FC<ManageUsersModalProps> = ({
                   <div style={emptyStateStyle}>No family members found</div>
                 ) : (
                   users.map(user => (
-                    <div key={user.id} style={userListItemStyle}>
+                    <div key={user.strava_user_id} style={userListItemStyle}>
                       <div style={userListInfoStyle}>
                         <div style={userListNameRowStyle}>
                           <div style={userListNameStyle}>
                             {getUserDisplayNameWithYou(user)}
                           </div>
-                          {selectedAdminId === user.id && (
+                          {selectedAdminId === user.strava_user_id && (
                             <span style={adminBadgeStyle}>
                               <Shield size={14} /> Admin
                             </span>
@@ -325,20 +325,20 @@ const ManageUsersModal: React.FC<ManageUsersModalProps> = ({
                   <div style={emptyStateStyle}>No family members found</div>
                 ) : (
                   users.map(user => (
-                    <label key={user.id} style={adminListItemStyle}>
+                    <label key={user.strava_user_id} style={adminListItemStyle}>
                       <input
                         type='radio'
                         name='family-plan-admin'
-                        checked={selectedAdminId === user.id}
-                        onChange={() => setSelectedAdminId(user.id)}
+                        checked={selectedAdminId === user.strava_user_id}
+                        onChange={() => setSelectedAdminId(user.strava_user_id)}
                         style={adminRadioStyle}
                       />
-                      <div style={{ minWidth: 0 }}>
+                      <div style={adminInnerStyle}>
                         <div style={userListNameStyle}>{getUserDisplayNameWithYou(user)}</div>
                         <div style={userListEmailStyle}>{user.email}</div>
                       </div>
                       <div style={adminRowRightStyle}>
-                        {selectedAdminId === user.id && (
+                        {selectedAdminId === user.strava_user_id && (
                           <span style={adminBadgeStyle}>
                             <Shield size={14} /> Admin
                           </span>
@@ -349,7 +349,7 @@ const ManageUsersModal: React.FC<ManageUsersModalProps> = ({
                 )}
               </div>
 
-              <div style={{ ...modalFooterStyle, gap: '0.5rem' }}>
+              <div style={adminFooterStyle}>
                 <button
                   type='button'
                   style={modalButtonStyle('secondary')}

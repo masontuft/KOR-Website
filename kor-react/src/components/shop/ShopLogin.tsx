@@ -57,6 +57,11 @@ const ShopLogin: React.FC = () => {
       const result = await response.json();
 
       console.log('✅ [ShopLogin] API response received:', result);
+      console.log('🔍 [ShopLogin] strava_user_id check:', {
+        top_level: result.strava_user_id,
+        in_plan_type_0: result.plan_type?.[0]?.strava_user_id,
+        plan_type_0_keys: Object.keys(result.plan_type?.[0] || {})
+      });
       console.log('📊 [ShopLogin] Shop data:', {
         plan_type: result.plan_type[0].plan_type,
         shop_name: result.plan_type[0].shop_name,
@@ -69,6 +74,14 @@ const ShopLogin: React.FC = () => {
       sessionStorage.setItem('shop_code', result.plan_type[0].shop_code);
       sessionStorage.setItem('plan_type', result.plan_type[0].plan_type);
       sessionStorage.setItem('shop_token', result.plan_type[0].shop_token);
+
+      // Store the viewer's identity at login time, while Auth0 is still active.
+      // On subsequent page loads Auth0 silent auth often fails (e.g. localhost / 3rd-party cookies),
+      // so we can't rely on auth0User being populated later.
+      if (user.email) {
+        sessionStorage.setItem('user_email', user.email);
+      }
+
 
       console.log('💾 [ShopLogin] Data stored in sessionStorage:', {
         shop_name: sessionStorage.getItem('shop_name'),

@@ -11,6 +11,7 @@ interface FamilyPlanUsageProps
 }
 
 const FamilyPlanUsage: React.FC<FamilyPlanUsageProps> = ({
+  shopUser,
   planFeatures,
   customerCount,
   customerCountLoading,
@@ -19,20 +20,23 @@ const FamilyPlanUsage: React.FC<FamilyPlanUsageProps> = ({
 }) => {
   const [showManageUsersModal, setShowManageUsersModal] = useState(false);
 
-  // Fetch the current admin from the backend on mount so sessionStorage is
-  // populated before the modal is ever opened.
+  // Fetch the current admin from the backend once the shop session is ready.
+  // shopUser?.shopCode is used as the trigger — it becomes non-null only after
+  // the login flow completes and sessionStorage is populated with shop_token.
   useEffect(() => {
     const config = getApiConfig();
+    if (!config.shopToken) return;
+
     getShopHead(config)
-      .then(adminId => {
-        if (adminId != null) {
-          setAdminUserId(adminId);
+      .then(head => {
+        if (head != null) {
+          setAdminUserId(head.strava_user_id);
         }
       })
       .catch(err => {
         console.warn('Could not fetch shop head on load:', err);
       });
-  }, []);
+  }, [shopUser?.shopCode]);
 
   // Local copy of count so the bar updates immediately when a user is removed.
   const [effectiveCount, setEffectiveCount] = useState<number>(
@@ -156,6 +160,7 @@ const FamilyPlanUsage: React.FC<FamilyPlanUsageProps> = ({
               }}
             >
               <button
+                type='button'
                 onClick={() => setShowManageUsersModal(true)}
                 style={{
                   backgroundColor: planFeatures?.color || '#007bff',

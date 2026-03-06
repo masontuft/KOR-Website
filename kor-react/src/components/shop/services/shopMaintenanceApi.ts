@@ -133,9 +133,8 @@ export const fetchShopUsers = async (
 /**
  * Removes a user's association with the current shop.
  *
- * NOTE: This endpoint does not require auth or shop_token; it only
- * needs the Strava user id. We still use the shared baseUrl from config
- * to keep API configuration centralized.
+ * NOTE: Only `baseUrl` is used from config — this endpoint requires only
+ * the Strava user id, not auth or shop_token.
  */
 export const removeUserShop = async (
   config: FetchConfig,
@@ -223,36 +222,17 @@ export interface GetShopHeadResponse {
   error?: string;
 }
 
-// ---------------------------------------------------------------------------
-// Mock flag for getShopHead
-//
-// /getShopHead is not yet deployed. Set REACT_APP_USE_MOCK_SHOP_HEAD=true in
-// .env.local (gitignored by CRA) to use the first shop user as the admin
-// while developing locally. .env.local is never included in production or CI
-// builds, so this flag cannot leak into a deployed environment.
-// ---------------------------------------------------------------------------
-const USE_MOCK_SHOP_HEAD = process.env.REACT_APP_USE_MOCK_SHOP_HEAD === 'true';
-
-if (USE_MOCK_SHOP_HEAD && process.env.NODE_ENV === 'development') {
-  // eslint-disable-next-line no-console
-  console.log(
-    '[DEV] getShopHead mock enabled: returning first shop user as admin. ' +
-      'Remove REACT_APP_USE_MOCK_SHOP_HEAD from .env.local to use the real endpoint.'
-  );
+export interface ShopHeadData {
+  strava_user_id: number;
+  email: string;
 }
 
 /**
  * Gets the current head/admin of the family plan shop.
  *
- * Returns the strava_user_id of the head user, or null if no head is set.
+ * Returns { strava_user_id, email } of the head user, or null if no head is set.
  */
-export const getShopHead = async (config: FetchConfig): Promise<number | null> => {
-  if (USE_MOCK_SHOP_HEAD) {
-    // Mock: pick the first user returned by the shop users list.
-    const users = await fetchShopUsers(config);
-    return users.length > 0 ? (users[0].strava_user_id as number) : null;
-  }
-
+export const getShopHead = async (config: FetchConfig): Promise<ShopHeadData | null> => {
   const { baseUrl, authToken, shopToken } = config;
 
   const response = await fetch(`${baseUrl}/getShopHead`, {
@@ -276,7 +256,8 @@ export const getShopHead = async (config: FetchConfig): Promise<number | null> =
     throw new Error(data?.error || 'Failed to get shop head');
   }
 
-  return data.head?.strava_user_id ?? null;
+  if (data.head == null) return null;
+  return { strava_user_id: data.head.strava_user_id, email: data.head.email };
 };
 
 /**

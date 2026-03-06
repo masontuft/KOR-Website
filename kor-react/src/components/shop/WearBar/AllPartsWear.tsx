@@ -132,13 +132,12 @@ const AllPartsWear: React.FC<AllPartsWearProps> = ({
               adminUserId != null &&
               part.ownerId === adminUserId;
 
-            const label = part.label;
             const ownerLabel = isAdminOwner ? 'You' : part.ownerName;
 
             return (
               <div key={`${part.ownerId}-${part.bikeName}-${part.label}-${index}`}>
                 <WearBar
-                  label={label}
+                  label={part.label}
                   value={part.wearPercent}
                   imageSRC={part.icon}
                   showAdminIndicator={isAdminOwner}
