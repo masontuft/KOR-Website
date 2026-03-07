@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
 import { useLegacyParams, logLegacyParams } from '../../hooks/useLegacyParams';
@@ -9,6 +9,7 @@ import PlanSpecificModules from './modules/PlanSpecificModules';
 // Types and Hooks
 import { ShopUser, PlanFeatures } from './types';
 import { usePlanFeatures } from './hooks/usePlanFeatures';
+import { fetchShopUsers, getApiConfig } from './services/shopMaintenanceApi';
 
 // Plan configurations moved to usePlanFeatures hook
 
@@ -404,70 +405,29 @@ const ShopDashboard: React.FC = () => {
     }
   }, [shopUser, getPlanFeatures]);
 
-  // Function to fetch customer count (extracted for reusability)
-  const fetchCustomerCount = async () => {
-    const shop_token = sessionStorage.getItem('shop_token');
-    if (!shop_token) {
-      console.log(
-        'ℹ️ [ShopDashboard] No shop_token in sessionStorage; skipping user count fetch.'
-      );
-      return;
-    }
-
-    const baseUrl =
-      process.env.REACT_APP_API_BASE_URL || 'https://jmrcycling.com:3001';
-    const authToken =
-      process.env.REACT_APP_API_AUTH_TOKEN || '1893784827439273928203838';
+  // Fetch live customer count using existing backend API (works during soft-auth too)
+  const fetchCustomerCount = useCallback(async () => {
+    const config = getApiConfig();
+    if (!config.shopToken) return;
 
     setCustomerCountLoading(true);
     setCustomerCountError(null);
 
     try {
-      const response = await fetch(`${baseUrl}/getShopUsers`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          auth: authToken,
-          shop_token
-        }) as unknown as BodyInit,
-        redirect: 'follow' as RequestRedirect
-      });
-
-      if (!response.ok) {
-        const errText = await response.text().catch(() => '');
-        throw new Error(`HTTP ${response.status} ${errText}`);
-      }
-
-      const data = await response.json();
-      if (data && data.message === 'success') {
-        const count =
-          typeof data.user_count === 'number'
-            ? data.user_count
-            : Array.isArray(data.users)
-              ? data.users.length
-              : 0;
-        setCustomerCount(count);
-        console.log('👥 [ShopDashboard] Loaded customer count:', count);
-      } else {
-        throw new Error(data?.error || 'Failed to load user count');
-      }
+      const users = await fetchShopUsers(config);
+      setCustomerCount(users.length);
     } catch (err) {
-      console.error(
-        '❌ [ShopDashboard] Failed to fetch shop user count:',
-        err
-      );
       setCustomerCountError(
         err instanceof Error ? err.message : 'Unknown error'
       );
     } finally {
       setCustomerCountLoading(false);
     }
-  };
+  }, []);
 
-  // Fetch live customer count using existing backend API (works during soft-auth too)
   useEffect(() => {
     fetchCustomerCount();
-  }, [isAuthenticated, shopUser?.shopCode]);
+  }, [fetchCustomerCount, isAuthenticated, shopUser?.shopCode]);
 
   // Allow the dashboard to render if we have session-based shop data, even while Auth0 initializes
   const hasSessionShopData = !!(

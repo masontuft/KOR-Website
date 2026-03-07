@@ -125,7 +125,6 @@ export const useShopMaintenance = () => {
     });
   }, []);
 
-
   /**
    * Expand all bikes for all users
    * Also closes the All Parts view if it's open

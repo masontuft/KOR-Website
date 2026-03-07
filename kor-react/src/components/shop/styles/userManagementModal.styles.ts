@@ -33,7 +33,7 @@ export const modalTitleRowStyle: React.CSSProperties = {
 export const modalHeaderStyle: React.CSSProperties = {
   margin: 0,
   fontSize: '1.15rem',
-  fontWeight: 650,
+  fontWeight: 700,
   color: '#1f2937',
 };
 
@@ -62,7 +62,7 @@ export const tabButtonStyle = (active: boolean): React.CSSProperties => ({
   padding: '0.65rem 0.9rem',
   cursor: 'pointer',
   fontSize: '0.9rem',
-  fontWeight: active ? 650 : 550,
+  fontWeight: active ? 600 : 500,
   color: active ? '#111827' : '#6b7280',
   borderBottom: active ? '2px solid #3B82F6' : '2px solid transparent',
   marginBottom: -1,
@@ -140,7 +140,7 @@ export const adminBadgeStyle: React.CSSProperties = {
   padding: '0.15rem 0.45rem',
   borderRadius: 999,
   fontSize: '0.75rem',
-  fontWeight: 650,
+  fontWeight: 700,
   flex: '0 0 auto',
 };
 
@@ -195,6 +195,22 @@ export const emptyStateStyle: React.CSSProperties = {
   padding: '1rem 0.5rem',
   fontSize: '0.9rem',
   color: '#6b7280',
+};
+
+export const unsavedChangesBadgeStyle: React.CSSProperties = {
+  color: '#f39c12',
+  marginLeft: '0.5rem',
+};
+
+export const adminInnerStyle: React.CSSProperties = {
+  minWidth: 0,
+};
+
+export const adminFooterStyle: React.CSSProperties = {
+  display: 'flex',
+  justifyContent: 'flex-end',
+  marginTop: '0.75rem',
+  gap: '0.5rem',
 };
 
 // Admin settings tab styles

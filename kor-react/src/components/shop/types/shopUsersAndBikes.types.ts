@@ -112,12 +112,3 @@ export interface ShopUsersAndBikesProps {
 }
 
 export type SortMode = 'wear_desc' | 'wear_asc';
-
-// Simple representation of a family plan member for management UI
-export interface FamilyMember {
-  id: number;
-  first_name: string;
-  last_name: string;
-  email: string;
-  strava_user_id: number;
-}
