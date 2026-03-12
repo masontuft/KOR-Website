@@ -12,6 +12,7 @@
 import { convertApiResponse } from '../modules/dataConverter';
 
 const FORM_ENCODED = 'application/x-www-form-urlencoded';
+const API_SUCCESS = 'success';
 
 export interface FetchConfig {
   baseUrl: string;
@@ -85,7 +86,7 @@ export const fetchShopMaintenanceReports = async (
 
   const data = await response.json();
 
-  if (data?.message !== 'success' || !Array.isArray(data?.users)) {
+  if (data?.message !== API_SUCCESS || !Array.isArray(data?.users)) {
     throw new Error(data?.error || 'Unexpected response from server');
   }
 
@@ -123,7 +124,7 @@ export const fetchShopUsers = async (
 
   const data = await response.json();
 
-  if (data?.message !== 'success' || !Array.isArray(data?.users)) {
+  if (data?.message !== API_SUCCESS || !Array.isArray(data?.users)) {
     throw new Error(data?.error || 'Unexpected response when loading users');
   }
 
@@ -159,7 +160,7 @@ export const removeUserShop = async (
 
   const data = (await response.json()) as RemoveUserShopResponse;
 
-  if (data?.message !== 'success') {
+  if (data?.message !== API_SUCCESS) {
     throw new Error(data?.error || data?.message || 'Failed to remove user');
   }
 
@@ -198,7 +199,7 @@ export const setUserHead = async (
 
   const data = (await response.json()) as SetUserHeadResponse;
 
-  if (data?.message !== 'success') {
+  if (data?.message !== API_SUCCESS) {
     throw new Error(data?.error || data?.message || 'Failed to set user as admin');
   }
 
@@ -252,7 +253,7 @@ export const getShopHead = async (config: FetchConfig): Promise<ShopHeadData | n
 
   const data = (await response.json()) as GetShopHeadResponse;
 
-  if (data?.message !== 'success') {
+  if (data?.message !== API_SUCCESS) {
     throw new Error(data?.error || 'Failed to get shop head');
   }
 

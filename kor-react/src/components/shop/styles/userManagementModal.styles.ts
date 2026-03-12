@@ -1,6 +1,53 @@
 // Styles for the family plan user management modal and confirm delete modal
 // Kept in plain objects for easy reuse and maintainability.
 
+import { tokens } from './shopMaintenance.styles';
+
+/**
+ * Modal-specific design tokens.
+ * Extends the shared token system with colors unique to this modal.
+ */
+const modalTokens = {
+  colors: {
+    // Text
+    textHeading: '#1f2937',
+    textBody: '#374151',
+    textMuted: '#4b5563',
+    textDisabled: '#9ca3af',
+    textDanger: '#dc2626',
+    textDangerDark: '#c0392b',
+    textWarning: '#f39c12',
+    // Backgrounds
+    bgSubtle: '#f3f4f6',
+    bgDisabled: '#f9fafb',
+    bgError: '#ffe6e6',
+    bgDangerDisabled: '#f5b7b1',
+    bgSecondaryButton: '#e0e0e0',
+    // Borders
+    borderSubtle: '#e5e7eb',
+    borderDivider: '#eef0f3',
+    borderDividerLight: '#f1f5f9',
+    borderDanger: '#fee2e2',
+    // Blue (primary action / admin indicator)
+    blue: '#3B82F6',
+    blueDark: '#1d4ed8',
+    blueBorder: '#dbeafe',
+    blueSubtle: '#eff6ff',
+    blueLegendBg: '#f0f7ff',
+    // Tab active text
+    textTabActive: '#111827',
+    textTabInactive: '#6b7280',
+  },
+  zIndex: {
+    modal: 1000,
+  },
+  size: {
+    closeButton: 34,
+    deleteButton: 36,
+    adminIndicatorDot: 8,
+  },
+};
+
 export const modalOverlayStyle: React.CSSProperties = {
   position: 'fixed',
   top: 0,
@@ -11,12 +58,12 @@ export const modalOverlayStyle: React.CSSProperties = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  zIndex: 1000,
+  zIndex: modalTokens.zIndex.modal,
 };
 
 export const modalContentStyle: React.CSSProperties = {
-  backgroundColor: '#ffffff',
-  borderRadius: 10,
+  backgroundColor: tokens.colors.white,
+  borderRadius: tokens.borderRadius.md,
   padding: '1.25rem',
   width: '100%',
   maxWidth: 560,
@@ -27,23 +74,23 @@ export const modalTitleRowStyle: React.CSSProperties = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '0.75rem',
+  gap: tokens.spacing.sm,
 };
 
 export const modalHeaderStyle: React.CSSProperties = {
   margin: 0,
   fontSize: '1.15rem',
   fontWeight: 700,
-  color: '#1f2937',
+  color: modalTokens.colors.textHeading,
 };
 
 export const closeIconButtonStyle: React.CSSProperties = {
-  border: '1px solid #e5e7eb',
-  backgroundColor: '#ffffff',
-  color: '#374151',
-  borderRadius: 8,
-  width: 34,
-  height: 34,
+  border: `1px solid ${modalTokens.colors.borderSubtle}`,
+  backgroundColor: tokens.colors.white,
+  color: modalTokens.colors.textBody,
+  borderRadius: tokens.borderRadius.sm,
+  width: modalTokens.size.closeButton,
+  height: modalTokens.size.closeButton,
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -53,7 +100,7 @@ export const closeIconButtonStyle: React.CSSProperties = {
 export const tabsContainerStyle: React.CSSProperties = {
   display: 'flex',
   marginTop: '0.9rem',
-  borderBottom: '1px solid #eef0f3',
+  borderBottom: `1px solid ${modalTokens.colors.borderDivider}`,
 };
 
 export const tabButtonStyle = (active: boolean): React.CSSProperties => ({
@@ -63,38 +110,38 @@ export const tabButtonStyle = (active: boolean): React.CSSProperties => ({
   cursor: 'pointer',
   fontSize: '0.9rem',
   fontWeight: active ? 600 : 500,
-  color: active ? '#111827' : '#6b7280',
-  borderBottom: active ? '2px solid #3B82F6' : '2px solid transparent',
+  color: active ? modalTokens.colors.textTabActive : modalTokens.colors.textTabInactive,
+  borderBottom: active ? `2px solid ${modalTokens.colors.blue}` : '2px solid transparent',
   marginBottom: -1,
 });
 
 export const tabPanelStyle: React.CSSProperties = {
-  paddingTop: '1rem',
+  paddingTop: tokens.spacing.md,
 };
 
 export const modalSubtextStyle: React.CSSProperties = {
   margin: 0,
   marginBottom: '0.9rem',
   fontSize: '0.9rem',
-  color: '#4b5563',
+  color: modalTokens.colors.textMuted,
   lineHeight: 1.4,
 };
 
 export const infoNoticeStyle: React.CSSProperties = {
-  backgroundColor: '#f3f4f6',
-  border: '1px solid #e5e7eb',
-  color: '#374151',
+  backgroundColor: modalTokens.colors.bgSubtle,
+  border: `1px solid ${modalTokens.colors.borderSubtle}`,
+  color: modalTokens.colors.textBody,
   padding: '0.6rem 0.75rem',
-  borderRadius: 8,
+  borderRadius: tokens.borderRadius.sm,
   fontSize: '0.85rem',
-  marginBottom: '0.75rem',
+  marginBottom: tokens.spacing.sm,
 };
 
 export const userListContainerStyle: React.CSSProperties = {
   maxHeight: 320,
   overflowY: 'auto',
-  marginTop: '0.5rem',
-  marginBottom: '1rem',
+  marginTop: tokens.spacing.xs,
+  marginBottom: tokens.spacing.md,
 };
 
 export const userListItemStyle: React.CSSProperties = {
@@ -102,8 +149,8 @@ export const userListItemStyle: React.CSSProperties = {
   alignItems: 'center',
   justifyContent: 'space-between',
   padding: '0.65rem 0.25rem',
-  borderBottom: '1px solid #f1f5f9',
-  gap: '0.75rem',
+  borderBottom: `1px solid ${modalTokens.colors.borderDividerLight}`,
+  gap: tokens.spacing.sm,
 };
 
 export const userListInfoStyle: React.CSSProperties = {
@@ -117,14 +164,14 @@ export const userListInfoStyle: React.CSSProperties = {
 export const userListNameRowStyle: React.CSSProperties = {
   display: 'flex',
   alignItems: 'center',
-  gap: '0.5rem',
+  gap: tokens.spacing.xs,
   minWidth: 0,
 };
 
 export const userListNameStyle: React.CSSProperties = {
   fontSize: '0.95rem',
   fontWeight: 600,
-  color: '#111827',
+  color: modalTokens.colors.textTabActive,
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
@@ -134,9 +181,9 @@ export const adminBadgeStyle: React.CSSProperties = {
   display: 'inline-flex',
   alignItems: 'center',
   gap: 6,
-  border: '1px solid #dbeafe',
-  backgroundColor: '#eff6ff',
-  color: '#1d4ed8',
+  border: `1px solid ${modalTokens.colors.blueBorder}`,
+  backgroundColor: modalTokens.colors.blueSubtle,
+  color: modalTokens.colors.blueDark,
   padding: '0.15rem 0.45rem',
   borderRadius: 999,
   fontSize: '0.75rem',
@@ -146,16 +193,16 @@ export const adminBadgeStyle: React.CSSProperties = {
 
 export const userListEmailStyle: React.CSSProperties = {
   fontSize: '0.85rem',
-  color: '#666',
+  color: tokens.colors.textSecondary,
 };
 
 export const deleteButtonStyle = (disabled: boolean): React.CSSProperties => ({
-  border: '1px solid #fee2e2',
-  backgroundColor: disabled ? '#f9fafb' : '#ffffff',
-  color: disabled ? '#9ca3af' : '#dc2626',
-  borderRadius: 10,
-  width: 36,
-  height: 36,
+  border: `1px solid ${modalTokens.colors.borderDanger}`,
+  backgroundColor: disabled ? modalTokens.colors.bgDisabled : tokens.colors.white,
+  color: disabled ? modalTokens.colors.textDisabled : modalTokens.colors.textDanger,
+  borderRadius: tokens.borderRadius.md,
+  width: modalTokens.size.deleteButton,
+  height: modalTokens.size.deleteButton,
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -165,7 +212,7 @@ export const deleteButtonStyle = (disabled: boolean): React.CSSProperties => ({
 export const modalFooterStyle: React.CSSProperties = {
   display: 'flex',
   justifyContent: 'flex-end',
-  marginTop: '0.75rem',
+  marginTop: tokens.spacing.sm,
 };
 
 export const modalButtonStyle = (
@@ -176,30 +223,30 @@ export const modalButtonStyle = (
   padding: '0.5rem 1.1rem',
   fontSize: '0.9rem',
   cursor: 'pointer',
-  backgroundColor: variant === 'primary' ? '#3B82F6' : '#e0e0e0',
-  color: variant === 'primary' ? '#ffffff' : '#333333',
-  marginLeft: '0.5rem',
+  backgroundColor: variant === 'primary' ? modalTokens.colors.blue : modalTokens.colors.bgSecondaryButton,
+  color: variant === 'primary' ? tokens.colors.white : tokens.colors.textPrimary,
+  marginLeft: tokens.spacing.xs,
 });
 
 export const errorMessageStyle: React.CSSProperties = {
-  backgroundColor: '#ffe6e6',
-  color: '#c0392b',
-  padding: '0.5rem 0.75rem',
+  backgroundColor: modalTokens.colors.bgError,
+  color: modalTokens.colors.textDangerDark,
+  padding: `${tokens.spacing.xs} ${tokens.spacing.sm}`,
   borderRadius: 4,
   fontSize: '0.85rem',
-  marginBottom: '0.75rem',
+  marginBottom: tokens.spacing.sm,
 };
 
 export const emptyStateStyle: React.CSSProperties = {
   textAlign: 'center',
   padding: '1rem 0.5rem',
   fontSize: '0.9rem',
-  color: '#6b7280',
+  color: modalTokens.colors.textTabInactive,
 };
 
 export const unsavedChangesBadgeStyle: React.CSSProperties = {
-  color: '#f39c12',
-  marginLeft: '0.5rem',
+  color: modalTokens.colors.textWarning,
+  marginLeft: tokens.spacing.xs,
 };
 
 export const adminInnerStyle: React.CSSProperties = {
@@ -209,8 +256,8 @@ export const adminInnerStyle: React.CSSProperties = {
 export const adminFooterStyle: React.CSSProperties = {
   display: 'flex',
   justifyContent: 'flex-end',
-  marginTop: '0.75rem',
-  gap: '0.5rem',
+  marginTop: tokens.spacing.sm,
+  gap: tokens.spacing.xs,
 };
 
 // Admin settings tab styles
@@ -218,7 +265,7 @@ export const adminFooterStyle: React.CSSProperties = {
 export const adminListContainerStyle: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
-  gap: '0.5rem',
+  gap: tokens.spacing.xs,
   maxHeight: 320,
   overflowY: 'auto',
   paddingRight: 2,
@@ -228,10 +275,10 @@ export const adminListItemStyle: React.CSSProperties = {
   display: 'grid',
   gridTemplateColumns: '18px 1fr auto',
   alignItems: 'center',
-  gap: '0.75rem',
+  gap: tokens.spacing.sm,
   padding: '0.65rem 0.75rem',
-  border: '1px solid #eef0f3',
-  borderRadius: 10,
+  border: `1px solid ${modalTokens.colors.borderDivider}`,
+  borderRadius: tokens.borderRadius.md,
   cursor: 'pointer',
   userSelect: 'none',
 };
@@ -256,7 +303,7 @@ export const confirmModalContentStyle: React.CSSProperties = {
 
 export const confirmModalHeaderStyle: React.CSSProperties = {
   ...modalHeaderStyle,
-  marginBottom: '0.75rem',
+  marginBottom: tokens.spacing.sm,
 };
 
 export const confirmModalTextStyle: React.CSSProperties = {
@@ -267,7 +314,7 @@ export const confirmModalTextStyle: React.CSSProperties = {
 export const confirmModalFooterStyle: React.CSSProperties = {
   display: 'flex',
   justifyContent: 'flex-end',
-  gap: '0.5rem',
+  gap: tokens.spacing.xs,
 };
 
 export const confirmButtonStyle = (
@@ -282,8 +329,8 @@ export const confirmButtonStyle = (
   backgroundColor:
     variant === 'danger'
       ? disabled
-        ? '#f5b7b1'
-        : '#e74c3c'
-      : '#e0e0e0',
-  color: variant === 'danger' ? '#ffffff' : '#333333',
+        ? modalTokens.colors.bgDangerDisabled
+        : tokens.colors.error
+      : modalTokens.colors.bgSecondaryButton,
+  color: variant === 'danger' ? tokens.colors.white : tokens.colors.textPrimary,
 });

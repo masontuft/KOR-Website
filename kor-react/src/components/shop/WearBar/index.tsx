@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Typography, LinearProgress } from '@mui/material';
+import { Box, Typography, LinearProgress, Tooltip } from '@mui/material';
+import { buildTooltipText } from './wearUtils';
 
 interface WearBarProps {
   label: string;
@@ -7,6 +8,11 @@ interface WearBarProps {
   threshold?: number;
   imageSRC: string;
   showAdminIndicator?: boolean;
+  // Optional — tooltip is suppressed when omitted
+  usedAmount?: number;
+  periodAmount?: number;
+  lastReplacedDate?: string | null;
+  unit?: 'miles' | 'hours';
 }
 
 const WearBar: React.FC<WearBarProps> = ({
@@ -14,9 +20,12 @@ const WearBar: React.FC<WearBarProps> = ({
   value,
   threshold = 75,
   imageSRC,
-  showAdminIndicator = false
+  showAdminIndicator = false,
+  usedAmount,
+  periodAmount,
+  lastReplacedDate,
+  unit = 'miles',
 }) => {
-  // Determine bar color based on wear percentage
   let barColor = '#00FF75';
   if (value === 100) {
     barColor = '#FF1744';
@@ -24,7 +33,12 @@ const WearBar: React.FC<WearBarProps> = ({
     barColor = '#FFD700';
   }
 
-  return (
+  const tooltipText =
+    usedAmount !== undefined && periodAmount !== undefined
+      ? buildTooltipText(label, usedAmount, periodAmount, unit, lastReplacedDate)
+      : '';
+
+  const bar = (
     <Box
       sx={{
         display: 'flex',
@@ -54,14 +68,14 @@ const WearBar: React.FC<WearBarProps> = ({
           style={{ width: '100%', height: '100%', objectFit: 'contain' }}
         />
       </Box>
-      {/* Label on the left */}
+      {/* Label */}
       <Typography
         variant='body1'
         sx={{
-          width: 100, // fixed width ensures all labels take same space
+          width: 100,
           textAlign: 'left',
           fontWeight: 600,
-          flexShrink: 0 // prevents shrinking for long labels
+          flexShrink: 0
         }}
       >
         {label}
@@ -96,11 +110,11 @@ const WearBar: React.FC<WearBarProps> = ({
         />
       </Box>
 
-      {/* Percentage on the right */}
+      {/* Percentage */}
       <Typography
         variant='body1'
         sx={{
-          width: 40, // fixed width ensures alignment
+          width: 40,
           textAlign: 'right',
           fontWeight: 600,
           flexShrink: 0
@@ -109,6 +123,18 @@ const WearBar: React.FC<WearBarProps> = ({
         {value}%
       </Typography>
     </Box>
+  );
+
+  if (!tooltipText) return bar;
+
+  return (
+    <Tooltip
+      title={<span style={{ whiteSpace: 'pre-line' }}>{tooltipText}</span>}
+      placement='top'
+      arrow
+    >
+      {bar}
+    </Tooltip>
   );
 };
 

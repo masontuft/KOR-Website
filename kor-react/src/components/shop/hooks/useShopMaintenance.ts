@@ -36,7 +36,6 @@ export const useShopMaintenance = () => {
   // STATE: UI state
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [actionError, setActionError] = useState<string | null>(null);
   const [search, setSearch] = useState('');
   const [showAllParts, setShowAllParts] = useState(false);
   const [allBikesExpanded, setAllBikesExpanded] = useState(false);
@@ -45,18 +44,13 @@ export const useShopMaintenance = () => {
    * USECALLBACK: Memoizes function to prevent unnecessary re-renders
    * WHY: Function reference stays same unless dependencies change
    */
-  const fetchUsers = useCallback(async () => {
-    setLoading(true);
+  const loadUsers = useCallback(async (silent: boolean) => {
+    if (!silent) setLoading(true);
     setError(null);
-    setActionError(null);
-    
-    // Reset UI states when refreshing
-    setShowAllParts(false);
-    setAllBikesExpanded(false);
 
     try {
       const config = getApiConfig();
-      
+
       if (!config.shopToken) {
         throw new Error('Missing shop_token. Please log in again.');
       }
@@ -93,9 +87,12 @@ export const useShopMaintenance = () => {
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Failed to load users');
     } finally {
-      setLoading(false);
+      if (!silent) setLoading(false);
     }
-  }, []); // No dependencies = function created once
+  }, []);
+
+  const fetchUsers = useCallback(() => loadUsers(false), [loadUsers]);
+  const refreshUsers = useCallback(() => loadUsers(true), [loadUsers]);
 
   /**
    * USEEFFECT: Runs on component mount
@@ -259,14 +256,12 @@ export const useShopMaintenance = () => {
     showAllParts,
     allBikesExpanded,
 
-    // Action state
-    actionError,
-    
     // Actions (functions)
     setSearch,
     setShowAllParts,
     toggleShowAllParts,
     fetchUsers,
+    refreshUsers,
     toggleExpand,
     toggleAllBikes
   };

@@ -57,17 +57,6 @@ const ShopLogin: React.FC = () => {
       const result = await response.json();
 
       console.log('✅ [ShopLogin] API response received:', result);
-      console.log('🔍 [ShopLogin] strava_user_id check:', {
-        top_level: result.strava_user_id,
-        in_plan_type_0: result.plan_type?.[0]?.strava_user_id,
-        plan_type_0_keys: Object.keys(result.plan_type?.[0] || {})
-      });
-      console.log('📊 [ShopLogin] Shop data:', {
-        plan_type: result.plan_type[0].plan_type,
-        shop_name: result.plan_type[0].shop_name,
-        shop_code: result.plan_type[0].shop_code,
-        shop_token: result.plan_type[0].shop_token
-      });
 
       // Store data in sessionStorage exactly like legacy system
       sessionStorage.setItem('shop_name', result.plan_type[0].shop_name);
@@ -81,7 +70,6 @@ const ShopLogin: React.FC = () => {
       if (user.email) {
         sessionStorage.setItem('user_email', user.email);
       }
-
 
       console.log('💾 [ShopLogin] Data stored in sessionStorage:', {
         shop_name: sessionStorage.getItem('shop_name'),
