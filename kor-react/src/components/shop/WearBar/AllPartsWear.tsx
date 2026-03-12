@@ -1,6 +1,8 @@
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
+import { Wrench } from 'lucide-react';
 import WearBar from './index';
 import { getWearPartsForBike } from './partWear';
+import PartReplaceModal, { PartEntry } from './PartReplaceModal';
 
 interface User {
   strava_user_id: number;
@@ -16,19 +18,10 @@ interface AllPartsWearProps {
   filteredUsers: User[];
   bikesByUser: Record<string, BikeCollection>;
   showAllParts: boolean;
-  // Controls how parts are sorted; currently we only use wear_desc (most worn -> least worn)
   sortMode?: 'wear_desc' | 'wear_asc';
   adminUserId?: number | null;
-  viewerIsAdmin?: boolean;
-}
-
-interface PartEntry {
-  label: string;
-  wearPercent: number;
-  bikeName: string;
-  ownerName: string;
-  ownerId: number;
-  icon: string;
+  hasAdmin?: boolean;
+  onRefresh?: () => void;
 }
 
 const AllPartsWear: React.FC<AllPartsWearProps> = ({
@@ -37,9 +30,11 @@ const AllPartsWear: React.FC<AllPartsWearProps> = ({
   showAllParts,
   sortMode = 'wear_desc',
   adminUserId = null,
-  viewerIsAdmin = false,
+  hasAdmin = false,
+  onRefresh,
 }) => {
   const [showAll, setShowAll] = React.useState(false);
+  const [selectedPart, setSelectedPart] = useState<PartEntry | null>(null);
 
   useEffect(() => {
     if (!showAllParts) setShowAll(false);
@@ -65,13 +60,20 @@ const AllPartsWear: React.FC<AllPartsWearProps> = ({
             bikeName,
             ownerName,
             ownerId: user.strava_user_id,
-            icon: part.icon
+            icon: part.icon,
+            usedAmount: part.used,
+            periodAmount: part.period,
+            lastReplacedDate: part.lastReplacedDate,
+            bikeId: part.bikeId,
+            unit: part.unit,
+            partType: part.partType,
+            replaceEndpoint: part.replaceEndpoint,
+            usedBodyKey: part.usedBodyKey,
           });
         });
       });
     });
 
-    // Sort all parts by wear percentage based on sortMode
     return partsList.sort((a, b) =>
       sortMode === 'wear_asc'
         ? a.wearPercent - b.wearPercent
@@ -81,12 +83,9 @@ const AllPartsWear: React.FC<AllPartsWearProps> = ({
 
   if (!showAllParts || allParts.length === 0) return null;
   const visibleParts = showAll ? allParts : allParts.slice(0, 5);
+
   return (
-    <div
-      style={{
-        marginTop: '1rem'
-      }}
-    >
+    <div style={{ marginTop: '1rem' }}>
       <h3 style={{ color: '#333', marginBottom: '1rem' }}>All Part Wear</h3>
       <div
         style={{
@@ -97,7 +96,7 @@ const AllPartsWear: React.FC<AllPartsWearProps> = ({
         }}
       >
         {/* Legend */}
-        {viewerIsAdmin && adminUserId != null && (
+        {hasAdmin && (
           <div
             style={{
               display: 'flex',
@@ -123,25 +122,47 @@ const AllPartsWear: React.FC<AllPartsWearProps> = ({
             <span>Your parts</span>
           </div>
         )}
-        <div
-          style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}
-        >
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           {visibleParts.map((part, index) => {
-            const isAdminOwner =
-              viewerIsAdmin &&
-              adminUserId != null &&
-              part.ownerId === adminUserId;
+            const isAdminOwner = hasAdmin && part.ownerId === adminUserId;
 
             const ownerLabel = isAdminOwner ? 'You' : part.ownerName;
 
             return (
               <div key={`${part.ownerId}-${part.bikeName}-${part.label}-${index}`}>
-                <WearBar
-                  label={part.label}
-                  value={part.wearPercent}
-                  imageSRC={part.icon}
-                  showAdminIndicator={isAdminOwner}
-                />
+                {/* WearBar row + wrench */}
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <div style={{ flex: 1 }}>
+                    <WearBar
+                      label={part.label}
+                      value={part.wearPercent}
+                      imageSRC={part.icon}
+                      showAdminIndicator={isAdminOwner}
+                      usedAmount={part.usedAmount}
+                      periodAmount={part.periodAmount}
+                      lastReplacedDate={part.lastReplacedDate}
+                      unit={part.unit}
+                    />
+                  </div>
+                  <button
+                    onClick={() => setSelectedPart(part)}
+                    title={`Replace ${part.label}`}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      padding: '0 0.25rem 0 0.5rem',
+                      color: '#9ca3af',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      flexShrink: 0,
+                    }}
+                    onMouseEnter={e => (e.currentTarget.style.color = '#3B82F6')}
+                    onMouseLeave={e => (e.currentTarget.style.color = '#9ca3af')}
+                  >
+                    <Wrench size={16} />
+                  </button>
+                </div>
                 <div
                   style={{
                     fontSize: '.9rem',
@@ -183,8 +204,6 @@ const AllPartsWear: React.FC<AllPartsWearProps> = ({
               }}
             >
               {showAll ? 'Show Less' : 'Show All'}
-
-              {/*Arrow*/}
               <span
                 style={{
                   display: 'flex',
@@ -199,6 +218,17 @@ const AllPartsWear: React.FC<AllPartsWearProps> = ({
           </div>
         )}
       </div>
+
+      {/* Replace modal — rendered once, driven by selectedPart */}
+      <PartReplaceModal
+        isOpen={selectedPart !== null}
+        onClose={() => setSelectedPart(null)}
+        part={selectedPart}
+        onSuccess={() => {
+          setSelectedPart(null);
+          onRefresh?.();
+        }}
+      />
     </div>
   );
 };

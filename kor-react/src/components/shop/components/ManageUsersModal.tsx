@@ -184,7 +184,6 @@ const ManageUsersModal: React.FC<ManageUsersModalProps> = ({
     }
   };
 
-
   if (!isOpen) return null;
 
   const getUserDisplayName = (user: ShopUser): string => {
@@ -192,11 +191,15 @@ const ManageUsersModal: React.FC<ManageUsersModalProps> = ({
     return fullName || user.email;
   };
 
-  const auth0Email = typeof auth0User?.email === 'string' ? auth0User.email : null;
+  // Auth0 silent auth often fails on subsequent page loads (3rd-party cookie restrictions),
+  // so fall back to the email stored in sessionStorage at login time.
+  const currentEmail =
+    (typeof auth0User?.email === 'string' ? auth0User.email : null) ??
+    sessionStorage.getItem('user_email');
 
   const isCurrentUser = (member: ShopUser): boolean => {
-    if (!auth0Email) return false;
-    return member.email?.toLowerCase() === auth0Email.toLowerCase();
+    if (!currentEmail) return false;
+    return member.email?.toLowerCase() === currentEmail.toLowerCase();
   };
 
   const getUserDisplayNameWithYou = (member: ShopUser): string => {

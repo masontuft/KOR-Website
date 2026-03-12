@@ -46,10 +46,10 @@ const ShopMaintenanceView: React.FC<ShopUsersAndBikesProps> = ({
     search,
     showAllParts,
     allBikesExpanded,
-    actionError,
     setSearch,
     toggleShowAllParts,
     fetchUsers,
+    refreshUsers,
     toggleExpand,
     toggleAllBikes,
   } = useShopMaintenance();
@@ -90,8 +90,9 @@ const ShopMaintenanceView: React.FC<ShopUsersAndBikesProps> = ({
     return () => window.removeEventListener(FAMILY_PLAN_EVENTS.ADMIN_UPDATED, handleAdminUpdated);
   }, []);
 
-  // Admin indicators show for whoever has head=1 in the DB — no email matching needed.
-  const viewerIsAdmin = adminUserId != null;
+  // True when a family plan admin has been assigned in the DB.
+  // Used to show admin-highlight indicators (blue dot, "(You)" label) on the admin's entries.
+  const hasAdmin = adminUserId != null;
 
   /**
    * RENDERING: Clean and focused
@@ -127,13 +128,6 @@ const ShopMaintenanceView: React.FC<ShopUsersAndBikesProps> = ({
         {/* Error State */}
         {error && <div style={errorStyle}>Error loading users: {error}</div>}
 
-        {/* Action Error State (e.g., failed remove) */}
-        {actionError && (
-          <div style={{ ...errorStyle, marginTop: error ? '0.5rem' : 0 }}>
-            {actionError}
-          </div>
-        )}
-
         {/* Empty State */}
         {!loading && !error && users.length === 0 && (
           <div style={emptyStateStyle}>No users found.</div>
@@ -150,7 +144,8 @@ const ShopMaintenanceView: React.FC<ShopUsersAndBikesProps> = ({
                 showAllParts={showAllParts}
                 sortMode={sortMode}
                 adminUserId={adminUserId}
-                viewerIsAdmin={viewerIsAdmin}
+                hasAdmin={hasAdmin}
+                onRefresh={refreshUsers}
               />
             </div>
 
@@ -165,8 +160,8 @@ const ShopMaintenanceView: React.FC<ShopUsersAndBikesProps> = ({
                   expanded: false
                 };
 
-                const isAdminUser = adminUserId != null && user.strava_user_id === adminUserId;
-                const showYou = viewerIsAdmin && isAdminUser;
+                const isAdminUser = hasAdmin && user.strava_user_id === adminUserId;
+                const showYou = isAdminUser;
 
                 return (
                   <UserCard
