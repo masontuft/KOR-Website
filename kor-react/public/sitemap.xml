@@ -40,5 +40,10 @@
     <loc>https://jmrcycling.com/shop/dashboard</loc>
     <priority>0.4</priority>
   </url>
+  <url>
+    <loc>https://jmrcycling.com/articles</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.7</priority>
+  </url>
 </urlset>
 

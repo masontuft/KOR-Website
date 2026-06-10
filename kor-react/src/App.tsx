@@ -19,6 +19,8 @@ import ShopLogin from './components/shop/ShopLogin';
 import ShopDashboard from './components/shop/ShopDashboard';
 import ShopSettings from './components/shop/ShopSettings';
 import ShopSignIn from './components/shop/ShopSignIn';
+import ArticlesIndex from './components/articles/ArticlesIndex';
+import Article from './components/articles/Article';
 import LegacyParamsDemo from './components/demo/LegacyParamsDemo';
 import ParameterTestPage from './components/demo/ParameterTestPage';
 import PersonalSignIn from './components/personal/PersonalSignIn';
@@ -82,6 +84,8 @@ function App() {
               <Route path='/contact' element={<Contact />} />
               <Route path='/faq' element={<FAQ />} />
               <Route path='/qr-guide' element={<QrGuide />} />
+              <Route path='/articles' element={<ArticlesIndex />} />
+              <Route path='/articles/:slug' element={<Article />} />
               <Route path='/oauth/authorize/*' element={<OAuthAuthorize />} />
               <Route path='/shop/login' element={<ShopLogin />} />
               <Route path='/shop/dashboard' element={<ShopDashboard />} />

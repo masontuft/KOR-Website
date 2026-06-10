@@ -7,6 +7,11 @@ const Footer: React.FC = () => {
       <div className="footer">
         <h3>KOR &copy; 2022 - Mason Tuft</h3>
         <h3>
+          <Link className="link" to="/articles">
+            Articles
+          </Link>
+        </h3>
+        <h3>
           <Link className="link" to="/contact">
             Contact Us
           </Link>
