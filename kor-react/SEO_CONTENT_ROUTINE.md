@@ -40,10 +40,12 @@ NEXT_ACTION: build-article
 
 **Phase 1 Complete → Create PR:**
 - [ ] `git checkout -b feature/seo-phase-1-infrastructure`
+- [ ] Stage specific files (never `git add .`) and `git commit -m "feat: Phase 1 — Article Infrastructure"`
 - [ ] `npm run build` passes
 - [ ] Create PR: `feature/seo-phase-1-infrastructure` → `main` with title `feat: SEO Phase 1 — Article Infrastructure`
-- [ ] Merge to main
+- [ ] **STOP — do NOT merge. User reviews and merges per Checkpoints section.**
 - [ ] Update CURRENT STATUS block above: change `CURRENT_PHASE: 2`, `CURRENT_ARTICLE: A0`, `ARTICLES_COMPLETED_THIS_PHASE: 0`, `PHASE_STATUS: in_progress`, `NEXT_ACTION: build-article`
+- [ ] Commit and push the CURRENT STATUS update to the feature branch
 
 ---
 
