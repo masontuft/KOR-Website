@@ -1,0 +1,121 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Build & Deploy React App
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: kor-react/package-lock.json
+
+      - name: Install dependencies
+        working-directory: kor-react
+        run: npm ci
+
+      - name: Build React app
+        working-directory: kor-react
+        env:
+          NODE_ENV: production
+        run: npm run build
+
+      - name: Verify build output
+        run: |
+          if [ ! -d "kor-react/build" ]; then
+            echo "ERROR: Build directory not found" >&2
+            exit 1
+          fi
+          if [ ! -f "oauth/authorize/index.html" ]; then
+            echo "ERROR: Missing legacy oauth/authorize/index.html" >&2
+            exit 1
+          fi
+
+      - name: Set up SSH
+        env:
+          DEPLOY_SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+        run: |
+          install -m 700 -d ~/.ssh
+          echo "$DEPLOY_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H jmrcycling.com >> ~/.ssh/known_hosts
+
+      - name: Prepare remote directories
+        run: |
+          ssh root@jmrcycling.com \
+            "mkdir -p /var/www/jmrcycling.com /var/www/jmrcycling.com/oauth/authorize"
+
+      - name: Create remote backup
+        run: |
+          TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+          ssh root@jmrcycling.com \
+            "tar -C /var/www/jmrcycling.com -czf /var/www/jmrcycling.com/backup-${TIMESTAMP}.tgz . || true"
+
+      - name: Deploy build (rsync, preserve oauth/)
+        run: |
+          rsync -az --delete --exclude 'oauth/' \
+            -e "ssh -o StrictHostKeyChecking=no" \
+            kor-react/build/ root@jmrcycling.com:/var/www/jmrcycling.com/
+
+      - name: Deploy legacy oauth/authorize
+        run: |
+          rsync -az \
+            -e "ssh -o StrictHostKeyChecking=no" \
+            oauth/authorize/ root@jmrcycling.com:/var/www/jmrcycling.com/oauth/authorize/
+
+      - name: Health checks
+        run: |
+          ROUTES=(
+            "https://jmrcycling.com/"
+            "https://jmrcycling.com/shop/login"
+            "https://jmrcycling.com/shop/dashboard"
+            "https://jmrcycling.com/our-app"
+            "https://jmrcycling.com/contact"
+            "https://jmrcycling.com/oauth/authorize/"
+          )
+
+          FAILED=false
+
+          for route in "${ROUTES[@]}"; do
+            if curl -sf --max-time 10 "$route" > /dev/null; then
+              echo "OK  $route"
+            else
+              echo "FAIL $route" >&2
+              FAILED=true
+            fi
+          done
+
+          # Content check: React root in SPA route
+          if curl -s --max-time 10 "https://jmrcycling.com/oauth/authorize/" | grep -q '<div id="root">'; then
+            echo "OK  /oauth/authorize/ serves React SPA shell"
+          else
+            echo "WARN /oauth/authorize/ — React root not found" >&2
+            FAILED=true
+          fi
+
+          # Content check: legacy static page marker
+          if curl -s --max-time 10 "https://jmrcycling.com/oauth/authorize/index.html" | grep -qi "Connecting to KOR"; then
+            echo "OK  /oauth/authorize/index.html legacy page present"
+          else
+            echo "WARN /oauth/authorize/index.html — marker text not found" >&2
+          fi
+
+          if [ "$FAILED" = "true" ]; then
+            echo ""
+            echo "One or more health checks failed. Check nginx SPA fallback config." >&2
+            exit 1
+          fi
+
+          echo ""
+          echo "All health checks passed. Live at https://jmrcycling.com/"
