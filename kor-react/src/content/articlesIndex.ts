@@ -16,6 +16,22 @@ export interface ArticleMeta {
 
 export const articles: ArticleMeta[] = [
   {
+    slug: 'when-to-replace-bike-chain',
+    title: 'When to Replace Your Bike Chain (Mileage + Wear Signs)',
+    description:
+      'Know exactly when to replace your bike chain: the 0.5% wear rule, mileage ranges by speed, and the cost of waiting too long. Drivetrain lifespan explained.',
+    category: 'maintenance',
+    tags: ['chain', 'drivetrain', 'maintenance', 'chain wear', 'chain replacement'],
+    datePublished: '2026-06-11',
+    dateModified: '2026-06-11',
+    heroImage: '/images/articles/when-to-replace-bike-chain.webp',
+    heroImageAlt: 'Close-up of a bicycle chain and cassette showing drivetrain wear on a mountain bike',
+    author: 'KOR Cycling Team',
+    schemaType: 'Article',
+    readingTime: 7,
+    related: ['bike-maintenance-schedule', 'how-to-measure-chain-wear', 'when-to-replace-cassette'],
+  },
+  {
     slug: 'bike-maintenance-schedule',
     title: 'Bike Maintenance Schedule: What to Service and When',
     description:
