@@ -53,7 +53,6 @@ export const replacePart = async (params: ReplacePartParams): Promise<void> => {
     baseUrl,
     stravaUserId,
     stravaWearBikeId,
-    bikeName: _bikeName,
     replaceEndpoint,
     usedBodyKey,
     partType,
