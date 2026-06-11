@@ -65,7 +65,7 @@ const Home: React.FC = () => {
                   </Link>
                 </div>
                 <p className="cta-trust-signal">
-                  ✅ Free to download • 🔒 Secure Strava integration
+                  Free to download · Secure Strava integration
                 </p>
               </div>
 
@@ -80,18 +80,15 @@ const Home: React.FC = () => {
                   never miss a ride to a broken bike again.
                 </p>
                 <div className="key-benefits">
-                  
                   <div className="benefit-point">
-                    🔧 <strong>Smart Tracking:</strong> Automatically monitors
-                    component wear
+                    <strong>Smart Tracking:</strong> Automatically monitors component wear
                   </div>
                   <div className="benefit-point">
-                    📱 <strong>Strava Integration:</strong> Uses your ride data
+                    <strong>Strava Integration:</strong> Uses your ride data
                   </div>
                   <div className="benefit-point">
-                    ⚡ <strong>Proactive Alerts:</strong> Know before parts fail
+                    <strong>Proactive Alerts:</strong> Know before parts fail
                   </div>
-                  
                 </div>
               </div>
             </div>
