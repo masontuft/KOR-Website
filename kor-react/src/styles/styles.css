@@ -1044,7 +1044,7 @@ button.mobile-link:hover {
 }
 .parallax_home {
   /* The image used */
-  background-image: url("/images/home_hero_bg.webp");
+  background-image: url("../images/home_hero_bg.webp");
 
   /* Set a specific height */
   /* min-height: 650px; */
