@@ -26,8 +26,8 @@ const Home: React.FC = () => {
               </div>
               <h1 id="hero-title" className="title_box">KOR (Keep On Rolling)</h1>
               <div className="cta-section">
-                <h3 className="cta-heading">Get Started Today - Free Download!</h3>
-                <h4  className="paragraph">Show up for every ride with a bike that’s ready to roll.</h4>
+                <p className="cta-heading">Get Started Today - Free Download!</p>
+                <p className="paragraph">Show up for every ride with a bike that’s ready to roll.</p>
                 <div className="app-store-buttons">
                   <a
                     href="https://play.google.com/store/apps/details?id=com.robtuft.newKOR"
@@ -74,11 +74,11 @@ const Home: React.FC = () => {
                     Spend less time worrying about maintenance and more time enjoying the 
                     ride.
                 </h2>
-                <h4 className="paragraph">
-                  Keep On Rolling is a bike maintenance app that tracks your component 
-                  wear from your Strava rides and alerts you before parts fail, so you 
+                <p className="paragraph">
+                  Keep On Rolling is a bike maintenance app that tracks your component
+                  wear from your Strava rides and alerts you before parts fail, so you
                   never miss a ride to a broken bike again.
-                </h4>
+                </p>
                 <div className="key-benefits">
                   
                   <div className="benefit-point">
@@ -103,7 +103,7 @@ const Home: React.FC = () => {
         <div className="parallax_parent">
           <div className="parallax2_home">
             <div style={{ padding: '5%' }}>
-              <h1 id="features-title">Why Choose KOR?</h1>
+              <h2 id="features-title">Why Choose KOR?</h2>
               <div className="point-content" role="list">
                 <article className="point-card" role="listitem">
                   <h3 className="title">Dedicated Support</h3>
