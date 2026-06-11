@@ -125,7 +125,7 @@ const SignUp: React.FC = () => {
               style={{
                 marginTop: '3em',
                 marginBottom: '2em',
-                backgroundColor: 'rgba(255,255,255,0.1)',
+                backgroundColor: 'rgba(0,0,0,0.72)',
                 padding: '2em',
                 borderRadius: '10px'
               }}
