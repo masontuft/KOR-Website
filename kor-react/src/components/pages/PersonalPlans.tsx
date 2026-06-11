@@ -199,26 +199,22 @@ const PersonalPlans: React.FC = () => {
                     flexWrap: 'wrap'
                   }}
                 >
-                  <a
-                    href='#'
+                  <button
                     data-cb-type='checkout'
                     data-cb-item-0='Family-USD-Monthly'
                     data-cb-item-0-quantity='1'
                     className='subscribe'
-                    onClick={e => e.preventDefault()}
                   >
                     Subscribe Monthly - $19.99/mo
-                  </a>
-                  <a
-                    href='#'
+                  </button>
+                  <button
                     data-cb-type='checkout'
                     data-cb-item-0='Family-USD-Yearly'
                     data-cb-item-0-quantity='1'
                     className='subscribe'
-                    onClick={e => e.preventDefault()}
                   >
                     Subscribe Yearly - $X/yr
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
