@@ -16,6 +16,23 @@ export interface ArticleMeta {
 
 export const articles: ArticleMeta[] = [
   {
+    slug: 'how-to-measure-chain-wear',
+    title: 'How to Measure Chain Wear: Checker Tool & Ruler Methods',
+    description:
+      'Step-by-step guide to measuring bike chain wear with a chain checker or 12-inch ruler. Know the 0.5% threshold and when to replace before cassette damage occurs.',
+    category: 'maintenance',
+    tags: ['chain wear', 'chain checker', 'drivetrain', 'maintenance', 'chain measurement'],
+    datePublished: '2026-06-11',
+    dateModified: '2026-06-11',
+    heroImage: '/images/articles/how-to-measure-chain-wear.webp',
+    heroImageAlt:
+      'Close-up of a bicycle chain and cassette drivetrain with measuring tool on trail background',
+    author: 'KOR Cycling Team',
+    schemaType: 'HowTo',
+    readingTime: 6,
+    related: ['bike-maintenance-schedule', 'when-to-replace-bike-chain', 'when-to-replace-cassette'],
+  },
+  {
     slug: 'when-to-replace-bike-chain',
     title: 'When to Replace Your Bike Chain (Mileage + Wear Signs)',
     description:
