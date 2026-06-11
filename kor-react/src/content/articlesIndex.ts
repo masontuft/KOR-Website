@@ -16,6 +16,22 @@ export interface ArticleMeta {
 
 export const articles: ArticleMeta[] = [
   {
+    slug: 'when-to-replace-cassette',
+    title: 'When to Replace Your Cassette (and Chainrings)',
+    description:
+      'Replace your cassette every 2–3 chains to avoid skipping and expensive repairs. Learn the wear signs, shark-tooth test, and chainring replacement timing.',
+    category: 'maintenance',
+    tags: ['cassette', 'chainring', 'drivetrain', 'maintenance', 'cassette wear'],
+    datePublished: '2026-06-11',
+    dateModified: '2026-06-11',
+    heroImage: '/images/articles/when-to-replace-cassette.webp',
+    heroImageAlt: 'Bicycle cassette showing worn teeth and drivetrain close-up on a mountain bike',
+    author: 'KOR Cycling Team',
+    schemaType: 'Article',
+    readingTime: 7,
+    related: ['bike-maintenance-schedule', 'when-to-replace-bike-chain', 'how-to-measure-chain-wear'],
+  },
+  {
     slug: 'how-to-measure-chain-wear',
     title: 'How to Measure Chain Wear: Checker Tool & Ruler Methods',
     description:
