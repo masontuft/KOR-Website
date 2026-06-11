@@ -14,13 +14,13 @@ ROUTINE_VERSION: 2026-06-10
 AUTOMATION_MODE: true
 WORKING_DIRECTORY: kor-react
 CURRENT_PHASE: 2
-CURRENT_ARTICLE: A0
+CURRENT_ARTICLE: A4
 ARTICLES_COMPLETED_THIS_PHASE: 0
 PHASE_STATUS: in_progress
 NEXT_ACTION: build-article
 ```
 
-**What the agent does next:** Build article A0 (bike-maintenance-schedule, Phase 2 pillar). PR #7 (feat: SEO Phase 1 — Article Infrastructure) must be merged to main before or alongside this work.
+**What the agent does next:** Build article A4 (when-to-replace-brake-pads). Phase 2a batch (A0–A3) complete and PR created. Phase 2b starts: A4–A8 (5 articles). After A8, create PR feature/seo-phase-2b-brakes-tires.
 
 ---
 
@@ -68,10 +68,10 @@ Agent uses this to determine which article to build next. Briefs are in `seo-con
 
 #### Phase 2a: A0, A1, A2, A3 (Drivetrain Core)
 
-- [ ] A0 (pillar)
-- [ ] A1
-- [ ] A2
-- [ ] A3
+- [x] A0 (pillar)
+- [x] A1
+- [x] A2
+- [x] A3
 
 **Batch Complete → PR:** `feature/seo-phase-2a-drivetrain`
 
