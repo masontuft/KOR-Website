@@ -10,8 +10,6 @@ import OurStory from './components/pages/OurStory';
 import OurApp from './components/pages/OurApp';
 import SignUp from './components/pages/SignUp';
 import PersonalPlans from './components/pages/PersonalPlans';
-import FamilyPlanPricing from './components/pages/FamilyPlanPricing';
-import FamilyPlanSignUp from './components/pages/FamilyPlanSignUp';
 import Contact from './components/pages/Contact';
 import FAQ from './components/pages/FAQ';
 import QrGuide from './components/pages/QrGuide';

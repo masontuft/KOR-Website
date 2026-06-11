@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build React App
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: kor-react/package-lock.json
+
+      - name: Install dependencies
+        working-directory: kor-react
+        run: npm ci
+
+      - name: Build
+        working-directory: kor-react
+        env:
+          NODE_ENV: production
+        run: npm run build
