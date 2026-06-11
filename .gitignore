@@ -36,3 +36,4 @@ Thumbs.db
 deploy-*.log
 nginx.conf.sample
 login.txt
+.gstack/
