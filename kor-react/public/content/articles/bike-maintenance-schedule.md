@@ -20,6 +20,8 @@ Your bike will tell you when something is wrong — but by then, the damage is a
 
 Here's the complete guide to what to service, when to service it, and how to stop guessing.
 
+![Cyclist performing maintenance on a clean mountain bike outdoors in natural light](/images/articles/bike-maintenance-schedule.webp)
+
 ## Time vs. Mileage vs. Hours: Which Interval System Works?
 
 Most maintenance advice falls into one of three buckets: calendar-based ("every six months"), mileage-based ("every 1,500 miles"), or hour-based ("every 50 hours"). Knowing which system fits which part is the first step to a schedule that actually works.

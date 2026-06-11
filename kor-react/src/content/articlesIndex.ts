@@ -42,7 +42,7 @@ export const articles: ArticleMeta[] = [
     dateModified: '2026-06-11',
     heroImage: '/images/articles/how-to-measure-chain-wear.webp',
     heroImageAlt:
-      'Close-up of a bicycle chain and cassette drivetrain with measuring tool on trail background',
+      'Red Park Tool chain wear indicator gauge inserted into bicycle chain links, macro close-up',
     author: 'KOR Cycling Team',
     schemaType: 'HowTo',
     readingTime: 6,

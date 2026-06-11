@@ -20,6 +20,8 @@ Replace your chain before it hits 0.5% wear on an 11- or 12-speed drivetrain, or
 
 Here's exactly how to know when it's time.
 
+![Close-up of a bicycle chain and cassette showing drivetrain wear on a mountain bike](/images/articles/when-to-replace-bike-chain.webp)
+
 ## Typical Bike Chain Lifespan
 
 Most chains last between **1,500 and 3,000 miles**. That range isn't vague — it reflects the real variables that determine how fast a chain wears:

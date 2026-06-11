@@ -8,7 +8,7 @@ datePublished: "2026-06-11"
 dateModified: "2026-06-11"
 author: "KOR Cycling Team"
 heroImage: "/images/articles/how-to-measure-chain-wear.webp"
-heroImageAlt: "Close-up of a bicycle chain and cassette drivetrain with measuring tool on trail background"
+heroImageAlt: "Red Park Tool chain wear indicator gauge inserted into bicycle chain links, macro close-up"
 schemaType: "HowTo"
 readingTime: 6
 related: ["bike-maintenance-schedule", "when-to-replace-bike-chain", "when-to-replace-cassette"]
@@ -17,6 +17,8 @@ related: ["bike-maintenance-schedule", "when-to-replace-bike-chain", "when-to-re
 # How to Measure Chain Wear: Checker Tool & Ruler Methods
 
 Measuring chain wear takes about five seconds with the right tool. At 0.5% wear on an 11- or 12-speed chain (0.75% on 10-speed and below), it's time to replace. Here's how to get that reading accurately — and what to do with it.
+
+![Red Park Tool chain wear indicator gauge inserted into bicycle chain links, macro close-up](/images/articles/how-to-measure-chain-wear.webp)
 
 ## What You're Actually Measuring
 

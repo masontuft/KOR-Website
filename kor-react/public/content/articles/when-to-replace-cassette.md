@@ -20,6 +20,8 @@ Replace your cassette every two to three chains. That's the rule that saves you 
 
 Here's how cassette wear works, how to spot it, and how to time your replacements so you're not paying for more than you need to.
 
+![Bicycle cassette showing worn shark-tooth cog teeth and drivetrain close-up on a mountain bike](/images/articles/when-to-replace-cassette.webp)
+
 ## The Every-2-to-3-Chains Rule
 
 Your chain wears faster than your cassette. Under normal conditions, one cassette should outlast two to three chains. The logic: replace the chain on schedule (at 0.5% wear on 11/12-speed, 0.75% on ≤10-speed) and the cassette cogs wear gradually and evenly with each chain swap.
