@@ -5,7 +5,7 @@ const Footer: React.FC = () => {
   return (
     <footer>
       <div className="footer">
-        <h3>KOR &copy; 2022 - Mason Tuft</h3>
+        <p className="footer-copy">KOR &copy; {new Date().getFullYear()} - Mason Tuft</p>
         <h3>
           <Link className="link" to="/articles">
             Articles
