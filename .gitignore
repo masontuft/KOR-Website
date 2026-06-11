@@ -26,6 +26,9 @@ Thumbs.db
 *.swp
 *.swo
 
+# Claude Code session data
+.claude/
+
 # Package lock files - we commit package-lock.json for CI consistency
 # package-lock.json
 
