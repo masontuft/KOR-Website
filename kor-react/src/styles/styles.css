@@ -2055,10 +2055,10 @@ a.payment-card2, a.payment-card3 {
   gap: 1rem;
   align-items: center;
   font-size: 0.88rem;
-  color: var(--text-secondary, #aaa);
+  color: #666;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
 .article-meta-category {
@@ -2076,6 +2076,7 @@ a.payment-card2, a.payment-card3 {
   margin: 0 auto;
   line-height: 1.75;
   font-size: 1.05rem;
+  color: #333;
 }
 
 .article-body h1 {
@@ -2083,6 +2084,8 @@ a.payment-card2, a.payment-card3 {
   line-height: 1.2;
   margin-top: 0;
   margin-bottom: 1rem;
+  color: var(--headline-color-on-white);
+  text-align: left;
 }
 
 .article-body h2 {
@@ -2090,13 +2093,17 @@ a.payment-card2, a.payment-card3 {
   margin-top: 2.5rem;
   margin-bottom: 0.75rem;
   padding-bottom: 0.3rem;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  color: var(--headline-color-on-white);
+  text-align: left;
 }
 
 .article-body h3 {
   font-size: 1.3rem;
   margin-top: 2rem;
   margin-bottom: 0.5rem;
+  color: var(--headline-color-on-white);
+  text-align: left;
 }
 
 .article-body p {
@@ -2118,7 +2125,7 @@ a.payment-card2, a.payment-card3 {
   border-left: 4px solid var(--accent-color, #e05c1a);
   margin: 1.5rem 0;
   padding: 0.75rem 1.25rem;
-  background: rgba(255,255,255,0.04);
+  background: rgba(0,0,0,0.04);
   border-radius: 0 6px 6px 0;
 }
 
@@ -2132,13 +2139,15 @@ a.payment-card2, a.payment-card3 {
 .article-body th,
 .article-body td {
   padding: 0.6rem 0.8rem;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(0,0,0,0.12);
   text-align: left;
+  color: #333;
 }
 
 .article-body th {
-  background: rgba(255,255,255,0.06);
+  background: rgba(0,0,0,0.05);
   font-weight: 600;
+  color: var(--headline-color-on-white);
 }
 
 .article-body img {
@@ -2155,14 +2164,15 @@ a.payment-card2, a.payment-card3 {
 }
 
 .article-body code {
-  background: rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.07);
   padding: 0.15em 0.4em;
   border-radius: 4px;
   font-size: 0.9em;
+  color: #333;
 }
 
 .article-body pre {
-  background: rgba(255,255,255,0.06);
+  background: #f4f5f9;
   padding: 1rem;
   border-radius: 8px;
   overflow-x: auto;
@@ -2191,6 +2201,8 @@ a.payment-card2, a.payment-card3 {
 .article-related h2 {
   font-size: 1.6rem;
   margin-bottom: 1.25rem;
+  color: var(--headline-color-on-white);
+  text-align: left;
 }
 
 /* Article page responsive */
