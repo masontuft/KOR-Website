@@ -888,7 +888,7 @@ nav {
   display: flex;
 }
 .link{
-    font-size: 2.2em;
+    font-size: 1.1em;
     padding: 8px 12px;
     background-color: var(--primary-color);
     border-radius: 8px;
@@ -896,7 +896,8 @@ nav {
     color: var(--headline-color-on-dark);
     font-family: var(--heading-font);
     margin: 0 0.5%;
-    transition: all 0.3s ease;
+    white-space: nowrap;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 .link:hover {
   background-color: var(--secondary-color);
@@ -908,7 +909,7 @@ nav {
 
 /* Ensure button elements with link classes inherit exact same styling */
 button.link {
-  font-size: 2.2em;
+  font-size: 1.1em;
   padding: 8px 12px;
   background-color: var(--primary-color);
   border-radius: 8px;
@@ -916,7 +917,8 @@ button.link {
   color: var(--headline-color-on-dark);
   font-family: var(--heading-font);
   margin: 0 0.5%;
-  transition: all 0.3s ease;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   border: none;
   cursor: pointer;
 }
