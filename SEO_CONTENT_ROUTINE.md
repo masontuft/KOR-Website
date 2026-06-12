@@ -14,13 +14,13 @@ ROUTINE_VERSION: 2026-06-10
 AUTOMATION_MODE: true
 WORKING_DIRECTORY: kor-react
 CURRENT_PHASE: 2
-CURRENT_ARTICLE: A4
-ARTICLES_COMPLETED_THIS_PHASE: 0
+CURRENT_ARTICLE: A5
+ARTICLES_COMPLETED_THIS_PHASE: 1
 PHASE_STATUS: in_progress
 NEXT_ACTION: build-article
 ```
 
-**What the agent does next:** Build article A4 (when-to-replace-brake-pads). Phase 2a batch (A0–A3) complete and PR created. Phase 2b starts: A4–A8 (5 articles). After A8, create PR feature/seo-phase-2b-brakes-tires.
+**What the agent does next:** Build article A5 (when-to-replace-brake-rotors). Phase 2b in progress: A4 done (1/5). Remaining: A5, A6, A7, A8. After A8, create PR feature/seo-phase-2b-brakes-tires.
 
 ---
 
@@ -79,7 +79,7 @@ Agent uses this to determine which article to build next. Briefs are in `seo-con
 
 #### Phase 2b: A4, A5, A6, A7, A8 (Brakes & Tires)
 
-- [ ] A4
+- [x] A4
 - [ ] A5
 - [ ] A6
 - [ ] A7

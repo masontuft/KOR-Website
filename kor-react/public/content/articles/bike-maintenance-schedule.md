@@ -81,6 +81,8 @@ Resin pads typically run 500–1,000 miles in normal conditions; metallic or sin
 
 Visual check: look through the caliper from behind the wheel. If the pad material is thin or you're hearing grinding (not just squeal — grinding), stop riding until you inspect.
 
+Read more: [When to Replace Bike Brake Pads](/articles/when-to-replace-brake-pads)
+
 ### Tires
 
 Road tires typically last 1,000–2,500 miles; more durable touring compounds can reach 3,000. MTB tires wear by knob erosion and casing damage rather than a simple mileage counter — a tire with flat-topped, squared-off center knobs has reached end of life for technical terrain, even if the sidewalls look fine.

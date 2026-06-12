@@ -16,6 +16,22 @@ export interface ArticleMeta {
 
 export const articles: ArticleMeta[] = [
   {
+    slug: 'when-to-replace-brake-pads',
+    title: 'When to Replace Bike Brake Pads: Wear Signs & Intervals',
+    description:
+      'Resin pads last 500–1,000 miles; metallic up to 1,500. Learn the 1.5 mm minimum, how to spot worn pads by sound and feel, and how to bed in replacements.',
+    category: 'maintenance',
+    tags: ['brake pads', 'disc brakes', 'brakes', 'maintenance', 'brake wear'],
+    datePublished: '2026-06-12',
+    dateModified: '2026-06-12',
+    heroImage: '/images/articles/when-to-replace-brake-pads.webp',
+    heroImageAlt: 'Mountain bike disc brake rotor and caliper close-up detail on a trail, shallow depth of field',
+    author: 'KOR Cycling Team',
+    schemaType: 'Article',
+    readingTime: 7,
+    related: ['bike-maintenance-schedule', 'when-to-replace-brake-rotors', 'how-often-bleed-disc-brakes'],
+  },
+  {
     slug: 'when-to-replace-cassette',
     title: 'When to Replace Your Cassette (and Chainrings)',
     description:
