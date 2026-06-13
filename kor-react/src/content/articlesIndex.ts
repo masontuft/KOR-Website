@@ -16,6 +16,22 @@ export interface ArticleMeta {
 
 export const articles: ArticleMeta[] = [
   {
+    slug: 'when-to-replace-brake-rotors',
+    title: 'When to Replace Bike Brake Rotors (Thickness Guide)',
+    description:
+      'Bike rotors need replacement at 1.5 mm thickness. Learn to measure with calipers, spot warping vs. contamination, and use the 2–4 pad-set lifespan rule.',
+    category: 'maintenance',
+    tags: ['brake rotors', 'disc brakes', 'brakes', 'maintenance', 'rotor wear'],
+    datePublished: '2026-06-13',
+    dateModified: '2026-06-13',
+    heroImage: '/images/articles/when-to-replace-brake-rotors.webp',
+    heroImageAlt: 'Mountain bike disc brake rotor and hydraulic caliper close-up with trail background, natural light',
+    author: 'KOR Cycling Team',
+    schemaType: 'Article',
+    readingTime: 7,
+    related: ['bike-maintenance-schedule', 'when-to-replace-brake-pads', 'how-often-bleed-disc-brakes'],
+  },
+  {
     slug: 'when-to-replace-brake-pads',
     title: 'When to Replace Bike Brake Pads: Wear Signs & Intervals',
     description:
