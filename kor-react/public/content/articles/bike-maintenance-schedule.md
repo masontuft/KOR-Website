@@ -161,7 +161,7 @@ Check periodically for play (grab the crankarm and push/pull it laterally) and r
 
 - Inspect cables and housing for fraying and sluggish movement
 - Check derailleur hanger — a bent hanger is the most common cause of poor shifting
-- Inspect brake rotors for contamination and measure thickness
+- Inspect brake rotors for contamination and [measure thickness](/articles/when-to-replace-brake-rotors)
 - Check cassette visually for shark-tooth cog profile
 - Inspect fork seals and add fresh suspension fluid if seeping
 
