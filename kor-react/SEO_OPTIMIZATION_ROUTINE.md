@@ -16,10 +16,10 @@ AUTOMATION_MODE: true
 WORKING_DIRECTORY: kor-react
 PR_CADENCE: per-task
 CURRENT_TRACK: performance
-CURRENT_TASK_ID: none
+CURRENT_TASK_ID: TASK-017
 TASK_STATUS: not_started
-NEXT_ACTION: audit-track
-LAST_CYCLE_DATE: 2026-09-04
+NEXT_ACTION: fix-item
+LAST_CYCLE_DATE: 2026-09-19
 CYCLES_SINCE_TRACK_AUDIT: 0
 ```
 
@@ -134,6 +134,7 @@ One row per discovered item. `status`: `open` → `in_progress` → `in_review` 
 | TASK-014 | internal-linking| Under-linked: `cycling-in-the-rain` had only 1 incoming `related[]` reference (from pillar `how-to-plan-a-bike-ride`). Fixed: added `cycling-in-the-rain` to the `related[]` array of `when-to-replace-bike-chain` (both `articlesIndex.ts` and markdown frontmatter) — `cycling-in-the-rain`'s own body already links out to `when-to-replace-bike-chain` for the wet-weather wear-rate discussion, making the reciprocal link a natural fit — plus a contextual inline link in `when-to-replace-bike-chain`'s wear-check-interval section pointing wet-weather riders to the post-rain care routine. `npm run build` passes. | in_review | 2026-07-24 |
 | TASK-015 | internal-linking| Under-linked: `group-ride-tips` had only 1 incoming `related[]` reference (from pillar `how-to-plan-a-bike-ride`). Fixed: added `group-ride-tips` to the `related[]` array of `strava-tips-for-cyclists` (both `articlesIndex.ts` and markdown frontmatter) — `strava-tips-for-cyclists`'s "Find Clubs That Match How You Actually Ride" section already discusses finding group rides via Strava Clubs, making the reciprocal link a natural fit — plus a contextual inline link in that section pointing new club-joiners to group ride etiquette before their first ride out. `npm run build` passes. | in_review | 2026-07-24 |
 | TASK-016 | internal-linking| Orphan: `bottom-bracket-creaking` had 0 incoming `related[]` references. Fixed: added `bottom-bracket-creaking` to the `related[]` arrays of `how-long-do-bike-parts-last` (both `articlesIndex.ts` and markdown frontmatter) — its own "Bottom Bracket: Longest-Lasting, Hardest to Diagnose" section already covers the same 3,000–10,000-mile lifespan range and creak-misdiagnosis point — and `when-to-replace-cassette` (same both-file update) — its "Noise under load" symptom section overlaps with BB-creak diagnosis — plus a contextual inline link in each article body at that point of overlap. `npm run build` passes. PR #85 open. | in_review | 2026-07-24 |
+| TASK-017 | performance     | Re-audited Track 4 against current `public/images/articles/*.webp` sizes. `bike-maintenance-schedule.webp` (272 KB, TASK-002) still open. Newly found: `when-to-replace-cassette.webp` is 200 KB, the second-largest hero image, exceeding the 150 KB threshold — recompress. Checked `Article.tsx` (hero image correctly *not* lazy-loaded, it's above the fold/LCP) and `ArticlesIndex.tsx` + related-articles thumbnails in `Article.tsx` (both already use `loading="lazy"`) — no issues there. | open   | 2026-09-19 |
 
 ---
 
