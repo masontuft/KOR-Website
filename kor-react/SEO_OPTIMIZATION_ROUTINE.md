@@ -15,11 +15,11 @@ ROUTINE_VERSION: 2026-07-24
 AUTOMATION_MODE: true
 WORKING_DIRECTORY: kor-react
 PR_CADENCE: per-task
-CURRENT_TRACK: performance
-CURRENT_TASK_ID: none
+CURRENT_TRACK: content-gap
+CURRENT_TASK_ID: TASK-005
 TASK_STATUS: not_started
-NEXT_ACTION: audit-track
-LAST_CYCLE_DATE: 2026-09-04
+NEXT_ACTION: propose-article
+LAST_CYCLE_DATE: 2026-09-23
 CYCLES_SINCE_TRACK_AUDIT: 0
 ```
 
@@ -119,7 +119,7 @@ One row per discovered item. `status`: `open` → `in_progress` → `in_review` 
 | task_id  | track           | summary                                                                                          | status | opened     |
 |----------|-----------------|---------------------------------------------------------------------------------------------------|--------|------------|
 | TASK-001 | technical-seo   | `ArticleSeo.tsx` emitted generic Article JSON-LD for all 3 `HowTo` articles (`winter-bike-storage`, `pre-ride-bike-check`, `how-to-measure-chain-wear`) — no `step` array, not eligible for HowTo rich results. Human sign-off received on the schema decision: added an optional `howToSteps: HowToStep[]` (+ optional `totalTime`) field to `ArticleMeta`, populated it for all 3 HowTo articles from their existing published prose (no new facts), and updated `ArticleSeo.tsx` to emit a real `step` array (and `totalTime` where explicitly stated) when `schemaType: 'HowTo'` and `howToSteps` is present. `npm run build` passes. | done | 2026-07-24 |
-| TASK-002 | performance     | `bike-maintenance-schedule.webp` is 272 KB, the largest hero image — recompress                   | open   | 2026-07-24 |
+| TASK-002 | performance     | `bike-maintenance-schedule.webp` is 272 KB, the largest hero image — recompress. Fixed: re-encoded with Pillow (WEBP, quality 33, method 6, same 1600x893 dimensions) — 272 KB → 144 KB, under the 150 KB threshold. No visible quality loss checked at display size. `loading="lazy"` already present on `ArticlesIndex.tsx` and `Article.tsx`'s related-article cards. `npm run build` passes. Note: this row was still `open` when `CURRENT STATUS` had already advanced to `NEXT_ACTION: audit-track` with `CURRENT_TASK_ID: none` — a stale-state mismatch. Per the Mission ("if the current track's backlog has an open item, fix it"), this cycle picked up the existing open item instead of running a redundant audit. `when-to-replace-cassette.webp` (199 KB) also exceeds the threshold but is out of scope for this task — left as a candidate for the next performance audit. | in_review | 2026-07-24 |
 | TASK-003 | internal-linking| Ran the orphan/under-linked audit across all 29 `related[]` arrays. Reverse map built; 0 broken slug references found. 11 slugs came back under the fewer-than-2-inbound-links threshold (pillars excluded) — logged individually as TASK-006 through TASK-016 rather than bundled into one fix, per the routine's split-large-fixes rule. | done   | 2026-07-24 |
 | TASK-004 | content-freshness| Any article with `dateModified` > 120 days before today needs a freshness pass. Rechecked 2026-07-24: oldest `dateModified` across all 29 articles is `2026-06-11` (43 days old) — none exceed the 120-day threshold. Nothing to fix; no code changed. | done | 2026-07-24 |
 | TASK-005 | content-gap     | Run a keyword-gap pass against Section 4 to propose 3–5 new candidate briefs                       | open   | 2026-07-24 |
