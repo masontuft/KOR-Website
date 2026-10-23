@@ -592,7 +592,7 @@
               "b": 1
             },
             {
-              "t": " You can pause your subscription from your subscription page. You can cancel at any time by emailing masontuft@jmrcycling.com from the account you used to subscribe; no phone call, reason, or notice period is required, and we will process the cancellation within two business days. If you cancel, you keep paid features until the end of the period you already paid for, and you will not be charged again."
+              "t": " You can pause, cancel, or manage your subscription at any time from the Manage Your Subscription page on our website, which opens our billing provider’s secure customer portal, or through the link in the mobile app. No phone call, reason, or notice period is required. If you cancel, you will not be charged again, and the cancellation screen shows the date your paid features end. If you have trouble, email masontuft@jmrcycling.com and we will cancel it for you within two business days."
             }
           ],
           [
@@ -1588,7 +1588,7 @@
         "type": "p",
         "inlines": [
           {
-            "t": "Deleting your account removes your profile, your bikes and components, and your connection to Strava and Garmin, and stops any sharing with bike shops. If you have a paid plan, email us to cancel it, or pause it from your subscription page, so that you are not billed again; we also cancel any active subscription when we process a deletion."
+            "t": "Deleting your account removes your profile, your bikes and components, and your connection to Strava and Garmin, and stops any sharing with bike shops. If you have a paid plan, cancel it first from the Manage Your Subscription page on our website or through the link in the app, so that you are not billed again. If you forget, email us and we will cancel any active subscription when we process the deletion."
           }
         ]
       },
