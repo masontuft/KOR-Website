@@ -1805,6 +1805,22 @@ a.payment-card2, a.payment-card3 {
     text-align: center;
     font-family: var(--heading-font);
 }
+.footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 24px;
+    padding: 8px 16px;
+    font-family: var(--paragraph-font);
+    font-size: 0.9em;
+}
+.footer-legal .link {
+    color: white;
+    opacity: 0.8;
+}
+.footer-legal .link:hover {
+    opacity: 1;
+}
 .footer-copy {
     color: white;
     font-family: var(--paragraph-font);

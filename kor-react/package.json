@@ -37,7 +37,9 @@
     "build:staging": "REACT_APP_ENV=staging react-scripts build",
     "build:production": "REACT_APP_ENV=production react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "sync:legal": "node scripts/sync-legal-docs.mjs",
+    "test:legal": "node --test scripts/legal-docs-parser.test.mjs"
   },
   "eslintConfig": {
     "extends": [
@@ -72,5 +74,8 @@
       "[/\\\\]node_modules[/\\\\](?!(react-markdown|remark-.*|rehype-.*|mdast-util-.*|hast-util-.*|micromark.*|unist-util-.*|vfile.*|unified|bail|ccount|character-entities.*|character-reference-invalid|comma-separated-tokens|decode-named-character-reference|devlop|escape-string-regexp|estree-util-.*|html-url-attributes|is-alphabetical|is-alphanumerical|is-decimal|is-hexadecimal|is-plain-obj|longest-streak|markdown-table|parse-entities|property-information|space-separated-tokens|stringify-entities|trim-lines|trough|zwitch|@ungap/structured-clone)[/\\\\]).+\\.(js|jsx|mjs|cjs|ts|tsx)$",
       "^.+\\.module\\.(css|sass|scss)$"
     ]
+  },
+  "devDependencies": {
+    "cheerio": "^1.0.0"
   }
 }

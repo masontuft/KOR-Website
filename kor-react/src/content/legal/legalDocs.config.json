@@ -1,0 +1,55 @@
+{
+  "_comment": "Source of truth for the legal pages. Each entry maps a route to a Google Doc. The doc must be shared as 'Anyone with the link can view'. Edit the doc, and the daily 'Sync legal docs' workflow opens a PR with the updated text. See docs/LEGAL_DOCS.md.",
+  "docs": [
+    {
+      "slug": "privacy",
+      "route": "/privacy",
+      "footerLabel": "Privacy",
+      "docId": "16IZ9s9Zv7LmeR2FU-nMsv2o18XCEYDy1KhT16Um3-Vw",
+      "title": "Privacy Policy",
+      "description": "How Keep On Rolling collects, uses and protects your information, including data from Strava and Garmin.",
+      "dropLines": [
+        "^JMRcycling LLC$",
+        "^JMRcycling PRIVACY POLICY$",
+        "^Privacy Policy$"
+      ],
+      "minBlocks": 24
+    },
+    {
+      "slug": "terms",
+      "route": "/terms",
+      "footerLabel": "Terms",
+      "docId": "1XhJVz-4yEmwME4ec-xH0gdom8p5tuT6Ty-9TyYKVuMI",
+      "title": "Terms of Service",
+      "description": "The terms that apply when you use the Keep On Rolling app and website.",
+      "minBlocks": 26
+    },
+    {
+      "slug": "shop-terms",
+      "route": "/shop-terms",
+      "footerLabel": "Shop Terms",
+      "docId": "1aWIH_KJMJ1pOcZSLH3PDUKHKawvuNwKxhofwx5xNEjI",
+      "title": "Bike Shop Partner Terms",
+      "description": "The terms for bike shops that use the KOR shop dashboard and QR codes.",
+      "minBlocks": 18
+    },
+    {
+      "slug": "cookies",
+      "route": "/cookies",
+      "footerLabel": "Cookies",
+      "docId": "17fwYzLYyA9BWyVVKRiI1FkPONiB2fsyKne_O--tnM_A",
+      "title": "Cookie and Tracking Notice",
+      "description": "The cookies and analytics tools used on jmrcycling.com and in the Keep On Rolling app.",
+      "minBlocks": 11
+    },
+    {
+      "slug": "data-requests",
+      "route": "/data-requests",
+      "footerLabel": "Data Requests",
+      "docId": "1mdiJaGy3YDeKMrXRBDZtG__-4Qs6IjgoTuEn1J9yTmE",
+      "title": "Data Requests and Account Deletion",
+      "description": "How to access, export or delete your data and disconnect Strava or Garmin.",
+      "minBlocks": 12
+    }
+  ]
+}
