@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { legalDocIndex } from '../../content/legal/legalDocs';
 
 const Footer: React.FC = () => {
   return (
@@ -16,6 +17,13 @@ const Footer: React.FC = () => {
             Contact Us
           </Link>
         </h3>
+        <nav className="footer-legal" aria-label="Legal">
+          {legalDocIndex.map((doc) => (
+            <Link key={doc.slug} className="link" to={doc.route}>
+              {doc.footerLabel}
+            </Link>
+          ))}
+        </nav>
         <div className="social">
           <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
             <img src="/images/facebook.png" alt="FB Icon" />

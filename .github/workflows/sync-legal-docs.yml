@@ -1,0 +1,67 @@
+name: Sync legal docs
+
+# The legal pages (privacy, terms, shop terms, cookies, data requests) are written in
+# Google Docs. This job re-reads them every day and opens a PR when the text changed, so
+# every legal change is reviewed and deployed through the normal pipeline.
+# See docs/LEGAL_DOCS.md.
+
+on:
+  schedule:
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    name: Sync legal docs from Google Docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: kor-react/package-lock.json
+
+      - name: Install dependencies
+        working-directory: kor-react
+        run: npm ci
+
+      - name: Run parser tests
+        working-directory: kor-react
+        run: npm run test:legal
+
+      # A doc that fails to sync keeps its previous text; the other docs still update.
+      # The failure is surfaced in the last step so a broken doc is never silent.
+      - name: Sync docs
+        id: sync
+        working-directory: kor-react
+        continue-on-error: true
+        run: npm run sync:legal
+
+      - name: Open PR if the text changed
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: sync/legal-docs
+          delete-branch: true
+          add-paths: kor-react/src/content/legal/legalDocs.generated.json
+          commit-message: 'chore: sync legal docs from Google Docs'
+          title: 'chore: sync legal docs from Google Docs'
+          body: |
+            The legal documents changed in Google Docs. Review the diff in
+            `kor-react/src/content/legal/legalDocs.generated.json`, then merge to publish.
+
+            Opened automatically by the "Sync legal docs" workflow.
+
+      - name: Fail if any doc could not be synced
+        if: steps.sync.outcome == 'failure'
+        run: |
+          echo "One or more legal docs failed to sync (see the 'Sync docs' step)."
+          exit 1

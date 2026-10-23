@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
 import GoogleAnalytics, { initGA } from './components/common/GoogleAnalytics';
 import { initPostHog } from './lib/posthog';
@@ -13,6 +13,8 @@ import PersonalPlans from './components/pages/PersonalPlans';
 import Contact from './components/pages/Contact';
 import FAQ from './components/pages/FAQ';
 import QrGuide from './components/pages/QrGuide';
+import LegalPage from './components/pages/LegalPage';
+import { legalDocIndex } from './content/legal/legalDocs';
 import ShopLogin from './components/shop/ShopLogin';
 import ShopDashboard from './components/shop/ShopDashboard';
 import ShopSettings from './components/shop/ShopSettings';
@@ -82,6 +84,16 @@ function App() {
               <Route path='/contact' element={<Contact />} />
               <Route path='/faq' element={<FAQ />} />
               <Route path='/qr-guide' element={<QrGuide />} />
+              {/* Legal pages: text lives in Google Docs, see docs/LEGAL_DOCS.md */}
+              {legalDocIndex.map((doc) => (
+                <Route
+                  key={doc.slug}
+                  path={doc.route}
+                  element={<LegalPage slug={doc.slug} />}
+                />
+              ))}
+              <Route path='/privacy-policy' element={<Navigate to='/privacy' replace />} />
+              <Route path='/terms-of-service' element={<Navigate to='/terms' replace />} />
               <Route path='/articles' element={<ArticlesIndex />} />
               <Route path='/articles/:slug' element={<Article />} />
               <Route path='/oauth/authorize/*' element={<OAuthAuthorize />} />

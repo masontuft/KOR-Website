@@ -1,0 +1,1811 @@
+{
+  "privacy": {
+    "title": "Privacy Policy",
+    "description": "How Keep On Rolling collects, uses and protects your information, including data from Strava and Garmin.",
+    "meta": [
+      {
+        "label": "Last Updated",
+        "value": "10/22/2026"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "JMRcycling is committed to maintaining robust privacy protections for its users. Our Privacy Policy (“Privacy Policy”) is designed to help you understand how we collect, use and safeguard the information you provide to us and to assist you in making informed decisions when using our Service."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "For purposes of this Agreement, “Site” refers to JMRcycling’s website, which can be accessed at jmrcycling.com or through our mobile application."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "“Service” refers to JMRcycling’s services accessed via the App, in which users can maintain their bike to their highest performance."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "The terms \"we,\" \"us,\" and \"our\" refer to JMRcycling LLC."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "“You” refers to you, as a user of our Site or our Service."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "By accessing our Site or our Service, you accept our Privacy Policy, and you consent to our collection, storage, use, and disclosure of your Personal Information as described in this Privacy Policy."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "I. INFORMATION WE COLLECT"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "We collect “Non-Personal Information” and “Personal Information.” "
+          },
+          {
+            "t": "Non-Personal Information",
+            "b": 1
+          },
+          {
+            "t": " includes information that cannot be used to personally identify you, such as anonymous usage data (Like miles), general demographic information we may collect, referring/exit pages and URLs, platform types, preferences you submit, and preferences that are generated based on the data you submit. "
+          },
+          {
+            "t": "Personal Information",
+            "b": 1
+          },
+          {
+            "t": " includes your First and Last name, which you submit to us through the registration process on our app, along with the account identifiers and access tokens that Strava or Garmin issue when you connect your account so the Service can read your ride data for you."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "inlines": [
+          {
+            "t": "1. Information collected via Technology"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "To activate the Service you do not need to submit any Personal Information other than a connected Strava or Garmin account. To use the Service thereafter, you do not need to submit further Personal Information. However, in an effort to improve the quality of the Service, we track information provided to us by your browser or by our software application when you view or use the Service, such as the website you came from (known as the “referring URL”), the type of browser you use, the device from which you connected to the Service, the time and date of access, and other information that does not personally identify you. We track this information using cookies, or small text files which include an anonymous unique identifier. Cookies are sent to a user’s browser from our servers and are stored on the user’s computer hard drive. Sending a cookie to a user’s browser enables us to collect Non-Personal information about that user and keep a record of the user’s preferences when utilizing our services, both on an individual and aggregate basis. For example, JMRcycling may use cookies to collect the following information:"
+          }
+        ]
+      },
+      {
+        "type": "ul",
+        "items": [
+          [
+            {
+              "t": "Bike Products you use and how long you use them"
+            }
+          ]
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "JMRcycling may use both persistent and session cookies; persistent cookies remain on your computer after you close your session and until you delete them, while session cookies expire when you close your browser."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "In our mobile app, we also use third-party software tools to understand how the app is used and to find and fix errors. PostHog collects product analytics, such as the screens you view and the actions you take, and may record session replays of how the app appears on your screen while you use it. Sentry collects crash and error reports along with device and app information, such as device model, operating system version and app version. We use this information only to operate and improve the Service."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "inlines": [
+          {
+            "t": "2. Information you provide us by registering for an account"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "In addition to the information provided automatically by your browser when you visit the Site, to become a subscriber to the Service you will need to create a personal profile. You can create a profile by registering with the Service and entering your Strava login. By registering, you are authorizing us to collect, store and use your name and user id in accordance with this Privacy Policy."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "inlines": [
+          {
+            "t": "3. Information we receive from Strava and Garmin"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "When you connect your Strava account, we receive your ride activities and the bikes recorded on them, so that we can add the miles to the right bike and track component wear."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "When you connect a Garmin account, we receive, with your consent, the distance of each ride and the bike associated with it, where Garmin provides this. We use this only to add miles to your bikes in KOR. We do not collect or store GPS, route or other location data from Garmin. By connecting your Garmin account, you consent to Garmin sharing this data with us. Garmin also handles your data under the Garmin Connect Privacy Policy ("
+          },
+          {
+            "t": "https://www.garmin.com/en-US/privacy/connect/",
+            "href": "https://www.garmin.com/en-US/privacy/connect/"
+          },
+          {
+            "t": ")."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "We keep data from Garmin only while your account stays connected. We delete it when you disconnect Garmin, delete your KOR account, or ask us to delete it, whichever happens first."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "inlines": [
+          {
+            "t": "4. Children’s Privacy"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "Our Service is not directed to children under the age of 13. JMRcycling does not knowingly collect or solicit Personal Information from anyone under the age of 13. Strava and Garmin accounts have their own minimum age requirements, and our Service is not intended for children under 13. Teenagers aged 13 to 17 may use the Service. We collect the same limited information from them as from other users, we do not sell it or use it for advertising, and a parent or guardian may ask us to review or delete it at any time."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "If you are a parent or guardian and become aware that your child has provided us with Personal Information without your consent, please contact us immediately at masontuft@jmrcycling.com. If we become aware that we have collected Personal Information from a child under the age of 13 without verifiable parental consent, we will take immediate steps to remove that information from our servers."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "We encourage parents and guardians to monitor their children’s internet usage and to instruct their children never to provide personal information through the Service without their permission."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "II. HOW WE USE AND SHARE INFORMATION"
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "inlines": [
+          {
+            "t": "Personal Information"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "Except as otherwise stated in this Privacy Policy, we do not sell, trade, rent, or otherwise share for marketing purposes your Personal Information with third parties without your consent. If you choose to set up your account with a bike shop, for example by scanning the shop’s QR code, you authorize us to share your name and your bike and component maintenance data, including mileage, with that shop so it can contact you. We share this information with a shop only after you set up your account with that shop. We also send maintenance alerts to your phone through push notifications. You can withdraw this permission at any time by contacting us or deleting your account. We do share Personal Information with vendors who are performing services for JMRcycling. Those vendors use your Personal Information only at our direction and in accordance with our Privacy Policy. Our vendors include Auth0 (sign-in), Chargebee (subscription billing), PostHog and Sentry (analytics and error monitoring), Expo and Firebase (push notifications), Twilio and Slack (internal alerts to us), and our hosting provider."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "In general, the Personal Information you provide to us is used to help us communicate with you. For example, we use Personal Information to contact users in response to questions, solicit feedback from users, provide technical support, and send maintenance alerts and service notices. We do not sell Personal Information, and we do not use data from Garmin or Strava for advertising, to build profiles for third parties, or to decide eligibility for credit or insurance."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "We may share Personal Information with outside parties if we have a good-faith belief that access, use, preservation, or disclosure of the information is reasonably necessary to meet any applicable legal process or enforceable governmental request; to enforce applicable Terms of Service, including investigation of potential violations; address fraud, security or technical concerns; or to protect against harm to the rights, property, or safety of our users or the public as required or permitted by law."
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "inlines": [
+          {
+            "t": "Non-Personal Information"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "In general, we use Non-Personal Information to help us improve the Service and customize the user experience. We also aggregate Non-Personal Information in order to track trends and analyze use patterns on the Site. We do not sell Non-Personal Information or share it with advertisers. We use data received from Garmin only for our own internal business purposes of operating the Service, and we do not disclose it to third parties in any form, including aggregated or de-identified form, except as described in this Privacy Policy."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "In the event we undergo a business transaction such as a merger, acquisition by another company, or sale of all or a portion of our assets, your Personal Information may be among the assets transferred. You acknowledge and consent that such transfers may occur and are permitted by this Privacy Policy, and that any acquirer of our assets may continue to process your Personal Information as set forth in this Privacy Policy. Data we receive from Garmin will be transferred only as permitted by our agreements with Garmin. If our information practices change at any time in the future, we will post the policy changes to the Site so that you may opt out of the new information practices. We suggest that you check the Site periodically if you are concerned about how your information is used."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "III. HOW WE PROTECT INFORMATION"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "We implement security measures designed to protect your information from unauthorized access. We urge you to take steps to keep your personal information safe by protecting your Strava and Garmin account credentials and your device. We further protect your information from potential security breaches by implementing certain technological security measures including encryption of data in transit and at rest, and firewalls. However, these measures do not guarantee that your information will not be accessed, disclosed, altered, or destroyed by breach of such firewalls and secure server software. By using our Service, you acknowledge that you understand and agree to assume these risks. If we confirm a security breach that affects your data, we will notify the people affected as required by law, and we will notify Garmin if the breach involves data received from Garmin."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "IV. YOUR RIGHTS REGARDING THE USE OF YOUR PERSONAL INFORMATION"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "We do not currently send promotional communications. If that changes, you will have the right at any time to prevent us from contacting you for marketing purposes. When we send a promotional communication to a user, the user can opt out of further promotional communications by following the unsubscribe instructions provided in each promotional e-mail. Please note that even if you opt out of promotional communications, we may still send you service notices, such as maintenance alerts and updates to this Privacy Policy."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "You may ask us at any time for a copy of the Personal Information we hold about you, and to correct or delete it. To delete your account and the data connected to it, use the Delete Account option in the More tab of the app, or email us at masontuft@jmrcycling.com. We respond to these requests promptly."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "To withdraw your consent for Garmin data, disconnect KOR in your Garmin account settings or email us at masontuft@jmrcycling.com. We then stop collecting Garmin data and delete the data we received from Garmin."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "V. LINKS TO OTHER WEBSITES"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "As part of the Service, we may provide links to or compatibility with other websites or applications. However, we are not responsible for the privacy practices employed by those websites or the information or content they contain. This Privacy Policy applies solely to information collected by us through the Site and the Service. Therefore, this Privacy Policy does not apply to your use of a third party website accessed by selecting a link on our Site or via our Service. To the extent that you access or use the Service through or on another website or application, then the privacy policy of that other website or application will apply to your access or use of that site or application. We encourage our users to read the privacy statements of other websites before proceeding to use them."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "VI. CHANGES TO OUR PRIVACY POLICY"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "JMRcycling reserves the right to change this policy and our Terms of Service at any time. We will notify you of significant changes to our Privacy Policy by placing a prominent notice in the app or on our site. Significant changes will go into effect 30 days following such notification. Non-material changes or clarifications will take effect immediately. You should periodically check the Site and this privacy page for updates."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "VII. CONTACT US"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "If you have any questions regarding this Privacy Policy or the practices of this Site, please contact us by sending an email to masontuft@jmrcycling.com."
+          }
+        ]
+      }
+    ]
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "description": "The terms that apply when you use the Keep On Rolling app and website.",
+    "meta": [
+      {
+        "label": "Effective Date",
+        "value": "10/22/2026"
+      },
+      {
+        "label": "Last Updated",
+        "value": "10/22/2026"
+      },
+      {
+        "label": "Operator",
+        "value": "JMRcycling LLC (“JMRcycling,” “KOR,” “Keep On Rolling,” “we,” “us,” “our”)"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "1. Agreement to These Terms"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "These Terms of Service (“Terms”) are a binding agreement between you and JMRcycling LLC. They apply to the Keep On Rolling mobile app, the website at jmrcycling.com, and everything we offer through them (together, the “Service”). By creating an account, connecting a Strava or Garmin account, or otherwise using the Service, you agree to these Terms and to our Privacy Policy. If you do not agree, do not use the Service."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "If you use the Service on behalf of a bike shop, the Bike Shop Partner Terms also apply to you. If the two documents conflict for shop features, the Bike Shop Partner Terms control."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "2. Who Can Use the Service"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "You must be at least 13 years old to use the Service. If you are under 18, you may use the Service only with the permission of a parent or legal guardian, who agrees to these Terms on your behalf and is responsible for your use. A parent or guardian may contact us at any time to review or delete a minor’s account."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "You must also meet the age and eligibility requirements of any account you connect, such as Strava or Garmin. You may not use the Service if you have been barred from it, or if the law where you live prohibits it."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "3. Your Account"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "You sign in through our authentication provider and connect a Strava or Garmin account so that the Service can read your rides. You are responsible for the activity on your account and for keeping your sign-in details and your connected accounts secure. Tell us promptly at masontuft@jmrcycling.com if you believe your account has been accessed without permission. Give us accurate information and keep it up to date."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "4. What the Service Does"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "KOR tracks the bikes and components you set up, adds ride distance from your connected accounts, estimates how worn each component is, and sends maintenance alerts. Some features can share your maintenance information with a bike shop you choose."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "The Service may change over time. We may add, change, or remove features, and we may limit or suspend access for maintenance, security, or legal reasons."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "5. Maintenance Estimates and Cycling Safety"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "Wear percentages, service intervals, and alerts are estimates based on the distance and settings you provide and on general intervals. They are not inspections. Real wear depends on weather, terrain, riding style, installation, and the condition of your bike, none of which the Service can see."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "Cycling is hazardous. The Service is a planning aid, not a safety system. You are solely responsible for inspecting your bike before every ride and for having it serviced by a qualified mechanic. Never rely on the Service as the only basis for deciding whether a bike or part is safe to ride. A missing alert, a late alert, or an inaccurate estimate does not make us responsible for a crash, injury, or damage."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "6. Connected Services (Strava and Garmin)"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "You choose whether to connect Strava or Garmin. When you do, you authorize us to receive the data described in our Privacy Policy and to use it only to run the Service for you. For Garmin, that is limited to the distance of each ride and the bike associated with it, where Garmin provides this."
+          }
+        ]
+      },
+      {
+        "type": "ul",
+        "items": [
+          [
+            {
+              "t": "You can disconnect at any time in the app or in your Strava or Garmin settings. When you disconnect, we stop collecting new data, and we delete the data we received from that service as described in our Privacy Policy."
+            }
+          ],
+          [
+            {
+              "t": "Strava and Garmin are independent companies. Their terms and privacy policies govern your use of their services. We are not responsible for their availability, accuracy, or changes to their programs."
+            }
+          ],
+          [
+            {
+              "t": "Keep On Rolling is not made, endorsed, or sponsored by Strava or Garmin. Strava and Garmin names and logos belong to their owners."
+            }
+          ],
+          [
+            {
+              "t": "If a connected service changes or ends its data access, some features may stop working without notice, and that is not a breach by us."
+            }
+          ]
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "7. Plans, Billing, and Cancellation"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "KOR offers a free plan and paid plans. Current plans, features, and prices are shown on our Personal Plans page. Features of a plan may change over time."
+          }
+        ]
+      },
+      {
+        "type": "ul",
+        "items": [
+          [
+            {
+              "t": "Billing.",
+              "b": 1
+            },
+            {
+              "t": " Paid plans are billed in advance on a recurring monthly basis through our billing provider, Chargebee. By subscribing, you authorize us and our billing provider to charge your payment method for each billing period until you cancel. We do not store your full card number."
+            }
+          ],
+          [
+            {
+              "t": "Automatic renewal.",
+              "b": 1
+            },
+            {
+              "t": " Your subscription renews automatically at the then-current price at the end of each billing period unless you cancel before the renewal date."
+            }
+          ],
+          [
+            {
+              "t": "Cancel or pause.",
+              "b": 1
+            },
+            {
+              "t": " You can pause, cancel, or manage your subscription at any time from the Manage Your Subscription page on our website, which opens our billing provider’s secure customer portal, or through the link in the mobile app. No phone call, reason, or notice period is required. If you cancel, you will not be charged again, and the cancellation screen shows the date your paid features end. If you have trouble, email masontuft@jmrcycling.com and we will cancel it for you within two business days."
+            }
+          ],
+          [
+            {
+              "t": "Price changes.",
+              "b": 1
+            },
+            {
+              "t": " If we raise the price of your plan, we will give you notice before it takes effect, and you may cancel before then."
+            }
+          ],
+          [
+            {
+              "t": "Refunds.",
+              "b": 1
+            },
+            {
+              "t": " Except where the law requires otherwise, payments are non-refundable for time already elapsed. If you were charged by mistake or have a billing problem, contact us within 30 days and we will work in good faith to fix it."
+            }
+          ],
+          [
+            {
+              "t": "Taxes.",
+              "b": 1
+            },
+            {
+              "t": " Prices may not include taxes; applicable taxes are added at checkout."
+            }
+          ]
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "8. Bike Shops"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "If you choose to set up your account with a bike shop, for example by scanning the shop’s QR code, you authorize us to share your name and your bike and component maintenance data, including mileage, with that shop so it can contact you and help service your bike. We share this only after you set up your account with that shop. You can end the connection or delete your account at any time. Shops are independent businesses. We do not control their work, prices, or advice and we are not responsible for what a shop does or fails to do."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "9. Your Content and Our License"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "You keep ownership of the information you put into the Service, such as your bike names, component settings, and notes (“Your Content”). You give JMRcycling a limited, non-exclusive, worldwide license to host, store, process, and display Your Content, and to share it with your chosen bike shop, only as needed to operate and improve the Service for you. This license ends when you delete the content or your account, except for backups and records we must keep by law, which are deleted on our normal schedule."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "10. Acceptable Use"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "You agree not to:"
+          }
+        ]
+      },
+      {
+        "type": "ul",
+        "items": [
+          [
+            {
+              "t": "break the law or violate anyone else’s rights using the Service;"
+            }
+          ],
+          [
+            {
+              "t": "access another person’s account or data, or try to get around security or access limits;"
+            }
+          ],
+          [
+            {
+              "t": "probe, scan, or test the Service for vulnerabilities without our written permission;"
+            }
+          ],
+          [
+            {
+              "t": "scrape, copy, resell, or build a competing service from the Service or its data;"
+            }
+          ],
+          [
+            {
+              "t": "use the Service, or data from Strava or Garmin obtained through it, for advertising, to profile people for third parties, or to decide eligibility for credit, insurance, or employment;"
+            }
+          ],
+          [
+            {
+              "t": "upload malware or interfere with the Service or its infrastructure;"
+            }
+          ],
+          [
+            {
+              "t": "use automated means to create accounts or place excessive load on the Service; or"
+            }
+          ],
+          [
+            {
+              "t": "help or encourage anyone to do any of the above."
+            }
+          ]
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "11. Our Property"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "The Service, including its software, design, text, graphics, and the KOR and Keep On Rolling names and logos, belongs to JMRcycling LLC or its licensors and is protected by law. We grant you a personal, limited, revocable, non-transferable license to use the app and website for your own non-commercial bike maintenance. We keep all other rights. If you send us feedback or ideas, we may use them without owing you anything."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "12. Third-Party Services"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "The Service relies on third parties such as Strava, Garmin, Auth0, Chargebee, and app stores. We are not responsible for their services, and your use of them may be subject to their own terms."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "13. Disclaimers"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "The Service is provided “as is” and “as available.” To the fullest extent the law allows, we disclaim all warranties, express or implied, including merchantability, fitness for a particular purpose, accuracy, and non-infringement. We do not promise that the Service will be uninterrupted, error-free, or secure, that ride data will always arrive complete or on time, or that its estimates are correct. Some places do not allow certain disclaimers, so some of this may not apply to you."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "14. Limitation of Liability"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "To the fullest extent the law allows, JMRcycling LLC and its owners, employees, and contractors will not be liable for indirect, incidental, special, consequential, or punitive damages, or for lost profits, lost data, or the cost of replacement parts or repairs, arising from your use of the Service. Our total liability for any claim relating to the Service will not exceed the greater of (a) the amount you paid us in the 12 months before the claim arose or (b) $100. Nothing in these Terms limits liability that cannot be limited by law, including for fraud or for personal injury caused by our negligence where the law does not permit a limit."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "15. Your Responsibility"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "You agree to be responsible for losses to us that arise from your violation of these Terms or misuse of the Service, to the extent the law allows. Nothing in this section applies to users under 18 or limits any right you have that cannot be waived."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "16. Ending Your Use"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "You may stop using the Service and delete your account at any time using the Delete Account option in the More tab of the app, or by emailing masontuft@jmrcycling.com. We may suspend or end your access if you violate these Terms, if required by law, if a connected service withdraws access, or if we shut down the Service. If we end the Service entirely, we will give notice where practical. Sections that by their nature should survive, including those on ownership, disclaimers, limits on liability, and governing law, survive termination."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "17. Changes to These Terms"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "We may update these Terms. For significant changes, we will post a prominent notice in the app or on our site, and the changes will take effect 30 days after the notice. Other changes take effect when posted. If you keep using the Service after changes take effect, you accept them. If you do not agree, you can stop using the Service and delete your account."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "18. Governing Law and Disputes"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "These Terms are governed by the laws of the State of Idaho, without regard to conflict-of-law rules. Before filing a claim, please contact us at masontuft@jmrcycling.com and give us a chance to resolve the issue informally for at least 30 days. If we cannot, you and JMRcycling agree that any dispute will be brought in the state or federal courts located in Idaho, and each of us consents to their jurisdiction. If you are a consumer, you also keep any rights under mandatory consumer protection laws where you live."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "19. General"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "These Terms, together with the Privacy Policy and any other policies referenced here, are the entire agreement between you and us about the Service. If a part of these Terms is found unenforceable, the rest stays in effect. If we do not enforce a right, we do not give it up. You may not transfer your rights under these Terms; we may transfer ours in a merger, acquisition, or sale of assets. Notices to you may be given in the app, on the site, or by email if you have given us one. Notices to us go to masontuft@jmrcycling.com."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "20. Contact Us"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "JMRcycling LLC, masontuft@jmrcycling.com. Website: jmrcycling.com."
+          }
+        ]
+      }
+    ]
+  },
+  "shop-terms": {
+    "title": "Bike Shop Partner Terms",
+    "description": "The terms for bike shops that use the KOR shop dashboard and QR codes.",
+    "meta": [
+      {
+        "label": "Effective Date",
+        "value": "10/22/2026"
+      },
+      {
+        "label": "Last Updated",
+        "value": "10/22/2026"
+      },
+      {
+        "label": "Operator",
+        "value": "JMRcycling LLC (“JMRcycling,” “KOR,” “we,” “us,” “our”)"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "1. About These Terms"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "These Bike Shop Partner Terms (“Shop Terms”) apply to any bike shop, mechanic, or other business (“Shop,” “you”) that opens a shop account, uses the KOR shop dashboard, or displays or distributes a KOR QR code to customers. They add to our Terms of Service and Privacy Policy. If they conflict on a point about shop features, these Shop Terms control."
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "The person who accepts these Shop Terms confirms that they have authority to bind the Shop."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "2. Shop Accounts"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "You must give accurate shop information and keep it current. You are responsible for everyone who uses your shop account, so give access only to staff who need it, keep sign-in details private, and tell us promptly if you suspect unauthorized use. We may require you to verify that you operate a real bike business."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "3. What Shops Can See"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "A Shop can see a KOR rider’s information only after the rider chooses to set up an account with that Shop, for example by scanning the Shop’s QR code. Once a rider does, the Shop can see:"
+          }
+        ]
+      },
+      {
+        "type": "ul",
+        "items": [
+          [
+            {
+              "t": "the rider’s name; and"
+            }
+          ],
+          [
+            {
+              "t": "the rider’s bike and component maintenance data, including mileage and wear estimates."
+            }
+          ]
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "Shops do not receive raw ride, route, or GPS data from Strava or Garmin. A rider can end the connection with a Shop at any time. When a rider ends the connection, deletes their account, or asks us to stop sharing, your access to that rider’s information ends, and you must stop using it as described below."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "4. How You May Use Rider Information"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "You may use rider information you receive through KOR only to:"
+          }
+        ]
+      },
+      {
+        "type": "ul",
+        "items": [
+          [
+            {
+              "t": "contact that rider about service or maintenance of their bike;"
+            }
+          ],
+          [
+            {
+              "t": "schedule, perform, and follow up on bike service for that rider; and"
+            }
+          ],
+          [
+            {
+              "t": "keep reasonable records of the service you provided to that rider."
+            }
+          ]
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "You may not:"
+          }
+        ]
+      },
+      {
+        "type": "ul",
+        "items": [
+          [
+            {
+              "t": "sell, rent, trade, license, or otherwise disclose rider information to anyone else, except to service providers who help you serve that rider and who are bound to protect it;"
+            }
+          ],
+          [
+            {
+              "t": "use rider information for advertising or marketing unrelated to servicing their bike unless the rider has separately and clearly agreed with you, outside of KOR, to receive it;"
+            }
+          ],
+          [
+            {
+              "t": "combine rider information with other data to build profiles of riders or use it to decide eligibility for credit, insurance, or employment;"
+            }
+          ],
+          [
+            {
+              "t": "contact a rider after they have ended the connection, other than as needed to finish work they already asked for;"
+            }
+          ],
+          [
+            {
+              "t": "contact minors in ways that go beyond servicing their bike; or"
+            }
+          ],
+          [
+            {
+              "t": "copy, export, scrape, or bulk-download shop data except through features we provide."
+            }
+          ]
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "Riders under 18 may use KOR. Treat their information with extra care and, where appropriate, communicate with a parent or guardian about their service."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "5. Your Privacy and Security Duties"
+          }
+        ]
+      },
+      {
+        "type": "ul",
+        "items": [
+          [
+            {
+              "t": "Follow all privacy, consumer-protection, and marketing laws that apply to you, including laws on text messages, calls, and email."
+            }
+          ],
+          [
+            {
+              "t": "Use reasonable administrative, technical, and physical safeguards to protect rider information, including limiting access to people who need it and signing out of shared devices."
+            }
+          ],
+          [
+            {
+              "t": "Tell us at masontuft@jmrcycling.com within 48 hours of discovering unauthorized access to, or loss of, rider information you received through KOR, so that we can meet our own notice duties."
+            }
+          ],
+          [
+            {
+              "t": "When a rider ends the connection or asks you to delete their information, or when your shop account ends, stop using their information and delete it within a reasonable time, except for records you must keep by law or for ordinary service records you keep about work you actually performed."
+            }
+          ],
+          [
+            {
+              "t": "Cooperate with reasonable requests from us to confirm that you follow these Shop Terms."
+            }
+          ]
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "6. QR Codes and Branding"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "We give you a QR code that links riders to KOR with your Shop identified. You may display it in your shop and in your own materials to invite customers to join. You may use the KOR name and logo only in the ways we provide or approve, only to say that you work with KOR, and not in a way that suggests KOR endorses your work or that you are owned by or affiliated with KOR beyond using the Service. We may withdraw this permission at any time. You keep your own names and logos. You give us a limited license to display your shop name, address, and logo in the Service so that riders can recognize your Shop."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "7. Your Service Work"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "You are an independent business. KOR is a tracking tool and does not employ you, supervise your work, or act as your agent. You alone are responsible for your repairs, advice, prices, parts, warranties, scheduling, and customer relationships. KOR’s wear estimates are not inspections and are no substitute for your professional judgment. Do not rely on them as the only basis for deciding whether a bike is safe to ride. We are not responsible for disputes between you and a rider."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "8. Fees"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "Shop features are provided at the prices, if any, shown to you when you sign up or in a written notice from us. We will give at least 30 days’ notice before any new fee or fee increase applies to you, and you may close your account before it does. Fees already paid are non-refundable except where the law requires, or if we end your access without cause."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "9. Term and Ending the Relationship"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "These Shop Terms continue until you or we end them. You may close your shop account at any time by contacting us. We may suspend or end your shop account if you breach these Shop Terms or the Terms of Service, if you misuse rider information, if we reasonably suspect fraud or security risk, or if we stop offering shop features. On ending, your access to rider information stops. Sections that by their nature should survive, including those on use of rider information, deletion, liability, and governing law, survive."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "10. Disclaimers and Liability"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "Shop features are provided “as is” and “as available,” and we do not promise that data will be complete, accurate, or uninterrupted. To the fullest extent the law allows, JMRcycling LLC will not be liable to you for indirect, incidental, special, consequential, or punitive damages, or for lost profits, lost business, or lost data, and our total liability under these Shop Terms will not exceed the fees you paid us in the 12 months before the claim arose (or $100 if you paid nothing). Nothing here limits liability that the law does not allow to be limited."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "11. Your Responsibility"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "To the extent the law allows, you will be responsible for, and will reimburse us for, losses, claims, and reasonable legal costs arising from (a) your misuse or unauthorized disclosure of rider information, (b) your repair or service work, or (c) your violation of these Shop Terms or applicable law."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "12. Changes"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "We may update these Shop Terms. We will give notice of significant changes in the shop dashboard or by contacting the account holder, and they take effect 30 days after the notice. If you keep using shop features after that, you accept the changes."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "13. Governing Law"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "These Shop Terms are governed by the laws of the State of Idaho, without regard to conflict-of-law rules. After at least 30 days of good-faith informal discussion, any dispute will be brought in the state or federal courts located in Idaho."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "14. General and Contact"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "These Shop Terms, the Terms of Service, and the Privacy Policy are the entire agreement between you and us about shop features. If part of them is unenforceable, the rest stays in effect. You may not assign these Shop Terms without our written consent. Questions or notices: masontuft@jmrcycling.com."
+          }
+        ]
+      }
+    ]
+  },
+  "cookies": {
+    "title": "Cookie and Tracking Notice",
+    "description": "The cookies and analytics tools used on jmrcycling.com and in the Keep On Rolling app.",
+    "meta": [
+      {
+        "label": "Effective Date",
+        "value": "10/22/2026"
+      },
+      {
+        "label": "Last Updated",
+        "value": "10/22/2026"
+      },
+      {
+        "label": "Applies To",
+        "value": "jmrcycling.com and the Keep On Rolling mobile app, operated by JMRcycling LLC"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "1. What This Notice Covers"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "This notice explains the cookies, similar technologies, and analytics tools we use on our website and in our app, why we use them, and how you can control them. It supplements our Privacy Policy. We do not sell your personal information, and we do not use these tools to show you advertising."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "2. What Cookies and Similar Technologies Are"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "Cookies are small text files that a site stores in your browser. Similar technologies, such as local storage and software development kits in apps, do the same kind of job. Some are essential to make a feature work. Others help us understand how the site and app are used so that we can fix problems and improve them."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "3. Tools We Use on the Website"
+          }
+        ]
+      },
+      {
+        "type": "ul",
+        "items": [
+          [
+            {
+              "t": "Sign-in and security (Auth0).",
+              "b": 1
+            },
+            {
+              "t": " Keeps you signed in on the shop and personal dashboards and helps protect your account. These are essential and are used only when you sign in."
+            }
+          ],
+          [
+            {
+              "t": "Subscriptions (Chargebee).",
+              "b": 1
+            },
+            {
+              "t": " Handles checkout and subscription management pages when you subscribe or manage a plan. These are essential for billing."
+            }
+          ],
+          [
+            {
+              "t": "Site analytics (Google Analytics 4).",
+              "b": 1
+            },
+            {
+              "t": " Measures how many people visit, which pages they view, and which button clicks matter, such as app download buttons. It uses cookies and similar identifiers."
+            }
+          ],
+          [
+            {
+              "t": "Product analytics (PostHog).",
+              "b": 1
+            },
+            {
+              "t": " Records page views and actions on the site and, for some visits, session recordings that replay how pages appeared and how they were used, so that we can find confusing screens and bugs. We route PostHog through our own domain."
+            }
+          ],
+          [
+            {
+              "t": "Contact forms (Formspree).",
+              "b": 1
+            },
+            {
+              "t": " Delivers the message you submit through our contact form. It does not set analytics cookies for us."
+            }
+          ]
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "4. Tools We Use in the Mobile App"
+          }
+        ]
+      },
+      {
+        "type": "ul",
+        "items": [
+          [
+            {
+              "t": "PostHog.",
+              "b": 1
+            },
+            {
+              "t": " Product analytics, such as which screens are viewed and which actions are taken, and session replays of how the app appears on your screen."
+            }
+          ],
+          [
+            {
+              "t": "Sentry.",
+              "b": 1
+            },
+            {
+              "t": " Crash and error reports with device model, operating system version, and app version."
+            }
+          ],
+          [
+            {
+              "t": "Expo and Firebase.",
+              "b": 1
+            },
+            {
+              "t": " Deliver push notifications for maintenance alerts, using a device token."
+            }
+          ]
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "5. What We Do Not Do"
+          }
+        ]
+      },
+      {
+        "type": "ul",
+        "items": [
+          [
+            {
+              "t": "We do not sell personal information or share it with advertisers."
+            }
+          ],
+          [
+            {
+              "t": "We do not run advertising or retargeting cookies."
+            }
+          ],
+          [
+            {
+              "t": "We do not use data from Strava or Garmin for analytics profiles, advertising, or tracking across other sites."
+            }
+          ]
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "6. Your Choices"
+          }
+        ]
+      },
+      {
+        "type": "ul",
+        "items": [
+          [
+            {
+              "t": "Browser controls.",
+              "b": 1
+            },
+            {
+              "t": " You can block or delete cookies in your browser settings. Essential features such as signing in may stop working if you block them."
+            }
+          ],
+          [
+            {
+              "t": "Do Not Track and Global Privacy Control.",
+              "b": 1
+            },
+            {
+              "t": " If your browser sends a Global Privacy Control signal, we treat it as a request to opt out of any sale or sharing of personal information, which we do not do in any case."
+            }
+          ],
+          [
+            {
+              "t": "Google Analytics.",
+              "b": 1
+            },
+            {
+              "t": " You can install Google’s browser add-on to opt out of Google Analytics."
+            }
+          ],
+          [
+            {
+              "t": "App analytics and push notifications.",
+              "b": 1
+            },
+            {
+              "t": " You can turn off push notifications in your phone’s settings. To limit app analytics, contact us and we will help you opt out or delete your account."
+            }
+          ],
+          [
+            {
+              "t": "Session replays.",
+              "b": 1
+            },
+            {
+              "t": " To ask us to delete session replay data tied to you, use the steps on our Data Requests and Account Deletion page."
+            }
+          ]
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "7. How Long We Keep Data"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "Analytics data is kept for as long as it is useful for improving the Service and then deleted or aggregated, and for no longer than our analytics providers’ standard retention allows unless we tell you otherwise. Cookies last from the length of your browsing session up to about two years, depending on the tool."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "8. Changes"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "We may update this notice when our tools change. We will post the new version here with a new date, and significant changes will be announced on the site or in the app."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "9. Contact Us"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "Questions about this notice: masontuft@jmrcycling.com."
+          }
+        ]
+      }
+    ]
+  },
+  "data-requests": {
+    "title": "Data Requests and Account Deletion",
+    "description": "How to access, export or delete your data and disconnect Strava or Garmin.",
+    "meta": [
+      {
+        "label": "Effective Date",
+        "value": "10/22/2026"
+      },
+      {
+        "label": "Last Updated",
+        "value": "10/22/2026"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "This page explains how to see, correct, export, or delete the information Keep On Rolling (JMRcycling LLC) holds about you, and how to disconnect Strava or Garmin."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "1. Delete Your Account in the App"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "The fastest way is in the app:"
+          }
+        ]
+      },
+      {
+        "type": "ul",
+        "items": [
+          [
+            {
+              "t": "Open the Keep On Rolling app and go to the More tab."
+            }
+          ],
+          [
+            {
+              "t": "Choose Delete Account and confirm."
+            }
+          ]
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "Deleting your account removes your profile, your bikes and components, and your connection to Strava and Garmin, and stops any sharing with bike shops. If you have a paid plan, cancel it first from the Manage Your Subscription page on our website or through the link in the app, so that you are not billed again. If you forget, email us and we will cancel any active subscription when we process the deletion."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "2. Delete or Access Your Data by Request"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "You can also email masontuft@jmrcycling.com from the contact method you used with the Service and tell us what you want:"
+          }
+        ]
+      },
+      {
+        "type": "ul",
+        "items": [
+          [
+            {
+              "t": "Access.",
+              "b": 1
+            },
+            {
+              "t": " A copy of the personal information we hold about you."
+            }
+          ],
+          [
+            {
+              "t": "Correction.",
+              "b": 1
+            },
+            {
+              "t": " Fixing information that is wrong."
+            }
+          ],
+          [
+            {
+              "t": "Deletion.",
+              "b": 1
+            },
+            {
+              "t": " Deleting your account and the data connected to it."
+            }
+          ],
+          [
+            {
+              "t": "Portability.",
+              "b": 1
+            },
+            {
+              "t": " A copy of your bike and maintenance data in a common file format."
+            }
+          ],
+          [
+            {
+              "t": "Opt out.",
+              "b": 1
+            },
+            {
+              "t": " Stopping analytics or notifications tied to you."
+            }
+          ]
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "Include your name as it appears in the app and the type of request. We may ask a few questions to confirm that the request comes from the account owner, and we will never ask for your password or payment card number. A parent or guardian may make these requests for a child under 18."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "3. Disconnect Strava or Garmin"
+          }
+        ]
+      },
+      {
+        "type": "ul",
+        "items": [
+          [
+            {
+              "t": "In the app.",
+              "b": 1
+            },
+            {
+              "t": " Use the connection settings to disconnect Strava or Garmin."
+            }
+          ],
+          [
+            {
+              "t": "At the source.",
+              "b": 1
+            },
+            {
+              "t": " Revoke Keep On Rolling in your Strava account settings under My Apps, or disconnect it in your Garmin account settings."
+            }
+          ],
+          [
+            {
+              "t": "By email.",
+              "b": 1
+            },
+            {
+              "t": " Email us to withdraw consent for Garmin data, and we will stop collecting it."
+            }
+          ]
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "When you disconnect Garmin, withdraw consent, or delete your account, we stop collecting data from Garmin and delete the data we received from Garmin. Garmin also keeps its own records about you under the Garmin Connect Privacy Policy at https://www.garmin.com/en-US/privacy/connect/."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "4. Bike Shop Sharing"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "If you set up your account with a bike shop, that shop can see your name and your bike and component maintenance data. To end sharing, remove the shop connection in the app, delete your account, or email us and we will end the connection. Shops are required to stop using your information when you do."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "5. How Long It Takes"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "We acknowledge requests promptly and complete them within 45 days. If we need more time or cannot do something, we will tell you why. In-app account deletion removes your data from our live systems right away, and the remaining copies in encrypted backups are overwritten on our normal backup schedule, which does not last longer than 90 days. Some records may be kept longer where the law requires, such as billing records, and security logs needed to prevent fraud."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "6. What We Cannot Delete"
+          }
+        ]
+      },
+      {
+        "type": "ul",
+        "items": [
+          [
+            {
+              "t": "Information held by Strava, Garmin, or your bike shop under their own policies. Contact them directly to manage it."
+            }
+          ],
+          [
+            {
+              "t": "Payment records held by our billing provider that the law requires them or us to keep."
+            }
+          ],
+          [
+            {
+              "t": "Information we are legally required to retain or need to defend against a legal claim."
+            }
+          ]
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "7. If We Don’t Resolve It"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "If you are unhappy with how we handled a request, reply to our message and ask for another review. You may also contact your state attorney general or your local data protection authority."
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "inlines": [
+          {
+            "t": "8. Contact"
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "inlines": [
+          {
+            "t": "JMRcycling LLC: masontuft@jmrcycling.com."
+          }
+        ]
+      }
+    ]
+  }
+}

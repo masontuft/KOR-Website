@@ -1,0 +1,212 @@
+/* Legal pages: long-form reading, so they use the light "workshop paper" surface from DESIGN.md.
+   League Gothic is already loaded globally; Instrument Sans and Geist Mono are scoped here
+   the same way QrCodeGenerator.css does it. */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Geist+Mono:wght@400;500&display=swap');
+
+.legal-page {
+  --legal-bg: #f5f2ed;
+  --legal-surface: #ffffff;
+  --legal-text: #0f1a26;
+  --legal-text-2: #2e4053;
+  --legal-muted: #4a5a6a;
+  --legal-border: #d4cfc9;
+  --legal-font-display: 'League Gothic', 'Arial Narrow', Arial, sans-serif;
+  --legal-font-body: 'Instrument Sans', system-ui, sans-serif;
+  --legal-font-data: 'Geist Mono', 'JetBrains Mono', monospace;
+
+  background: var(--legal-bg);
+  color: var(--legal-text);
+  font-family: var(--legal-font-body);
+  padding: 64px 24px 96px;
+  text-align: left;
+}
+
+.legal-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.legal-header {
+  max-width: 760px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--legal-border);
+  margin-bottom: 40px;
+}
+
+.legal-title {
+  font-family: var(--legal-font-display);
+  font-weight: 400;
+  font-size: clamp(3rem, 7vw, 5rem);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  text-align: left; /* global h1/h2 rule centers headings */
+  color: var(--legal-text-2);
+  margin: 0 0 24px;
+}
+
+.legal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+  margin: 0;
+}
+.legal-meta-row {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  max-width: 100%;
+}
+.legal-meta dt,
+.legal-meta dd {
+  margin: 0;
+  font-family: var(--legal-font-data);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.legal-meta dt {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--legal-muted);
+}
+.legal-meta dd {
+  color: var(--legal-text);
+}
+
+.legal-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+}
+
+@media (min-width: 1024px) {
+  .legal-layout {
+    grid-template-columns: 260px minmax(0, 760px);
+    gap: 64px;
+  }
+  .legal-toc {
+    display: block;
+    position: sticky;
+    top: 24px;
+    align-self: start;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+  }
+}
+
+.legal-toc {
+  display: none; /* long on phones; the headings are scannable and the page is a single column */
+  text-align: left;
+}
+.legal-toc li {
+  margin: 0;
+  padding: 0;
+}
+.legal-toc-label {
+  font-family: var(--legal-font-body);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: left;
+  color: var(--legal-text-2);
+  margin: 0 0 12px;
+}
+.legal-toc ol,
+.legal-related ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.legal-toc a,
+.legal-related a {
+  color: var(--legal-muted);
+  font-size: 14px;
+  line-height: 1.4;
+  text-decoration: none;
+}
+.legal-toc a:hover,
+.legal-related a:hover,
+.legal-toc a:focus-visible,
+.legal-related a:focus-visible {
+  color: var(--legal-text-2);
+  text-decoration: underline;
+}
+
+.legal-content {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--legal-text);
+  min-width: 0;
+}
+.legal-content h2 {
+  font-family: var(--legal-font-display);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--legal-text-2);
+  margin: 56px 0 16px;
+  scroll-margin-top: 24px;
+}
+.legal-content h2:first-child {
+  margin-top: 0;
+}
+.legal-content h3 {
+  font-family: var(--legal-font-body);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.25;
+  color: var(--legal-text-2);
+  margin: 32px 0 12px;
+  scroll-margin-top: 24px;
+}
+.legal-content p {
+  margin: 0 0 16px;
+}
+.legal-content ul {
+  margin: 0 0 16px;
+  padding-left: 24px;
+}
+.legal-content li {
+  margin-bottom: 8px;
+}
+.legal-content a,
+.legal-body-text a {
+  color: var(--legal-text-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+.legal-content a:hover {
+  color: var(--legal-text);
+}
+.legal-content strong {
+  font-weight: 600;
+}
+
+.legal-related {
+  max-width: 760px;
+  margin-top: 72px;
+  padding-top: 24px;
+  border-top: 1px solid var(--legal-border);
+}
+.legal-related ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+@media (max-width: 640px) {
+  .legal-page {
+    padding: 40px 16px 64px;
+  }
+  .legal-content h2 {
+    font-size: 28px;
+    margin-top: 40px;
+  }
+}
