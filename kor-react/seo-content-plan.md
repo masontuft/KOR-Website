@@ -540,4 +540,40 @@ Execute in this order. Within a phase, ship the pillar first.
 - Track keyword positions for the two pillar keywords plus A1, A4, A7, B1, C8 as the leading indicators.
 
 ---
+
+## Section 8: Backlog Candidates
+
+Proposals from the content-gap track (TASK-005, 2026-10-24). **Not greenlit** — no article is written until a human assigns a real article ID and adds it to the build queue. No Ahrefs/volume data was used; keyword intent is judged from gaps against the 29 live slugs. Intervals below are deliberately left as "verify against manufacturer guidance at build time" — do not publish numbers not sourced then.
+
+#### D1. How to True a Bike Wheel (and When to Take It to a Shop)
+- **KW**: "how to true a bike wheel" (informational, how-to)
+- **Title**: `How to True a Bike Wheel: Spot a Wobble and Know Your Limits`
+- **URL**: `/articles/how-to-true-a-bike-wheel`
+- **Category**: maintenance
+- **Schema**: HowTo (needs `howToSteps` in `ArticleMeta`, per TASK-001 pattern)
+- **Links**: pillar `/articles/bike-maintenance-schedule`; `/articles/pre-ride-bike-check`; `/articles/when-to-replace-bike-tires`; `/articles/bike-maintenance-for-beginners`; `/our-app`
+- **Why it's a gap**: wheels are the one major rotating system with no article; "wobbly wheel" is a common beginner symptom that currently has no landing page. Not a KOR-tracked component, so frame as a pre-ride check / shop-vs-DIY decision, not a tracked interval.
+- **Cover**: spinning the wheel against the brake or frame to spot lateral/radial wobble; loose vs. broken spokes; what a truing stand does and what a bike-mounted check can't; when a wobble is a shop job (cracked rim, broken spokes, rim-brake rub vs. disc rub); link the check into the M-check habit.
+
+#### D2. E-Bike Maintenance: What's Different From a Regular Bike
+- **KW**: "e-bike maintenance" (informational)
+- **Title**: `E-Bike Maintenance: What's Different (and What Isn't)`
+- **URL**: `/articles/e-bike-maintenance`
+- **Category**: maintenance
+- **Schema**: Article
+- **Links**: pillar `/articles/bike-maintenance-schedule`; `/articles/when-to-replace-bike-chain`; `/articles/when-to-replace-brake-pads`; `/articles/winter-bike-storage`; `/articles/sram-axs-battery-life`; `/our-app`
+- **Why it's a gap**: no live article covers motor-assisted bikes; drivetrain and brake parts wear faster under motor torque and extra weight, and battery care/storage is a distinct intent. Confirm with a human whether KOR supports e-bike components before building — if not, keep KOR mentions generic.
+- **Cover**: which standard wear parts still apply (chain, cassette, pads, rotors, tires) and why they may wear sooner; battery care and storage (cross-link winter storage); what to leave to a certified shop (motor, controller); cleaning precautions around electronics.
+
+#### D3. When to Replace Your Bike Helmet
+- **KW**: "when to replace a bike helmet" (informational)
+- **Title**: `When to Replace a Bike Helmet: After a Crash and With Age`
+- **URL**: `/articles/when-to-replace-bike-helmet`
+- **Category**: cycling-basics
+- **Schema**: Article (+ FAQ section)
+- **Links**: `/articles/new-bike-checklist`; `/articles/what-to-bring-on-a-bike-ride`; `/articles/pre-ride-bike-check`; `/articles/how-long-do-bike-parts-last`; `/our-app`
+- **Why it's a gap**: a "when to replace" query in the same shape as the A-cluster, but for safety gear not covered anywhere. Not a KOR-tracked component — position as a general-gear complement to the app's parts tracking.
+- **Cover**: replace after any significant impact even without visible damage; visible-damage and strap/fit checks; age guidance **must be quoted from manufacturer or standards-body sources at build time** (no interval is given here on purpose); how to check fit and certification labels; FAQs: "Can I reuse a helmet after a crash?", "Do helmets expire?".
+
+---
 *End of plan. Begin with Section 1 on a fresh feature branch.*
