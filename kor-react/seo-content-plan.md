@@ -540,4 +540,40 @@ Execute in this order. Within a phase, ship the pillar first.
 - Track keyword positions for the two pillar keywords plus A1, A4, A7, B1, C8 as the leading indicators.
 
 ---
+
+## Section 8: Backlog Candidates (content-gap proposals — NOT greenlit)
+
+> Proposed by the SEO optimization routine (TASK-005, 2026-10-25). Proposals only: no article is written until a human assigns a real article ID and adds it to the build queue. Any numeric intervals below are placeholders to be sourced from the manufacturer or industry documentation at build time — none are asserted here. Checked against the 29 live slugs and Sections 4 briefs: no duplicates.
+
+#### D1. How to Choose and Replace Chainrings
+- **KW**: "when to replace chainrings" (informational)
+- **Title**: `When to Replace Chainrings: Wear Signs and Pairing With Chains`
+- **URL**: `/articles/when-to-replace-chainrings`
+- **Category**: maintenance
+- **Schema**: Article
+- **Links**: pillar `/articles/bike-maintenance-schedule`; `/articles/when-to-replace-bike-chain`; `/articles/when-to-replace-cassette`; `/our-app`
+- **Why it's a gap**: chainrings are mentioned only in passing inside the chain and cassette articles. They are a distinct tracked drivetrain component with their own search intent, and a natural cluster sibling.
+- **Cover**: visual wear signs (shark-fin teeth, chain skipping under load); how chain wear accelerates ring wear; replacing rings alongside chain and cassette; single-ring vs. double/triple considerations; how KOR tracks ring mileage.
+
+#### D2. Bike Tire Pressure Guide
+- **KW**: "bike tire pressure" (informational)
+- **Title**: `Bike Tire Pressure: How to Find the Right PSI for Your Ride`
+- **URL**: `/articles/bike-tire-pressure-guide`
+- **Category**: cycling-basics
+- **Schema**: Article (+ FAQ)
+- **Links**: `/articles/when-to-replace-bike-tires`; `/articles/tubeless-sealant-how-often`; `/articles/pre-ride-bike-check`; `/articles/mtb-vs-road-maintenance`
+- **Why it's a gap**: tire pressure appears as a bullet in the pre-ride check and winter storage articles but has no dedicated page, despite being a high-volume, evergreen rider question.
+- **Cover**: the factors that move ideal pressure (rider weight, tire width, tubeless vs. tubes, surface, discipline); sidewall min/max as the hard limits; how to adjust for conditions; checking frequency. Specific PSI ranges to be taken from tire/rim manufacturer guidance at build time.
+
+#### D3. E-Bike Maintenance Basics
+- **KW**: "e-bike maintenance" (informational)
+- **Title**: `E-Bike Maintenance: What Changes (and What Doesn't)`
+- **URL**: `/articles/e-bike-maintenance`
+- **Category**: maintenance
+- **Schema**: Article (+ FAQ)
+- **Links**: pillar `/articles/bike-maintenance-schedule`; `/articles/sram-axs-battery-life`; `/articles/winter-bike-storage`; `/articles/how-long-do-bike-parts-last`; `/our-app`
+- **Why it's a gap**: e-bikes are only touched on via battery notes in two articles. Drivetrain and brake parts typically wear faster under motor assist, and the intent is clearly distinct from road/MTB maintenance.
+- **Cover**: faster wear on chain, cassette, pads and tires under assist; battery and charging care (defer to manufacturer guidance); what to leave to a certified shop (motor, firmware); cleaning cautions around electronics; how KOR tracks e-bike component mileage. Avoid unsourced interval figures.
+
+---
 *End of plan. Begin with Section 1 on a fresh feature branch.*

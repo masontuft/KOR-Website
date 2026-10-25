@@ -15,11 +15,11 @@ ROUTINE_VERSION: 2026-07-24
 AUTOMATION_MODE: true
 WORKING_DIRECTORY: kor-react
 PR_CADENCE: per-task
-CURRENT_TRACK: content-gap
-CURRENT_TASK_ID: TASK-005
+CURRENT_TRACK: technical-seo
+CURRENT_TASK_ID: none
 TASK_STATUS: not_started
-NEXT_ACTION: propose-article
-LAST_CYCLE_DATE: 2026-09-25
+NEXT_ACTION: audit-track
+LAST_CYCLE_DATE: 2026-10-25
 CYCLES_SINCE_TRACK_AUDIT: 0
 ```
 
@@ -122,7 +122,7 @@ One row per discovered item. `status`: `open` → `in_progress` → `in_review` 
 | TASK-002 | performance     | `bike-maintenance-schedule.webp` is 272 KB, the largest hero image — recompress. Fixed: the file was 1600×893 (all other hero images are 1280×720) with a lossy re-encode inflating size further at matching quality. Resized to 1280×714 (matching the standard hero width, aspect preserved) and re-encoded as WebP at quality 58 — 149,578 bytes (under the 150 KB threshold), no visible quality loss at display size. `Article.tsx`/`ArticlesIndex.tsx` render it responsively with no hardcoded dimensions, so no code changes were needed. `npm run build` passes. | in_review | 2026-07-24 |
 | TASK-003 | internal-linking| Ran the orphan/under-linked audit across all 29 `related[]` arrays. Reverse map built; 0 broken slug references found. 11 slugs came back under the fewer-than-2-inbound-links threshold (pillars excluded) — logged individually as TASK-006 through TASK-016 rather than bundled into one fix, per the routine's split-large-fixes rule. | done   | 2026-07-24 |
 | TASK-004 | content-freshness| Any article with `dateModified` > 120 days before today needs a freshness pass. Rechecked 2026-07-24: oldest `dateModified` across all 29 articles is `2026-06-11` (43 days old) — none exceed the 120-day threshold. Nothing to fix; no code changed. | done | 2026-07-24 |
-| TASK-005 | content-gap     | Run a keyword-gap pass against Section 4 to propose 3–5 new candidate briefs                       | open   | 2026-07-24 |
+| TASK-005 | content-gap     | Keyword-gap pass done: appended 3 candidate briefs (D1 `when-to-replace-chainrings`, D2 `bike-tire-pressure-guide`, D3 `e-bike-maintenance`) to `seo-content-plan.md` Section 8. Proposals only; awaiting human greenlight. | done   | 2026-07-24 |
 | TASK-006 | internal-linking| Orphan: `sram-axs-battery-life` had 0 incoming `related[]` references from other articles. Fixed: added `sram-axs-battery-life` to the `related[]` arrays of `mtb-vs-road-maintenance` and `winter-bike-storage` (both `articlesIndex.ts` and markdown frontmatter), plus a contextual inline link in each article body where AXS/electronic-shifting battery care was already discussed. `npm run build` passes. PR #66 merged. | done | 2026-07-24 |
 | TASK-007 | internal-linking| Orphan: `mtb-vs-road-maintenance` had 0 incoming `related[]` references. Fixed: added `mtb-vs-road-maintenance` to the `related[]` arrays of `dropper-post-maintenance` and `suspension-service-intervals` (both `articlesIndex.ts` and markdown frontmatter) — both are MTB-specific hour-based service items already cross-linked to each other and to the orphan article, making the reciprocal link a natural fit — plus a contextual inline link in each article body's "Where it Fits in Your Full Maintenance Plan" section. `npm run build` passes. PR #67 merged. | done | 2026-07-24 |
 | TASK-008 | internal-linking| Orphan: `winter-bike-storage` had 0 incoming `related[]` references. Fixed: added `winter-bike-storage` to the `related[]` arrays of `sram-axs-battery-life` (both `articlesIndex.ts` and markdown frontmatter) and `tubeless-sealant-how-often` (same) — both already discussed off-season/storage handling for batteries and sealant respectively, and winter-bike-storage already linked out to both, making the reciprocal link a natural fit — plus a contextual inline link in each article body's storage-relevant section. `npm run build` passes. PR #68 merged. | done | 2026-07-24 |
