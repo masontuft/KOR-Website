@@ -2916,3 +2916,19 @@ a.payment-card2, a.payment-card3 {
     height: 1px;
   }
 }
+/* 404 page */
+.not-found {
+  text-align: center;
+}
+
+.not-found-text {
+  max-width: 36em;
+  margin: 0 auto 2rem;
+}
+
+.not-found-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}

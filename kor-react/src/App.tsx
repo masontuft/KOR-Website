@@ -25,6 +25,7 @@ import LegacyParamsDemo from './components/demo/LegacyParamsDemo';
 import ParameterTestPage from './components/demo/ParameterTestPage';
 import PersonalSignIn from './components/personal/PersonalSignIn';
 import OAuthAuthorize from './components/oauth/OAuthAuthorize';
+import NotFound from './components/pages/NotFound';
 import './styles/styles.css';
 
 function App() {
@@ -113,6 +114,8 @@ function App() {
                 path='/demo/parameter-test'
                 element={<ParameterTestPage />}
               />
+              {/* Must stay last: catches every path no route above matched */}
+              <Route path='*' element={<NotFound />} />
             </Routes>
           </main>
           <Footer />
