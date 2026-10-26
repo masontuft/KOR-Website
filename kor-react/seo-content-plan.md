@@ -540,4 +540,34 @@ Execute in this order. Within a phase, ship the pillar first.
 - Track keyword positions for the two pillar keywords plus A1, A4, A7, B1, C8 as the leading indicators.
 
 ---
+## Section 8: Backlog Candidates
+
+Proposed by the SEO routine (TASK-005, content-gap, 2026-10-26). **Proposals only — not greenlighted.** No article is written until a human assigns an article ID and queues it. Cross-checked against all 29 live slugs and Section 4: none duplicates an existing or briefed-but-unbuilt article. Any interval/number below must be sourced from manufacturer docs at build time; none are asserted here.
+
+#### D1. E-Bike Maintenance Schedule (`category: maintenance`)
+- **KW**: "e-bike maintenance" / "ebike maintenance schedule" (informational)
+- **Title**: `E-Bike Maintenance: What Changes vs. a Regular Bike`
+- **URL**: `/articles/e-bike-maintenance-schedule`
+- **Schema**: Article (+ FAQ section)
+- **Links**: pillar `/articles/bike-maintenance-schedule`; `/articles/when-to-replace-bike-chain`; `/articles/when-to-replace-brake-pads`; `/articles/sram-axs-battery-life`; `/articles/winter-bike-storage`; `/our-app`
+- **Cover**: faster drivetrain and brake-pad wear from motor torque and added weight (qualitative; cite manufacturer guidance for any interval); battery care and storage; what to leave to a dealer (motor/firmware); tracking e-bike component mileage separately in KOR. Why it's a gap: the library covers road/MTB wear parts but nothing e-bike specific, a high-intent and growing query family.
+
+#### D2. How to True a Bike Wheel (`category: maintenance`)
+- **KW**: "how to true a bike wheel" (informational, how-to)
+- **Title**: `How to True a Bike Wheel: Spoke Wrench Basics`
+- **URL**: `/articles/how-to-true-a-bike-wheel`
+- **Schema**: HowTo (requires `howToSteps` per TASK-001 pattern)
+- **Links**: pillar `/articles/bike-maintenance-schedule`; `/articles/pre-ride-bike-check`; `/articles/when-to-replace-bike-tires`; `/articles/bike-tune-up-cost`
+- **Cover**: spotting a wobble (spin test against brake pads/frame); lateral vs. radial hop; spoke-wrench turn basics and which direction moves the rim; when to stop and go to a shop (cracked rim, broken spokes); cost-of-shop context. Why it's a gap: no wheel/spoke content exists; HowTo schema fits and pairs with existing HowTo articles.
+
+#### D3. When to Replace a Bike Helmet (`category: cycling-basics`)
+- **KW**: "when to replace bike helmet" (informational)
+- **Title**: `When to Replace Your Bike Helmet (Age & Crash Rules)`
+- **URL**: `/articles/when-to-replace-bike-helmet`
+- **Schema**: Article (+ FAQ section)
+- **Links**: `/articles/new-bike-checklist`; `/articles/pre-ride-bike-check`; `/articles/how-long-do-bike-parts-last`; `/articles/bike-maintenance-for-beginners`
+- **Cover**: replace after any significant impact; age-based guidance as stated by helmet manufacturers/standards bodies (cite, do not invent a number); visual inspection checklist (cracked shell, compressed foam, worn straps/fit pads); storage and heat/chemical exposure. Why it's a gap: a gear-replacement intent adjacent to the existing "when to replace" cluster, with no coverage of safety gear.
+
+---
+
 *End of plan. Begin with Section 1 on a fresh feature branch.*
