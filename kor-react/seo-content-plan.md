@@ -539,5 +539,39 @@ Execute in this order. Within a phase, ship the pillar first.
 - Submit the updated sitemap in Google Search Console for `jmrcycling.com`; monitor indexing of `/articles/*` — if client-side rendering causes indexing lag after 4–6 weeks, propose pre-rendering (e.g., `react-snap`) as a separate PR; do not add it preemptively.
 - Track keyword positions for the two pillar keywords plus A1, A4, A7, B1, C8 as the leading indicators.
 
+## Section 8: Backlog Candidates
+
+Content-gap proposals from the SEO optimization routine (TASK-005, 2026-10-27). **Proposals only — not greenlit, not built.** A human must assign real article IDs and add them to `SEO_CONTENT_ROUTINE.md`'s queue before any article is written. Checked against all 29 live slugs and Section 4: none duplicate an existing or already-briefed article. Intervals/figures are deliberately omitted — any numbers must be sourced and added to the brief at greenlight time (no stats invented here).
+
+#### G1. When to Replace a Bike Helmet
+- **KW**: "when to replace bike helmet" (informational)
+- **Title**: `When to Replace a Bike Helmet: Crash, Age & Wear Signs`
+- **URL**: `/articles/when-to-replace-bike-helmet`
+- **Category**: cycling-basics
+- **Schema**: Article (+ FAQ section)
+- **Links**: pillar `/articles/bike-maintenance-schedule`; `/articles/how-long-do-bike-parts-last`; `/articles/new-bike-checklist`; `/our-app`
+- **Why it's a gap**: Library covers every drivetrain/brake/tire wear item but no rider-safety gear lifespan; strong replacement-interval search intent that fits KOR's "when to replace" positioning.
+- **Cover**: replace-after-crash rule; manufacturer-stated age guidance (cite manufacturer/standards source at build time); visible damage and fit-pad wear checks; storage/heat/sunscreen degradation; how to log helmet age in KOR as a tracked item.
+
+#### G2. How to True a Bike Wheel / Check Spoke Tension
+- **KW**: "how to true a bike wheel" (informational, how-to)
+- **Title**: `How to True a Bike Wheel: Spokes, Wobble & When to Go to a Shop`
+- **URL**: `/articles/how-to-true-a-bike-wheel`
+- **Category**: maintenance
+- **Schema**: HowTo (requires `howToSteps` per TASK-001 pattern)
+- **Links**: pillar `/articles/bike-maintenance-schedule`; `/articles/pre-ride-bike-check`; `/articles/bike-tune-up-cost`; `/articles/mtb-vs-road-maintenance`
+- **Why it's a gap**: Wheels are the one major component group with no article; how-to intent complements the existing HowTo set and the DIY-vs-shop cost angle links naturally to `bike-tune-up-cost`.
+- **Cover**: spin-test for lateral/radial wobble; tools needed (spoke wrench, truing stand or upside-down-bike method); small-adjustment technique; when a broken spoke or cracked rim means replace not true; pointers to a shop for dished/tensioned rebuilds.
+
+#### G3. E-Bike Maintenance: What's Different
+- **KW**: "e-bike maintenance" (informational)
+- **Title**: `E-Bike Maintenance Schedule: What Wears Faster and What to Service`
+- **URL**: `/articles/e-bike-maintenance`
+- **Category**: maintenance
+- **Schema**: Article (+ FAQ section)
+- **Links**: pillar `/articles/bike-maintenance-schedule`; `/articles/when-to-replace-bike-chain`; `/articles/when-to-replace-brake-pads`; `/articles/sram-axs-battery-life`; `/articles/winter-bike-storage`
+- **Why it's a gap**: Fast-growing intent not covered; existing articles assume acoustic bikes. Battery content (`sram-axs-battery-life`, `winter-bike-storage`) gives strong internal-link support.
+- **Cover**: why drivetrain and brake components wear faster under motor assist (qualitative; source any interval from manufacturer docs at build time); motor/battery care vs. what to leave to a dealer; battery storage and charging habits; torque-sensor/software update notes; how mileage tracking via Strava applies to e-bike components.
+
 ---
 *End of plan. Begin with Section 1 on a fresh feature branch.*
