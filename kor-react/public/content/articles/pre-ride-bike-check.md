@@ -11,7 +11,7 @@ heroImage: "/images/articles/pre-ride-bike-check.webp"
 heroImageAlt: "Cyclist in helmet inspecting bicycle brake and wheel before a ride, ready to go, outdoor natural lighting"
 schemaType: "HowTo"
 readingTime: 7
-related: ["how-to-plan-a-bike-ride", "bike-maintenance-schedule", "when-to-replace-bike-tires", "new-bike-checklist"]
+related: ["how-to-plan-a-bike-ride", "bike-maintenance-schedule", "when-to-replace-bike-tires", "new-bike-checklist", "bike-wheel-truing"]
 ---
 
 # The 5-Minute Pre-Ride Bike Check (M-Check Guide)

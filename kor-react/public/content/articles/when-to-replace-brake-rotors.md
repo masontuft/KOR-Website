@@ -11,7 +11,7 @@ heroImage: "/images/articles/when-to-replace-brake-rotors.webp"
 heroImageAlt: "Mountain bike disc brake rotor and hydraulic caliper close-up with trail background, natural light"
 schemaType: "Article"
 readingTime: 7
-related: ["bike-maintenance-schedule", "when-to-replace-brake-pads", "how-often-bleed-disc-brakes"]
+related: ["bike-maintenance-schedule", "when-to-replace-brake-pads", "how-often-bleed-disc-brakes", "bike-wheel-truing"]
 ---
 
 # When to Replace Bike Brake Rotors (Thickness Guide)

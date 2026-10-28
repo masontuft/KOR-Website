@@ -11,7 +11,7 @@ heroImage: "/images/articles/winter-bike-storage.webp"
 heroImageAlt: "Bicycle stored cleanly in a garage during winter, hung on a wall rack"
 schemaType: "HowTo"
 readingTime: 8
-related: ["bike-maintenance-schedule", "when-to-replace-bike-tires", "tubeless-sealant-how-often", "sram-axs-battery-life"]
+related: ["bike-maintenance-schedule", "when-to-replace-bike-tires", "tubeless-sealant-how-often", "sram-axs-battery-life", "e-bike-maintenance"]
 ---
 
 # How to Store a Bike for Winter (Without Ruining Parts)

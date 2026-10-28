@@ -210,4 +210,19 @@
     <loc>https://jmrcycling.com/data-requests</loc>
     <priority>0.3</priority>
   </url>
+  <url>
+    <loc>https://jmrcycling.com/articles/bike-wheel-truing</loc>
+    <lastmod>2026-10-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://jmrcycling.com/articles/gravel-bike-tire-pressure</loc>
+    <lastmod>2026-10-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://jmrcycling.com/articles/e-bike-maintenance</loc>
+    <lastmod>2026-10-28</lastmod>
+    <priority>0.6</priority>
+  </url>
 </urlset>

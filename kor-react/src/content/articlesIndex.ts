@@ -54,7 +54,7 @@ export const articles: ArticleMeta[] = [
     author: 'KOR Cycling Team',
     schemaType: 'Article',
     readingTime: 8,
-    related: ['bike-maintenance-schedule', 'suspension-service-intervals', 'dropper-post-maintenance', 'tubeless-sealant-how-often', 'sram-axs-battery-life'],
+    related: ['bike-maintenance-schedule', 'suspension-service-intervals', 'dropper-post-maintenance', 'tubeless-sealant-how-often', 'sram-axs-battery-life', 'e-bike-maintenance'],
   },
   {
     slug: 'winter-bike-storage',
@@ -70,7 +70,7 @@ export const articles: ArticleMeta[] = [
     author: 'KOR Cycling Team',
     schemaType: 'HowTo',
     readingTime: 8,
-    related: ['bike-maintenance-schedule', 'when-to-replace-bike-tires', 'tubeless-sealant-how-often', 'sram-axs-battery-life'],
+    related: ['bike-maintenance-schedule', 'when-to-replace-bike-tires', 'tubeless-sealant-how-often', 'sram-axs-battery-life', 'e-bike-maintenance'],
     howToSteps: [
       {
         name: 'Wash and Lube Before It Sits',
@@ -292,7 +292,7 @@ export const articles: ArticleMeta[] = [
     author: 'KOR Cycling Team',
     schemaType: 'HowTo',
     readingTime: 7,
-    related: ['how-to-plan-a-bike-ride', 'bike-maintenance-schedule', 'when-to-replace-bike-tires', 'new-bike-checklist'],
+    related: ['how-to-plan-a-bike-ride', 'bike-maintenance-schedule', 'when-to-replace-bike-tires', 'new-bike-checklist', 'bike-wheel-truing'],
     totalTime: 'PT5M',
     howToSteps: [
       {
@@ -435,7 +435,7 @@ export const articles: ArticleMeta[] = [
     author: 'KOR Cycling Team',
     schemaType: 'Article',
     readingTime: 7,
-    related: ['bike-maintenance-schedule', 'when-to-replace-bike-tires', 'winter-bike-storage'],
+    related: ['bike-maintenance-schedule', 'when-to-replace-bike-tires', 'winter-bike-storage', 'gravel-bike-tire-pressure'],
   },
   {
     slug: 'when-to-replace-bike-tires',
@@ -452,7 +452,7 @@ export const articles: ArticleMeta[] = [
     author: 'KOR Cycling Team',
     schemaType: 'Article',
     readingTime: 8,
-    related: ['bike-maintenance-schedule', 'tubeless-sealant-how-often', 'pre-ride-bike-check'],
+    related: ['bike-maintenance-schedule', 'tubeless-sealant-how-often', 'pre-ride-bike-check', 'gravel-bike-tire-pressure'],
   },
   {
     slug: 'how-often-bleed-disc-brakes',
@@ -484,7 +484,7 @@ export const articles: ArticleMeta[] = [
     author: 'KOR Cycling Team',
     schemaType: 'Article',
     readingTime: 7,
-    related: ['bike-maintenance-schedule', 'when-to-replace-brake-pads', 'how-often-bleed-disc-brakes'],
+    related: ['bike-maintenance-schedule', 'when-to-replace-brake-pads', 'how-often-bleed-disc-brakes', 'bike-wheel-truing'],
   },
   {
     slug: 'when-to-replace-brake-pads',
@@ -597,5 +597,53 @@ export const articles: ArticleMeta[] = [
     schemaType: 'Article',
     readingTime: 12,
     related: ['when-to-replace-bike-chain', 'how-to-measure-chain-wear', 'when-to-replace-cassette'],
+  },
+  {
+    slug: 'bike-wheel-truing',
+    title: 'Bike Wheel Truing: Signs Your Wheel Is Out of True',
+    description:
+      'Wobbling rim or rubbing brake? Learn the signs a bike wheel needs truing, how to spin-test it, and when to see a shop. Check yours before your next ride.',
+    category: 'maintenance',
+    tags: ['wheel truing', 'out of true wheel', 'bike wheel wobble', 'spokes', 'maintenance'],
+    datePublished: '2026-10-28',
+    dateModified: '2026-10-28',
+    heroImage: '/images/articles/bike-wheel-truing.webp',
+    heroImageAlt: 'Road bike wheel in a workshop stand showing spokes and disc rotor, used to check whether the rim is true',
+    author: 'KOR Cycling Team',
+    schemaType: 'Article',
+    readingTime: 6,
+    related: ['bike-maintenance-schedule', 'pre-ride-bike-check', 'when-to-replace-brake-rotors', 'how-long-do-bike-parts-last'],
+  },
+  {
+    slug: 'gravel-bike-tire-pressure',
+    title: 'Gravel Bike Tire Pressure: How to Find Your PSI',
+    description:
+      'Gravel bike tire pressure depends on weight, tire width, and surface. Use this method to find your starting PSI and fine-tune it on the trail. Dial it in.',
+    category: 'maintenance',
+    tags: ['gravel bike tire pressure', 'tire pressure', 'gravel', 'tubeless', 'PSI'],
+    datePublished: '2026-10-28',
+    dateModified: '2026-10-28',
+    heroImage: '/images/articles/gravel-bike-tire-pressure.webp',
+    heroImageAlt: 'Cyclist checking tire pressure with a small gauge beside a wide-tire bike on a loose gravel road',
+    author: 'KOR Cycling Team',
+    schemaType: 'Article',
+    readingTime: 6,
+    related: ['bike-maintenance-schedule', 'when-to-replace-bike-tires', 'tubeless-sealant-how-often', 'pre-ride-bike-check'],
+  },
+  {
+    slug: 'e-bike-maintenance',
+    title: 'E-Bike Maintenance: What to Service and How Often',
+    description:
+      'E-bikes wear chains and brake pads faster. See what to service, how to care for the battery, and what to leave to the dealer. Keep your motor happy.',
+    category: 'maintenance',
+    tags: ['e-bike maintenance', 'electric bike', 'battery care', 'drivetrain', 'brakes'],
+    datePublished: '2026-10-28',
+    dateModified: '2026-10-28',
+    heroImage: '/images/articles/e-bike-maintenance.webp',
+    heroImageAlt: 'Mechanic\'s hand checking the chain and drivetrain beside the motor and battery of an electric mountain bike',
+    author: 'KOR Cycling Team',
+    schemaType: 'Article',
+    readingTime: 7,
+    related: ['bike-maintenance-schedule', 'mtb-vs-road-maintenance', 'when-to-replace-bike-chain', 'when-to-replace-brake-pads', 'winter-bike-storage'],
   },
 ];

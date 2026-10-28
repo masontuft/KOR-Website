@@ -11,7 +11,7 @@ heroImage: "/images/articles/mtb-vs-road-maintenance.webp"
 heroImageAlt: "Mountain bike and road bike parked side by side outdoors, showing contrasting tire and suspension setups"
 schemaType: "Article"
 readingTime: 8
-related: ["bike-maintenance-schedule", "suspension-service-intervals", "dropper-post-maintenance", "tubeless-sealant-how-often", "sram-axs-battery-life"]
+related: ["bike-maintenance-schedule", "suspension-service-intervals", "dropper-post-maintenance", "tubeless-sealant-how-often", "sram-axs-battery-life", "e-bike-maintenance"]
 ---
 
 # MTB vs Road Bike Maintenance: What Changes & What Doesn't

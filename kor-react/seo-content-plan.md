@@ -543,7 +543,7 @@ Execute in this order. Within a phase, ship the pillar first.
 
 ## Section 8: Backlog Candidates
 
-Content-gap proposals from the SEO optimization routine (TASK-005, 2026-10-28). **Proposals only — not greenlit.** No article is written until a human assigns a real article ID and adds it to `SEO_CONTENT_ROUTINE.md`'s queue. Checked against all 29 live slugs and Section 4 briefs: none duplicate an existing or briefed-but-unbuilt article. Numeric intervals are deliberately omitted — source them from manufacturer docs at build time rather than inventing figures.
+Content-gap proposals from the SEO optimization routine (TASK-005, 2026-10-28). **Greenlit and built 2026-10-28 (G1–G3 are live as articles).** Original note: proposals only. No article is written until a human assigns a real article ID and adds it to `SEO_CONTENT_ROUTINE.md`'s queue. Checked against all 29 live slugs and Section 4 briefs: none duplicate an existing or briefed-but-unbuilt article. Numeric intervals are deliberately omitted — source them from manufacturer docs at build time rather than inventing figures.
 
 #### G1. How to Tell If a Bike Wheel Needs Truing
 - **KW**: "how to know if bike wheel needs truing" (informational, troubleshooting)

@@ -11,7 +11,7 @@ heroImage: "/images/articles/when-to-replace-bike-tires.webp"
 heroImageAlt: "Mountain bike tire on rocky trail showing knobby tread close-up, outdoor natural lighting, ultra-realistic 16:9"
 schemaType: "Article"
 readingTime: 8
-related: ["bike-maintenance-schedule", "tubeless-sealant-how-often", "pre-ride-bike-check"]
+related: ["bike-maintenance-schedule", "tubeless-sealant-how-often", "pre-ride-bike-check", "gravel-bike-tire-pressure"]
 ---
 
 # When to Replace Bike Tires: Mileage & 6 Wear Signs
