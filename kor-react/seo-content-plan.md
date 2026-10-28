@@ -540,4 +540,40 @@ Execute in this order. Within a phase, ship the pillar first.
 - Track keyword positions for the two pillar keywords plus A1, A4, A7, B1, C8 as the leading indicators.
 
 ---
+
+## Section 8: Backlog Candidates
+
+Content-gap proposals from the SEO optimization routine (TASK-005, 2026-10-28). **Greenlit and built 2026-10-28 (G1–G3 are live as articles).** Original note: proposals only. No article is written until a human assigns a real article ID and adds it to `SEO_CONTENT_ROUTINE.md`'s queue. Checked against all 29 live slugs and Section 4 briefs: none duplicate an existing or briefed-but-unbuilt article. Numeric intervals are deliberately omitted — source them from manufacturer docs at build time rather than inventing figures.
+
+#### G1. How to Tell If a Bike Wheel Needs Truing
+- **KW**: "how to know if bike wheel needs truing" (informational, troubleshooting)
+- **Title**: `Bike Wheel Truing: Signs Your Wheel Is Out of True`
+- **URL**: `/articles/bike-wheel-truing`
+- **Schema**: Article
+- **Category**: maintenance
+- **Links**: pillar `/articles/bike-maintenance-schedule`; `/articles/pre-ride-bike-check`; `/articles/when-to-replace-brake-rotors` (rub vs. warped rotor); `/articles/how-long-do-bike-parts-last`
+- **Why it's a gap**: No wheel/spoke content exists in the library; wheel wobble and rim rub are common troubleshooting searches adjacent to brake and tire topics, and the A5 rotor article already needs a "is it the wheel or the rotor?" handoff.
+- **Cover**: spin-test check for lateral/radial wobble; rim rub vs. rotor rub vs. brake-pad drag; loose or broken spokes; when a shop truing visit is warranted vs. DIY with a spoke wrench; when to replace the wheel.
+
+#### G2. Gravel Tire Pressure Guide
+- **KW**: "gravel bike tire pressure" (informational)
+- **Title**: `Gravel Bike Tire Pressure: How to Find Your PSI`
+- **URL**: `/articles/gravel-bike-tire-pressure`
+- **Schema**: Article
+- **Category**: maintenance
+- **Links**: pillar; `/articles/when-to-replace-bike-tires`; `/articles/tubeless-sealant-how-often`; `/articles/pre-ride-bike-check`
+- **Why it's a gap**: Tire-wear and sealant articles exist, but nothing covers pressure selection, a high-volume gravel/MTB query that feeds the same tire cluster.
+- **Cover**: variables that move the number (rider + bike weight, tire width, tubeless vs. tubes, surface); starting-point method and adjusting by feel; pinch-flat and rim-damage risk when too low; checking pressure as part of the pre-ride routine. Use manufacturer/tire-brand calculators as external references; do not state PSI ranges without a cited source.
+
+#### G3. E-Bike Maintenance: What's Different
+- **KW**: "e-bike maintenance" (informational)
+- **Title**: `E-Bike Maintenance: What to Service and How Often`
+- **URL**: `/articles/e-bike-maintenance`
+- **Schema**: Article
+- **Category**: maintenance
+- **Links**: pillar; `/articles/mtb-vs-road-maintenance` (same "what differs" structure); `/articles/when-to-replace-bike-chain`; `/articles/when-to-replace-brake-pads`; `/articles/winter-bike-storage`
+- **Why it's a gap**: Library covers road and MTB differences but nothing e-bike specific; added motor torque and weight accelerate drivetrain and brake wear, and battery/storage care overlaps existing winter-storage and AXS-battery content.
+- **Cover**: faster drivetrain and brake pad wear and why to check them sooner; battery care and storage; what not to do when washing (no direct high-pressure spray at motor/battery); software/firmware updates and dealer-only motor service. Check each claim against manufacturer service docs at build time.
+
+---
 *End of plan. Begin with Section 1 on a fresh feature branch.*

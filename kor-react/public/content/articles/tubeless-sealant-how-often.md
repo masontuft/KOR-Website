@@ -11,7 +11,7 @@ heroImage: "/images/articles/tubeless-sealant-how-often.webp"
 heroImageAlt: "Mountain bike tire on rocky trail showing knobby tread close-up, outdoor natural lighting"
 schemaType: "Article"
 readingTime: 7
-related: ["bike-maintenance-schedule", "when-to-replace-bike-tires", "winter-bike-storage"]
+related: ["bike-maintenance-schedule", "when-to-replace-bike-tires", "winter-bike-storage", "gravel-bike-tire-pressure"]
 ---
 
 # How Often to Add Tubeless Sealant (Hours & Months)
