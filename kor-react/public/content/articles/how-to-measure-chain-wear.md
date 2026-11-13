@@ -1,6 +1,6 @@
 ---
 title: "How to Measure Chain Wear: Checker Tool & Ruler Methods"
-description: "Step-by-step guide to measuring bike chain wear with a chain checker or 12-inch ruler. Know the 0.5% threshold and when to replace before cassette damage occurs."
+description: "Step-by-step guide to measuring bike chain wear with a chain checker or 12-inch ruler. Know the 0.5% threshold and when to replace before cassette damage."
 slug: "how-to-measure-chain-wear"
 category: "maintenance"
 tags: ["chain wear", "chain checker", "drivetrain", "maintenance", "chain measurement"]

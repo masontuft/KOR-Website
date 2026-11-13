@@ -28,7 +28,7 @@ export const articles: ArticleMeta[] = [
     slug: 'sram-axs-battery-life',
     title: 'SRAM AXS Battery Life: How Long It Lasts & Care Tips',
     description:
-      'SRAM AXS batteries run about 20 hours of ride time per charge, with shifter coin cells lasting roughly two years. Here\'s how to read the signs and never get stranded.',
+      'SRAM AXS batteries run about 20 hours of ride time per charge, with shifter coin cells lasting roughly two years. Learn the signs and never get stranded.',
     category: 'maintenance',
     tags: ['sram axs battery life', 'axs battery', 'electronic shifting maintenance', 'bike maintenance schedule', 'axs derailleur battery'],
     datePublished: '2026-07-10',
@@ -102,7 +102,7 @@ export const articles: ArticleMeta[] = [
     slug: 'new-bike-checklist',
     title: 'New Bike Checklist: 10 Things to Do After You Buy',
     description:
-      'Just bought a bike? Dial in fit, prioritize accessories, register your serial number, and set up wear tracking before your first real ride.',
+      'Just bought a bike? Dial in your fit, prioritize accessories, register your serial number, and set up wear tracking before your first real ride begins.',
     category: 'cycling-basics',
     tags: ['new bike checklist', 'new bike setup', 'bike fit basics', 'new bike accessories', 'first bike maintenance'],
     datePublished: '2026-07-07',
@@ -182,7 +182,7 @@ export const articles: ArticleMeta[] = [
     slug: 'bikepacking-for-beginners',
     title: 'Bikepacking for Beginners: Plan Your First Overnighter',
     description:
-      'Start bikepacking with the S24O method: gear, bags, route tips, and a pre-trip service checklist so your first overnighter goes as planned.',
+      'Start bikepacking with the S24O method: gear, bags, route tips, and a pre-trip service checklist so your first overnighter goes exactly as planned.',
     category: 'ride-planning',
     tags: ['bikepacking for beginners', 'bikepacking', 'bike camping', 'overnighter', 'S24O'],
     datePublished: '2026-06-30',
@@ -527,7 +527,7 @@ export const articles: ArticleMeta[] = [
     slug: 'how-to-measure-chain-wear',
     title: 'How to Measure Chain Wear: Checker Tool & Ruler Methods',
     description:
-      'Step-by-step guide to measuring bike chain wear with a chain checker or 12-inch ruler. Know the 0.5% threshold and when to replace before cassette damage occurs.',
+      'Step-by-step guide to measuring bike chain wear with a chain checker or 12-inch ruler. Know the 0.5% threshold and when to replace before cassette damage.',
     category: 'maintenance',
     tags: ['chain wear', 'chain checker', 'drivetrain', 'maintenance', 'chain measurement'],
     datePublished: '2026-06-11',

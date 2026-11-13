@@ -16,10 +16,10 @@ AUTOMATION_MODE: true
 WORKING_DIRECTORY: kor-react
 PR_CADENCE: per-task
 CURRENT_TRACK: technical-seo
-CURRENT_TASK_ID: TASK-018
+CURRENT_TASK_ID: TASK-019
 TASK_STATUS: not_started
 NEXT_ACTION: fix-item
-LAST_CYCLE_DATE: 2026-11-11
+LAST_CYCLE_DATE: 2026-11-13
 CYCLES_SINCE_TRACK_AUDIT: 0
 ```
 
@@ -135,7 +135,7 @@ One row per discovered item. `status`: `open` → `in_progress` → `in_review` 
 | TASK-015 | internal-linking| Under-linked: `group-ride-tips` had only 1 incoming `related[]` reference (from pillar `how-to-plan-a-bike-ride`). Fixed: added `group-ride-tips` to the `related[]` array of `strava-tips-for-cyclists` (both `articlesIndex.ts` and markdown frontmatter) — `strava-tips-for-cyclists`'s "Find Clubs That Match How You Actually Ride" section already discusses finding group rides via Strava Clubs, making the reciprocal link a natural fit — plus a contextual inline link in that section pointing new club-joiners to group ride etiquette before their first ride out. `npm run build` passes. | in_review | 2026-07-24 |
 | TASK-016 | internal-linking| Orphan: `bottom-bracket-creaking` had 0 incoming `related[]` references. Fixed: added `bottom-bracket-creaking` to the `related[]` arrays of `how-long-do-bike-parts-last` (both `articlesIndex.ts` and markdown frontmatter) — its own "Bottom Bracket: Longest-Lasting, Hardest to Diagnose" section already covers the same 3,000–10,000-mile lifespan range and creak-misdiagnosis point — and `when-to-replace-cassette` (same both-file update) — its "Noise under load" symptom section overlaps with BB-creak diagnosis — plus a contextual inline link in each article body at that point of overlap. `npm run build` passes. PR #85 open. | in_review | 2026-07-24 |
 | TASK-017 | technical-seo   | Audit 2026-11-11 (32 articles): pillar `bike-maintenance-for-beginners` had `<priority>0.6</priority>` in `public/sitemap.xml`; the checklist requires `0.7` for all three pillars (the other two were already correct). Fixed: priority set to `0.7`. No other sitemap issues — 32/32 article `<url>` entries present, no extras or duplicates, every `<lastmod>` matches `dateModified`. `npm run build` passes. | in_review | 2026-11-11 |
-| TASK-018 | technical-seo   | Four `description` strings fall outside the 140–160 character range: `sram-axs-battery-life` (166), `how-to-measure-chain-wear` (161), `new-bike-checklist` (139), `bikepacking-for-beginners` (139). Trim or extend each in `articlesIndex.ts` (and the matching markdown frontmatter, if present) without adding new facts. | open | 2026-11-11 |
+| TASK-018 | technical-seo   | Four `description` strings fall outside the 140–160 character range: `sram-axs-battery-life` (166), `how-to-measure-chain-wear` (161), `new-bike-checklist` (139), `bikepacking-for-beginners` (139). Trim or extend each in `articlesIndex.ts` (and the matching markdown frontmatter, if present) without adding new facts. Fixed 2026-11-13: descriptions now 153 / 154 / 151 / 147 chars in both `articlesIndex.ts` and markdown frontmatter; wording only, no new facts. `npm run build` passes. | in_review | 2026-11-11 |
 | TASK-019 | technical-seo   | `how-long-do-bike-parts-last.md` (line 182) embeds `/images/app-store-badge.svg` and `/images/google-play-badge.svg`, but neither file exists in `public/images/`, so both images are broken. The App Store and Play Store URLs they link to also need checking against the real listings. Needs a human decision: add the official badge assets, or replace the images with a text link to `/our-app`. | open | 2026-11-11 |
 
 ---
