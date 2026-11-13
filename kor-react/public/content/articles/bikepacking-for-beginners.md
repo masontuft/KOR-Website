@@ -1,6 +1,6 @@
 ---
 title: "Bikepacking for Beginners: Plan Your First Overnighter"
-description: "Start bikepacking with the S24O method: gear, bags, route tips, and a pre-trip service checklist so your first overnighter goes as planned."
+description: "Start bikepacking with the S24O method: gear, bags, route tips, and a pre-trip service checklist so your first overnighter goes exactly as planned."
 slug: "bikepacking-for-beginners"
 category: "ride-planning"
 tags: ["bikepacking for beginners", "bikepacking", "bike camping", "overnighter", "S24O"]

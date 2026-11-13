@@ -1,6 +1,6 @@
 ---
 title: "New Bike Checklist: 10 Things to Do After You Buy"
-description: "Just bought a bike? Dial in fit, prioritize accessories, register your serial number, and set up wear tracking before your first real ride."
+description: "Just bought a bike? Dial in your fit, prioritize accessories, register your serial number, and set up wear tracking before your first real ride begins."
 slug: "new-bike-checklist"
 category: "cycling-basics"
 tags: ["new bike checklist", "new bike setup", "bike fit basics", "new bike accessories", "first bike maintenance"]
