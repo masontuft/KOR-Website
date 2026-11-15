@@ -179,8 +179,6 @@ Most riders don't track this because it's tedious. Spreadsheets fall behind. Pap
 
 Stop guessing when parts need service. KOR connects to Strava and tracks wear on your chain, brake pads, tires, suspension, and more — then alerts you before they fail.
 
-[![Download on the App Store](/images/app-store-badge.svg)](https://apps.apple.com/app/kor-cycling) [![Get it on Google Play](/images/google-play-badge.svg)](https://play.google.com/store/apps/details?id=com.korcycling)
-
 [See how KOR tracks your components →](/our-app)
 
 ---
