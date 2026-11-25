@@ -85,7 +85,7 @@ const QrGuide: React.FC = () => {
         url={`${baseUrl}/qr-guide`}
       />
       
-      <main style={{ padding: '2rem 1rem', minHeight: '80vh' }}>
+      <div style={{ padding: '2rem 1rem', minHeight: '80vh' }}>
         <div style={styles.guideContainer}>
           <h1 style={{ color: '#333', textAlign: 'center', marginBottom: '1rem' }}>
             📱 New QR Code System Guide
@@ -230,7 +230,7 @@ const QrGuide: React.FC = () => {
             }
           `}</style>
         </div>
-      </main>
+      </div>
 
       <Footer />
     </div>

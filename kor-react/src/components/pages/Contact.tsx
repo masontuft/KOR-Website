@@ -72,7 +72,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <main>
+    <div>
       <StructuredData
         type="website"
         pageTitle="Contact Us — KOR"
@@ -217,7 +217,7 @@ const Contact: React.FC = () => {
           </div>
         </form>
       </div>
-    </main>
+    </div>
   );
 };
 
