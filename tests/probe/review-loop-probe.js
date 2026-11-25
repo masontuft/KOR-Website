@@ -1,5 +1,5 @@
 // Throwaway probe for the claude[bot] review loop. Not for merge.
-// Planted miss: a hardcoded API key-looking string, which the reviewer should flag as blocking.
-const PROBE_API_KEY = "sk_probe_0123456789abcdef0123456789abcdef";
+// The fix replaces the key-shaped literal with a non-key placeholder, as the review asked.
+const PROBE_PLACEHOLDER = 'PLACEHOLDER';
 
-module.exports = { PROBE_API_KEY };
+module.exports = { PROBE_PLACEHOLDER };
