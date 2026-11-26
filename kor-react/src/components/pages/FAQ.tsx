@@ -83,7 +83,7 @@ const FAQ: React.FC = () => {
   };
 
   return (
-    <main>
+    <div>
       <StructuredData
         type="website"
         pageTitle="Frequently Asked Questions — KOR"
@@ -185,7 +185,7 @@ const FAQ: React.FC = () => {
           </button>
         </form>
       </section>
-    </main>
+    </div>
   );
 };
 
