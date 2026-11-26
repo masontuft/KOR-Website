@@ -670,7 +670,6 @@ select {
 }
 
 select:focus {
-  outline: none;
   border-color: var(--accent1-color);
 }
 
