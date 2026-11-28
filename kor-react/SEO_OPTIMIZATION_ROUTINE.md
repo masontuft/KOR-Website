@@ -19,8 +19,8 @@ CURRENT_TRACK: internal-linking
 CURRENT_TASK_ID: none
 TASK_STATUS: not_started
 NEXT_ACTION: audit-track
-LAST_CYCLE_DATE: 2026-11-14
-CYCLES_SINCE_TRACK_AUDIT: 0
+LAST_CYCLE_DATE: 2026-11-28
+CYCLES_SINCE_TRACK_AUDIT: 1
 ```
 
 > **PR_CADENCE: per-task** — Every cycle produces at most one small PR for one backlog item. Never bundle unrelated fixes. Branch naming: `seo-opt/[task-id]-[short-slug]`, e.g. `seo-opt/task-001-howto-schema`.
@@ -137,6 +137,7 @@ One row per discovered item. `status`: `open` → `in_progress` → `in_review` 
 | TASK-017 | technical-seo   | Audit 2026-11-11 (32 articles): pillar `bike-maintenance-for-beginners` had `<priority>0.6</priority>` in `public/sitemap.xml`; the checklist requires `0.7` for all three pillars (the other two were already correct). Fixed: priority set to `0.7`. No other sitemap issues — 32/32 article `<url>` entries present, no extras or duplicates, every `<lastmod>` matches `dateModified`. `npm run build` passes. | in_review | 2026-11-11 |
 | TASK-018 | technical-seo   | Four `description` strings fall outside the 140–160 character range: `sram-axs-battery-life` (166), `how-to-measure-chain-wear` (161), `new-bike-checklist` (139), `bikepacking-for-beginners` (139). Trim or extend each in `articlesIndex.ts` (and the matching markdown frontmatter, if present) without adding new facts. Fixed 2026-11-13: descriptions now 153 / 154 / 151 / 147 chars in both `articlesIndex.ts` and markdown frontmatter; wording only, no new facts. `npm run build` passes. | in_review | 2026-11-11 |
 | TASK-019 | technical-seo   | `how-long-do-bike-parts-last.md` (line 182) embeds `/images/app-store-badge.svg` and `/images/google-play-badge.svg`, but neither file exists in `public/images/`, so both images are broken. The App Store and Play Store URLs they link to also need checking against the real listings. Fixed 2026-11-14: removed the broken inline badge line (the placeholder store URLs did not match the real listings, and `Article.tsx` already renders the correct badges with the real URLs on every article); the `/our-app` text link remains. `npm run build` passes. | in_review | 2026-11-11 |
+| TASK-020 | internal-linking| Re-audit 2026-11-28 (32 articles): reverse `related[]` map shows 0 broken slug references and no non-pillar slug with fewer than 2 inbound links (only `bike-maintenance-for-beginners`, a pillar, is at 1 — excluded by the checklist). Audited clean; no code changed, no PR. 1st consecutive empty audit of this track. | done | 2026-11-28 |
 
 ---
 
